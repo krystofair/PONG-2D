@@ -1,0 +1,1 @@
+C:/Libraries/SFML-2.5.1/lib/libsfml-window-s.a -lopengl32 C:/Libraries/SFML-2.5.1/lib/libsfml-system-s.a -lOpenGL32 -lwinmm -lgdi32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
