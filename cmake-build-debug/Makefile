@@ -47,10 +47,10 @@ RM = C:\CLion-2018.3.2\bin\cmake\win\bin\cmake.exe -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Christofair\Desktop\pong
+CMAKE_SOURCE_DIR = P:\PONG-2D
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Christofair\Desktop\pong\cmake-build-debug
+CMAKE_BINARY_DIR = P:\PONG-2D\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Christofair\Desktop\pong\cmake-build-debug\CMakeFiles C:\Users\Christofair\Desktop\pong\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start P:\PONG-2D\cmake-build-debug\CMakeFiles P:\PONG-2D\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Christofair\Desktop\pong\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start P:\PONG-2D\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ pong/fast:
 	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/build
 .PHONY : pong/fast
 
+gracz.obj: gracz.cpp.obj
+
+.PHONY : gracz.obj
+
+# target to build an object file
+gracz.cpp.obj:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/gracz.cpp.obj
+.PHONY : gracz.cpp.obj
+
+gracz.i: gracz.cpp.i
+
+.PHONY : gracz.i
+
+# target to preprocess a source file
+gracz.cpp.i:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/gracz.cpp.i
+.PHONY : gracz.cpp.i
+
+gracz.s: gracz.cpp.s
+
+.PHONY : gracz.s
+
+# target to generate assembly for a file
+gracz.cpp.s:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/gracz.cpp.s
+.PHONY : gracz.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -149,6 +176,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+rakieta.obj: rakieta.cpp.obj
+
+.PHONY : rakieta.obj
+
+# target to build an object file
+rakieta.cpp.obj:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/rakieta.cpp.obj
+.PHONY : rakieta.cpp.obj
+
+rakieta.i: rakieta.cpp.i
+
+.PHONY : rakieta.i
+
+# target to preprocess a source file
+rakieta.cpp.i:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/rakieta.cpp.i
+.PHONY : rakieta.cpp.i
+
+rakieta.s: rakieta.cpp.s
+
+.PHONY : rakieta.s
+
+# target to generate assembly for a file
+rakieta.cpp.s:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/rakieta.cpp.s
+.PHONY : rakieta.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -158,9 +212,15 @@ help:
 	@echo ... pong
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... gracz.obj
+	@echo ... gracz.i
+	@echo ... gracz.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... rakieta.obj
+	@echo ... rakieta.i
+	@echo ... rakieta.s
 .PHONY : help
 
 

@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Christofair/Desktop/pong/main.cpp" "C:/Users/Christofair/Desktop/pong/cmake-build-debug/CMakeFiles/pong.dir/main.cpp.obj"
+  "P:/PONG-2D/gracz.cpp" "P:/PONG-2D/cmake-build-debug/CMakeFiles/pong.dir/gracz.cpp.obj"
+  "P:/PONG-2D/main.cpp" "P:/PONG-2D/cmake-build-debug/CMakeFiles/pong.dir/main.cpp.obj"
+  "P:/PONG-2D/rakieta.cpp" "P:/PONG-2D/cmake-build-debug/CMakeFiles/pong.dir/rakieta.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
