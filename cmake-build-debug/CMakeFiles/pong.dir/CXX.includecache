@@ -676,6 +676,18 @@ SFML/Config.hpp
 
 C:/Libraries/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
 
+P:/PONG-2D/IGracz.h
+rakieta.h
+P:/PONG-2D/rakieta.h
+SFML/Window/Keyboard.hpp
+-
+
+P:/PONG-2D/IMenu.h
+
+P:/PONG-2D/gracz.h
+IGracz.h
+P:/PONG-2D/IGracz.h
+
 P:/PONG-2D/main.cpp
 iostream
 -
@@ -683,4 +695,32 @@ SFML/Window.hpp
 -
 SFML/Graphics.hpp
 -
+sterowanie.h
+P:/PONG-2D/sterowanie.h
+menu.cpp
+P:/PONG-2D/menu.cpp
+
+P:/PONG-2D/menu.cpp
+list
+-
+SFML/Graphics/Text.hpp
+-
+SFML/Graphics/Drawable.hpp
+-
+SFML/Graphics/RenderTarget.hpp
+-
+IMenu.h
+P:/PONG-2D/IMenu.h
+
+P:/PONG-2D/rakieta.h
+SFML/Graphics.hpp
+-
+
+P:/PONG-2D/sterowanie.h
+SFML/Window/Event.hpp
+-
+gracz.h
+P:/PONG-2D/gracz.h
+IMenu.h
+P:/PONG-2D/IMenu.h
 

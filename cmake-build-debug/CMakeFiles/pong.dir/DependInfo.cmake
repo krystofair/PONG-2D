@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "P:/PONG-2D/gracz.cpp" "P:/PONG-2D/cmake-build-debug/CMakeFiles/pong.dir/gracz.cpp.obj"
   "P:/PONG-2D/main.cpp" "P:/PONG-2D/cmake-build-debug/CMakeFiles/pong.dir/main.cpp.obj"
+  "P:/PONG-2D/menu.cpp" "P:/PONG-2D/cmake-build-debug/CMakeFiles/pong.dir/menu.cpp.obj"
   "P:/PONG-2D/rakieta.cpp" "P:/PONG-2D/cmake-build-debug/CMakeFiles/pong.dir/rakieta.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

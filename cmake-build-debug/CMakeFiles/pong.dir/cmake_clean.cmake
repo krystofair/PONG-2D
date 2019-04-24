@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/pong.dir/main.cpp.obj"
   "CMakeFiles/pong.dir/rakieta.cpp.obj"
   "CMakeFiles/pong.dir/gracz.cpp.obj"
+  "CMakeFiles/pong.dir/menu.cpp.obj"
   "pong.pdb"
   "pong.exe"
   "pong.exe.manifest"

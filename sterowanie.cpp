@@ -1,7 +1,9 @@
 #include "sterowanie.h"
 
 
-void Sterowanie::operator()(sf::Event e)
+
+template <typename T>
+void Sterowanie<T>::operator()(sf::Event e)
 {
 #define code e.key.code
 	switch(stan)
@@ -11,19 +13,30 @@ void Sterowanie::operator()(sf::Event e)
 			//klawisz potwierdzający wybór
 			if(e.key.code == Klawisz::Enter)
 			{
-			    //wybierz obecnie ustawioną opcje
+			    //nic nie rób jak na razie
 			}
 			else if(code == Klawisz::Up)
 			{
-			    //ogarnij powyższy napis w menu
+			    menu->odznaczOpcje(menu->zaz_opcja);
+			    menu->zaznaczOpcje([](IMenu<T>* m)->sf::Text*
+			    {
+			    	for(auto i : m->opcje)
+			    		if(m->zaz_opcja == i)
+			    			return --i;
+			    }(menu));
 			}
 			else if(code == Klawisz::Down)
 			{
-			    //ogarnij niższy napis w menu
+			    menu->odznaczOpcje(menu->zaz_opcja);
+			    menu->zaznaczOpcje([](IMenu<T>* m)->sf::Text* {
+			    	for(auto i : m->opcje)
+			    		if(m->zaz_opcja == i)
+			    			return ++i;
+			    }(menu));
 			}
 			break;
 		}
-		case ROZGRYWKA:
+		case GRA:
 		{
 			if(code == gracz1->getKlawisz(0))
 			{
@@ -45,19 +58,24 @@ void Sterowanie::operator()(sf::Event e)
 		}
 	}
 }
-void Sterowanie::zmienStan(STAN inny_stan) {
+template <typename T>
+void Sterowanie<T>::zmienStan(STAN inny_stan) {
     stan = inny_stan;
 }
 
-
-//na przyklad cos takiego.
-//#define DEBUG_STEROWANIE
-#ifdef DEBUG_STEROWANIE
-int main()
+template <typename T>
+void Sterowanie<T>::setGracz(Gracz *g, int who)
 {
-	sf::Event event{};
-	Sterowanie sterowanie;
-	if(event.type == sf::Event::KeyPressed) sterowanie(event);
-	return 0;
+	switch(who)
+	{
+		case 1: gracz1 = g; break;
+		case 2: gracz2 = g; break;
+		default: gracz1 = g;
+	}
 }
-#endif /* DEBUG_STEROWANIE */
+
+template <typename T>
+void Sterowanie<T>::setMenu(IMenu<T>* m)
+{
+    menu = m;
+}

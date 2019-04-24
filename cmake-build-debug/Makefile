@@ -176,6 +176,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+menu.obj: menu.cpp.obj
+
+.PHONY : menu.obj
+
+# target to build an object file
+menu.cpp.obj:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/menu.cpp.obj
+.PHONY : menu.cpp.obj
+
+menu.i: menu.cpp.i
+
+.PHONY : menu.i
+
+# target to preprocess a source file
+menu.cpp.i:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/menu.cpp.i
+.PHONY : menu.cpp.i
+
+menu.s: menu.cpp.s
+
+.PHONY : menu.s
+
+# target to generate assembly for a file
+menu.cpp.s:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/menu.cpp.s
+.PHONY : menu.cpp.s
+
 rakieta.obj: rakieta.cpp.obj
 
 .PHONY : rakieta.obj
@@ -218,6 +245,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... menu.obj
+	@echo ... menu.i
+	@echo ... menu.s
 	@echo ... rakieta.obj
 	@echo ... rakieta.i
 	@echo ... rakieta.s
