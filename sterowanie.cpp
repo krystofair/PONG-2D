@@ -1,56 +1,66 @@
 #include "sterowanie.h"
 
 
-
-template <typename T>
-void Sterowanie<T>::operator()(sf::Event e)
+void Sterowanie::operator()(sf::Event e)
 {
-#define code e.key.code
 	switch(stan)
 	{
 		case MENU:
 		{
-			//klawisz potwierdzający wybór
+			/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
+		    if(imenu == nullptr) exit(-1);
+			/* klawisz potwierdzający wybór */
 			if(e.key.code == Klawisz::Enter)
 			{
 			    //nic nie rób jak na razie
 			}
-			else if(code == Klawisz::Up)
+			else if(e.key.code == Klawisz::Up)
 			{
-			    menu->odznaczOpcje(menu->zaz_opcja);
-			    menu->zaznaczOpcje([](IMenu<T>* m)->sf::Text*
-			    {
-			    	for(auto i : m->opcje)
-			    		if(m->zaz_opcja == i)
-			    			return --i;
-			    }(menu));
+				auto zaz = imenu->getZaz();
+				for(int i=0; i< imenu->getKontOpcji().size(); ++i)
+				{
+					if(zaz->getString() == imenu->getKontOpcji()[i].getString())
+					{
+					    if(i >= 1)
+						{
+					        imenu->odznaczOpcje();
+					        imenu->zaznaczOpcje(&imenu->getKontOpcji()[i-1]);
+						}
+					}
+				}
 			}
-			else if(code == Klawisz::Down)
+			else if(e.key.code == Klawisz::Down)
 			{
-			    menu->odznaczOpcje(menu->zaz_opcja);
-			    menu->zaznaczOpcje([](IMenu<T>* m)->sf::Text* {
-			    	for(auto i : m->opcje)
-			    		if(m->zaz_opcja == i)
-			    			return ++i;
-			    }(menu));
+				auto zaz = imenu->getZaz();
+				for(int i=0; i< imenu->getKontOpcji().size(); ++i)
+				{
+					if(zaz->getString() == imenu->getKontOpcji()[i].getString())
+					{
+						if(i < imenu->getKontOpcji().size()-1)
+						{
+							imenu->odznaczOpcje();
+							imenu->zaznaczOpcje(&imenu->getKontOpcji()[i+1]);
+						}
+					}
+				}
 			}
 			break;
 		}
 		case GRA:
 		{
-			if(code == gracz1->getKlawisz(0))
+			if(e.key.code == gracz1->getKlawisz(0))
 			{
 
 			}
-			else if(code == gracz2->getKlawisz(0))
+			else if(e.key.code == gracz2->getKlawisz(0))
 			{
 
 			}
-			else if(code == gracz1->getKlawisz(1))
+			else if(e.key.code == gracz1->getKlawisz(1))
 			{
 
 			}
-			else if(code == gracz2->getKlawisz(1))
+			else if(e.key.code == gracz2->getKlawisz(1))
 			{
 
 			}
@@ -58,13 +68,12 @@ void Sterowanie<T>::operator()(sf::Event e)
 		}
 	}
 }
-template <typename T>
-void Sterowanie<T>::zmienStan(STAN inny_stan) {
+
+void Sterowanie::zmienStan(STAN inny_stan) {
     stan = inny_stan;
 }
 
-template <typename T>
-void Sterowanie<T>::setGracz(Gracz *g, int who)
+void Sterowanie::setGracz(Gracz *g, int who)
 {
 	switch(who)
 	{
@@ -74,8 +83,7 @@ void Sterowanie<T>::setGracz(Gracz *g, int who)
 	}
 }
 
-template <typename T>
-void Sterowanie<T>::setMenu(IMenu<T>* m)
+void Sterowanie::setMenu(IMenu* m)
 {
-    menu = m;
+	imenu = m;
 }

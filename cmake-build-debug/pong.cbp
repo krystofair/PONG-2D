@@ -96,10 +96,19 @@
 		<Unit filename="P:/PONG-2D/menu.cpp">
 			<Option target="pong"/>
 		</Unit>
+		<Unit filename="P:/PONG-2D/menu.h">
+			<Option target="pong"/>
+		</Unit>
 		<Unit filename="P:/PONG-2D/rakieta.cpp">
 			<Option target="pong"/>
 		</Unit>
 		<Unit filename="P:/PONG-2D/rakieta.h">
+			<Option target="pong"/>
+		</Unit>
+		<Unit filename="P:/PONG-2D/sterowanie.cpp">
+			<Option target="pong"/>
+		</Unit>
+		<Unit filename="P:/PONG-2D/sterowanie.h">
 			<Option target="pong"/>
 		</Unit>
 		<Unit filename="P:/PONG-2D/CMakeLists.txt">

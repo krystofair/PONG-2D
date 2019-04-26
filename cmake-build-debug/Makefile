@@ -230,6 +230,33 @@ rakieta.cpp.s:
 	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/rakieta.cpp.s
 .PHONY : rakieta.cpp.s
 
+sterowanie.obj: sterowanie.cpp.obj
+
+.PHONY : sterowanie.obj
+
+# target to build an object file
+sterowanie.cpp.obj:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/sterowanie.cpp.obj
+.PHONY : sterowanie.cpp.obj
+
+sterowanie.i: sterowanie.cpp.i
+
+.PHONY : sterowanie.i
+
+# target to preprocess a source file
+sterowanie.cpp.i:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/sterowanie.cpp.i
+.PHONY : sterowanie.cpp.i
+
+sterowanie.s: sterowanie.cpp.s
+
+.PHONY : sterowanie.s
+
+# target to generate assembly for a file
+sterowanie.cpp.s:
+	$(MAKE) -f CMakeFiles\pong.dir\build.make CMakeFiles/pong.dir/sterowanie.cpp.s
+.PHONY : sterowanie.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -251,6 +278,9 @@ help:
 	@echo ... rakieta.obj
 	@echo ... rakieta.i
 	@echo ... rakieta.s
+	@echo ... sterowanie.obj
+	@echo ... sterowanie.i
+	@echo ... sterowanie.s
 .PHONY : help
 
 

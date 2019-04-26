@@ -2,10 +2,13 @@
 // Created by Christofair on 23.04.2019.
 //
 
+#include <vector>
 
 #ifndef PONG_IMENU_H
 #define PONG_IMENU_H
 
+
+//Here is type for IMenu, but that is only for omitted templates :D
 
 /**
  * Interface to all menu in game.
@@ -13,30 +16,44 @@
  * please write appropriate issue about this.
  * Greeting by Christofair.
  */
-template <typename T>
 class IMenu
 {
 public:
+    using OptionType = sf::Text;
     IMenu() = default;
     virtual ~IMenu() = default;
-
     /**
      * Zaznacza opcje w menu.
      * @param t: jest wskaźnikiem do opcji, która powinna być zaznaczona.
      */
-    virtual void zaznaczOpcje(T* t) = 0;
+    virtual void zaznaczOpcje(OptionType* t) = 0;
 
     /**
      * Odznacza opcje w menu.
      * @param t: jest wskaźnikiem do opcji, która powinna być odznaczona.
      */
-    virtual void odznaczOpcje(T* t) = 0;
+    virtual void odznaczOpcje() = 0;
 
     /**
      * Wykonuje kod, który powinnien się wykonać w czasie wybrania danej opcji.
      * @param t: jest wskaźnikiem na opcje do uruchomienia.
      */
-    virtual void uruchomOpcje(T* t) = 0;
+    virtual void uruchomOpcje(OptionType* t) = 0;
+
+    /**
+     * Zwraca wskaźnik do obecnie zaznaczonej opcji
+     * bo się przyda.
+     */
+    virtual OptionType* getZaz() = 0;
+
+    /**
+     * Zwraca referencje do kontenera z opcjami.
+     */
+    virtual std::vector<OptionType>& getKontOpcji() = 0;
+
+protected:
+    std::vector<OptionType> opcje;
+    OptionType* zaznaczona;
 };
 
 

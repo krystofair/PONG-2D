@@ -27,6 +27,9 @@ public:
      * @param r: Obiekt rakiety do przypisania dla pola.
      */
     virtual void setRakieta(const Rakieta&) = 0;
+
+protected:
+    Rakieta* rakieta;
 };
 
 

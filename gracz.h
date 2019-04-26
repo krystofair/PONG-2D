@@ -30,7 +30,6 @@ public:
 
 
 private:
-    Rakieta *rakieta;
     Klawisz klawisze[4];
 
 };

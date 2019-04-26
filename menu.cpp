@@ -8,55 +8,60 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-#include "IMenu.h"
+#include "menu.h"
 
 
-template <typename T>
-class MainMenu: public IMenu<T>, public sf::Drawable
+
+Menu::Menu()
 {
-private:
-    sf::Font font;
-    std::list<sf::Text> opcje;
-public:
-    sf::Text* zaz_opcja{nullptr};
-    MainMenu()
+    if(!font.loadFromFile("Font/calibri.ttf")) exit(10);
+    opcje.emplace_back("Uruchom gre", font);
+    opcje.emplace_back("Zmien sterowanie", font);
+    opcje.emplace_back("Wyjscie", font);
+    zaznaczona = &opcje.front();
+    zaznaczona->setFillColor(sf::Color::Blue);
+
+    int i=0;
+    for(auto& item : opcje)
     {
-        font.loadFromFile("Font/calibri.ttf");
-        opcje.emplace_back("Uruchom gre", font);
-        opcje.emplace_back("Zmien sterowanie", font);
-        opcje.emplace_back("Wyjscie", font);
-        zaz_opcja = &opcje.front();
-        int i=0;
-        for(auto& item : opcje)
-        {
-            item.setPosition(100, i);
-            i+=item.getCharacterSize()+5;
-        }
-
+        item.setPosition(100, i);
+        i+=item.getCharacterSize()+5;
     }
+}
 
+void Menu::zaznaczOpcje(OptionType* t)
+{
+    if(t == nullptr) return;
+    t->setFillColor(sf::Color::Blue);
+    zaznaczona = t;
+}
 
+void Menu::odznaczOpcje()
+{
+    if(zaznaczona == nullptr) return;
+    zaznaczona->setFillColor(sf::Color::White);
+    zaznaczona = nullptr;
 
-    void zaznaczOpcje(sf::Text* t) override
-    {
-        t->setFillColor(sf::Color::Blue);
-        zaz_opcja = t;
+}
 
-    }
+void Menu::uruchomOpcje(OptionType *t)
+{
 
-    void odznaczOpcje(sf::Text* t) override
-    {
-        t->setFillColor(sf::Color::Black);
-        zaz_opcja = nullptr;
-    }
-    void uruchomOpcje(sf::Text* t) override {}
-    ~MainMenu(){}
+}
 
-protected:
-    void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const
-    {
-        for(auto& opcja : opcje)
-            target.draw(opcja, states);
-    }
-};
+IMenu::OptionType* Menu::getZaz()
+{
+    return zaznaczona;
+}
 
+std::vector<IMenu::OptionType>& Menu::getKontOpcji()
+{
+    return opcje;
+}
+
+void Menu::draw(sf::RenderTarget &target,
+        sf::RenderStates states = sf::RenderStates::Default) const
+{
+    for(auto& item : opcje)
+        target.draw(item, states);
+}

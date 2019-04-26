@@ -70,38 +70,10 @@ CMakeFiles/pong.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pong.dir/main.cpp.s"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S P:\PONG-2D\main.cpp -o CMakeFiles\pong.dir\main.cpp.s
 
-CMakeFiles/pong.dir/rakieta.cpp.obj: CMakeFiles/pong.dir/flags.make
-CMakeFiles/pong.dir/rakieta.cpp.obj: CMakeFiles/pong.dir/includes_CXX.rsp
-CMakeFiles/pong.dir/rakieta.cpp.obj: ../rakieta.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pong.dir/rakieta.cpp.obj"
-	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\pong.dir\rakieta.cpp.obj -c P:\PONG-2D\rakieta.cpp
-
-CMakeFiles/pong.dir/rakieta.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pong.dir/rakieta.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E P:\PONG-2D\rakieta.cpp > CMakeFiles\pong.dir\rakieta.cpp.i
-
-CMakeFiles/pong.dir/rakieta.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pong.dir/rakieta.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S P:\PONG-2D\rakieta.cpp -o CMakeFiles\pong.dir\rakieta.cpp.s
-
-CMakeFiles/pong.dir/gracz.cpp.obj: CMakeFiles/pong.dir/flags.make
-CMakeFiles/pong.dir/gracz.cpp.obj: CMakeFiles/pong.dir/includes_CXX.rsp
-CMakeFiles/pong.dir/gracz.cpp.obj: ../gracz.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pong.dir/gracz.cpp.obj"
-	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\pong.dir\gracz.cpp.obj -c P:\PONG-2D\gracz.cpp
-
-CMakeFiles/pong.dir/gracz.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pong.dir/gracz.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E P:\PONG-2D\gracz.cpp > CMakeFiles\pong.dir\gracz.cpp.i
-
-CMakeFiles/pong.dir/gracz.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pong.dir/gracz.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S P:\PONG-2D\gracz.cpp -o CMakeFiles\pong.dir\gracz.cpp.s
-
 CMakeFiles/pong.dir/menu.cpp.obj: CMakeFiles/pong.dir/flags.make
 CMakeFiles/pong.dir/menu.cpp.obj: CMakeFiles/pong.dir/includes_CXX.rsp
 CMakeFiles/pong.dir/menu.cpp.obj: ../menu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pong.dir/menu.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pong.dir/menu.cpp.obj"
 	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\pong.dir\menu.cpp.obj -c P:\PONG-2D\menu.cpp
 
 CMakeFiles/pong.dir/menu.cpp.i: cmake_force
@@ -112,20 +84,64 @@ CMakeFiles/pong.dir/menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pong.dir/menu.cpp.s"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S P:\PONG-2D\menu.cpp -o CMakeFiles\pong.dir\menu.cpp.s
 
+CMakeFiles/pong.dir/sterowanie.cpp.obj: CMakeFiles/pong.dir/flags.make
+CMakeFiles/pong.dir/sterowanie.cpp.obj: CMakeFiles/pong.dir/includes_CXX.rsp
+CMakeFiles/pong.dir/sterowanie.cpp.obj: ../sterowanie.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pong.dir/sterowanie.cpp.obj"
+	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\pong.dir\sterowanie.cpp.obj -c P:\PONG-2D\sterowanie.cpp
+
+CMakeFiles/pong.dir/sterowanie.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pong.dir/sterowanie.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E P:\PONG-2D\sterowanie.cpp > CMakeFiles\pong.dir\sterowanie.cpp.i
+
+CMakeFiles/pong.dir/sterowanie.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pong.dir/sterowanie.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S P:\PONG-2D\sterowanie.cpp -o CMakeFiles\pong.dir\sterowanie.cpp.s
+
+CMakeFiles/pong.dir/gracz.cpp.obj: CMakeFiles/pong.dir/flags.make
+CMakeFiles/pong.dir/gracz.cpp.obj: CMakeFiles/pong.dir/includes_CXX.rsp
+CMakeFiles/pong.dir/gracz.cpp.obj: ../gracz.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pong.dir/gracz.cpp.obj"
+	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\pong.dir\gracz.cpp.obj -c P:\PONG-2D\gracz.cpp
+
+CMakeFiles/pong.dir/gracz.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pong.dir/gracz.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E P:\PONG-2D\gracz.cpp > CMakeFiles\pong.dir\gracz.cpp.i
+
+CMakeFiles/pong.dir/gracz.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pong.dir/gracz.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S P:\PONG-2D\gracz.cpp -o CMakeFiles\pong.dir\gracz.cpp.s
+
+CMakeFiles/pong.dir/rakieta.cpp.obj: CMakeFiles/pong.dir/flags.make
+CMakeFiles/pong.dir/rakieta.cpp.obj: CMakeFiles/pong.dir/includes_CXX.rsp
+CMakeFiles/pong.dir/rakieta.cpp.obj: ../rakieta.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pong.dir/rakieta.cpp.obj"
+	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\pong.dir\rakieta.cpp.obj -c P:\PONG-2D\rakieta.cpp
+
+CMakeFiles/pong.dir/rakieta.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pong.dir/rakieta.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E P:\PONG-2D\rakieta.cpp > CMakeFiles\pong.dir\rakieta.cpp.i
+
+CMakeFiles/pong.dir/rakieta.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pong.dir/rakieta.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S P:\PONG-2D\rakieta.cpp -o CMakeFiles\pong.dir\rakieta.cpp.s
+
 # Object files for target pong
 pong_OBJECTS = \
 "CMakeFiles/pong.dir/main.cpp.obj" \
-"CMakeFiles/pong.dir/rakieta.cpp.obj" \
+"CMakeFiles/pong.dir/menu.cpp.obj" \
+"CMakeFiles/pong.dir/sterowanie.cpp.obj" \
 "CMakeFiles/pong.dir/gracz.cpp.obj" \
-"CMakeFiles/pong.dir/menu.cpp.obj"
+"CMakeFiles/pong.dir/rakieta.cpp.obj"
 
 # External object files for target pong
 pong_EXTERNAL_OBJECTS =
 
 pong.exe: CMakeFiles/pong.dir/main.cpp.obj
-pong.exe: CMakeFiles/pong.dir/rakieta.cpp.obj
-pong.exe: CMakeFiles/pong.dir/gracz.cpp.obj
 pong.exe: CMakeFiles/pong.dir/menu.cpp.obj
+pong.exe: CMakeFiles/pong.dir/sterowanie.cpp.obj
+pong.exe: CMakeFiles/pong.dir/gracz.cpp.obj
+pong.exe: CMakeFiles/pong.dir/rakieta.cpp.obj
 pong.exe: CMakeFiles/pong.dir/build.make
 pong.exe: C:/Libraries/SFML-2.5.1/lib/libsfml-graphics-s-d.a
 pong.exe: C:/Libraries/SFML-2.5.1/lib/libsfml-window-s-d.a
@@ -143,7 +159,7 @@ pong.exe: C:/Libraries/SFML-2.5.1/lib/libsfml-system-s-d.a
 pong.exe: CMakeFiles/pong.dir/linklibs.rsp
 pong.exe: CMakeFiles/pong.dir/objects1.rsp
 pong.exe: CMakeFiles/pong.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable pong.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=P:\PONG-2D\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable pong.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\pong.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

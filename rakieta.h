@@ -15,17 +15,20 @@ class Rakieta
 {
 public:
     Rakieta(unsigned int x, unsigned int y) : pos_x(x), pos_y(y) {}
+
     /**
      * Ustawia pozycje rakiety. Gdzie zostanie wyświetlona na ekranie.
      * @param x: pozycja na osi odciętych.
      * @param y: pozycja na osi rzędnych.
      */
     inline void setPozycja(unsigned int x, unsigned int y);
+
     /**
      * Metoda ustawiająca pozycje na osi X.
      * @param x: współrzędna x.
      */
     inline void setPozX(unsigned int x);
+
     /**
      * Metoda ustawiająca pozycje na osi Y.
      * @param y: współrzędna y.

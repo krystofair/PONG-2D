@@ -2,19 +2,22 @@
 using namespace std;
 
 #include <iostream>
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "sterowanie.h"
-#include "menu.cpp"
+#include "menu.h"
+
+
 
 int main()
 {
     //sf::Window window(sf::VideoMode(800, 600), "SFML works!");
     sf::RenderWindow window(sf::VideoMode(800,600),
             "niedzialaLOLZ");
-    MainMenu<sf::Text> moje_menu = MainMenu<sf::Text>();
-    Sterowanie<sf::Text> sterowanie(Sterowanie<sf::Text>::STAN::MENU);
+    Menu moje_menu = Menu();
+    Sterowanie sterowanie(Sterowanie::STAN::MENU);
     sterowanie.setMenu(&moje_menu);
 
     float i =0;
