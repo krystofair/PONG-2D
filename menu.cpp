@@ -24,7 +24,7 @@ Menu::Menu()
     int i=0;
     for(auto& item : opcje)
     {
-        item.setPosition(100, i);
+        item.setPosition(200, i);
         i+=item.getCharacterSize()+5;
     }
 }
@@ -54,7 +54,7 @@ IMenu::OptionType* Menu::getZaz()
     return zaznaczona;
 }
 
-std::vector<IMenu::OptionType>& Menu::getKontOpcji()
+IMenu::Kontener<IMenu::OptionType>& Menu::getKontOpcji()
 {
     return opcje;
 }

@@ -20,6 +20,9 @@ class IMenu
 {
 public:
     using OptionType = sf::Text;
+    template <typename T>
+    using Kontener = std::vector<T>;
+
     IMenu() = default;
     virtual ~IMenu() = default;
     /**
@@ -49,10 +52,10 @@ public:
     /**
      * Zwraca referencje do kontenera z opcjami.
      */
-    virtual std::vector<OptionType>& getKontOpcji() = 0;
+    virtual Kontener<OptionType>& getKontOpcji() = 0;
 
 protected:
-    std::vector<OptionType> opcje;
+    Kontener<OptionType> opcje;
     OptionType* zaznaczona;
 };
 

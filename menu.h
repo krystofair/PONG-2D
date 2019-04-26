@@ -27,7 +27,7 @@ public:
 
     virtual OptionType* getZaz();
 
-    virtual std::vector<OptionType>& getKontOpcji();
+    virtual Kontener<OptionType>& getKontOpcji();
 
 protected:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
