@@ -9,31 +9,32 @@
 #define PONG_MENU_H
 
 /**
- * Klasa dziedziczy po interfejsie `IMenu` wiêc znane jest przeznaczenie jej metod.
- * Menu jest próbne
+ * Klasa dziedziczy po interfejsie `IMenu` wiÄ™c znane jest przeznaczenie jej metod.
+ * Menu jest prÃ³bne
  */
 class Menu : public IMenu, public sf::Drawable
 {
 public:
-	Menu();
+    using OptionType = IMenu::OptionType;
+    Menu();
 
-	virtual ~Menu() = default;
+    virtual ~Menu() = default;
 
-	virtual void zaznaczOpcje(OptionType*);
+    bool zaznaczOpcje(Menu::Kontener<OptionType>::iterator);
 
-	virtual void odznaczOpcje();
+    bool odznaczOpcje();
 
-	virtual void uruchomOpcje(OptionType*);
+    void uruchomOpcje(Menu::Kontener<OptionType>::iterator);
 
-	virtual OptionType* getZaz();
+    Kontener<OptionType>::iterator getZaz();
 
-	virtual Kontener<OptionType>& getKontOpcji();
+    Kontener<OptionType>& getKontOpcji();
 
 protected:
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 private:
-	sf::Font font;
+    sf::Font font;
 };
 
 #endif //PONG_MENU_H

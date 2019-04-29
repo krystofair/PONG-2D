@@ -2,13 +2,12 @@
 // Created by Christofair on 23.04.2019.
 //
 
+#include <list>
 #include <vector>
 
 #ifndef PONG_IMENU_H
 #define PONG_IMENU_H
 
-
-//Here is type for IMenu, but that is only for omitted templates :D
 
 /**
  * Interface to all menu in game.
@@ -19,44 +18,44 @@
 class IMenu
 {
 public:
-	using OptionType = sf::Text;
-	template <typename T>
-	using Kontener = std::vector<T>;
+    using OptionType = sf::Text;
+    template <typename T>
+    using Kontener = std::list<T>;
 
-	IMenu() = default;
-	virtual ~IMenu() = default;
-	/**
-	 * Zaznacza opcje w menu.
-	 * @param t: jest wskaŸnikiem do opcji, która powinna byæ zaznaczona.
-	 */
-	virtual void zaznaczOpcje(OptionType* t) = 0;
+    IMenu() = default;
+    virtual ~IMenu() = default;
+    /**
+     * Zaznacza opcje w menu.
+     * @param t: jest wskaÅºnikiem do opcji, ktÃ³ra powinna byÄ‡ zaznaczona.
+     */
+    virtual bool zaznaczOpcje(Kontener<OptionType>::iterator) = 0;
 
-	/**
-	 * Odznacza opcje w menu.
-	 * @param t: jest wskaŸnikiem do opcji, która powinna byæ odznaczona.
-	 */
-	virtual void odznaczOpcje() = 0;
+    /**
+     * Odznacza opcje w menu.
+     * @param t: jest wskaÅºnikiem do opcji, ktÃ³ra powinna byÄ‡ odznaczona.
+     */
+    virtual bool odznaczOpcje() = 0;
 
-	/**
-	 * Wykonuje kod, który powinnien siê wykonaæ w czasie wybrania danej opcji.
-	 * @param t: jest wskaŸnikiem na opcje do uruchomienia.
-	 */
-	virtual void uruchomOpcje(OptionType* t) = 0;
+    /**
+     * Wykonuje kod, ktÃ³ry powinnien siÄ™ wykonaÄ‡ w czasie wybrania danej opcji.
+     * @param t: jest wskaÅºnikiem na opcje do uruchomienia.
+     */
+    virtual void uruchomOpcje(Kontener<OptionType>::iterator t) = 0;
 
-	/**
-	 * Zwraca wskaŸnik do obecnie zaznaczonej opcji
-	 * bo siê przyda.
-	 */
-	virtual OptionType* getZaz() = 0;
+    /**
+     * Zwraca wskaÅºnik do obecnie zaznaczonej opcji
+     * bo siÄ™ przyda.
+     */
+    virtual Kontener<OptionType>::iterator getZaz() = 0;
 
-	/**
-	 * Zwraca referencje do kontenera z opcjami.
-	 */
-	virtual Kontener<OptionType>& getKontOpcji() = 0;
+    /**
+     * Zwraca referencje do kontenera z opcjami.
+     */
+    virtual Kontener<OptionType>& getKontOpcji() = 0;
 
 protected:
-	Kontener<OptionType> opcje;
-	OptionType* zaznaczona;
+    Kontener<OptionType> opcje;
+    Kontener<OptionType>::iterator zaznaczona;
 };
 
 

@@ -3,83 +3,71 @@
 
 void Sterowanie::operator()(sf::Event e)
 {
-	switch (stan)
+	switch(stan)
 	{
-	case MENU:
-	{
-		/* jeœli nie ma obiektu menu, a stan gry jest w stanie MENU to wyst¹pi b³¹d. */
-		if (imenu == nullptr) exit(-1);
-		/* klawisz potwierdzaj¹cy wybór */
-		if (e.key.code == Klawisz::Enter)
+		case MENU:
 		{
-			//nic nie rób jak na razie
-		}
-		else if (e.key.code == Klawisz::Up)
-		{
-			auto zaz = imenu->getZaz();
-			for (int i = 0; i < imenu->getKontOpcji().size(); ++i)
+			/* jeÅ›li nie ma obiektu menu, a stan gry jest w stanie MENU to wystÄ…pi bÅ‚Ä…d. */
+		    if(imenu == nullptr) exit(-1);
+			/* klawisz potwierdzajÄ…cy wybÃ³r */
+			if(e.key.code == Klawisz::Enter)
 			{
-				if (zaz == &imenu->getKontOpcji()[i])
+			    imenu->uruchomOpcje(imenu->getZaz());
+			}
+			else if(e.key.code == Klawisz::Up)
+			{
+				auto zaz = imenu->getZaz();
+				if(zaz != imenu->getKontOpcji().begin())
 				{
-					if (i >= 1)
-					{
-						imenu->odznaczOpcje();
-						imenu->zaznaczOpcje(&imenu->getKontOpcji()[i - 1]);
-					}
+					imenu->odznaczOpcje();
+					imenu->zaznaczOpcje(std::prev(zaz));
 				}
 			}
-		}
-		else if (e.key.code == Klawisz::Down)
-		{
-			auto zaz = imenu->getZaz();
-			for (int i = 0; i < imenu->getKontOpcji().size(); ++i)
+			else if(e.key.code == Klawisz::Down)
 			{
-				if (zaz == &imenu->getKontOpcji()[i])
+			    auto zaz = imenu->getZaz();
+				if (std::next(zaz) != imenu->getKontOpcji().end())
 				{
-					if (i < imenu->getKontOpcji().size() - 1)
-					{
-						imenu->odznaczOpcje();
-						imenu->zaznaczOpcje(&imenu->getKontOpcji()[i + 1]);
-					}
+					imenu->odznaczOpcje();
+					imenu->zaznaczOpcje(std::next(zaz));
 				}
 			}
+			break;
 		}
-		break;
-	}
-	case GRA:
-	{
-		if (e.key.code == gracz1->getKlawisz(0))
+		case GRA:
 		{
+			if(e.key.code == gracz1->getKlawisz(0))
+			{
 
-		}
-		else if (e.key.code == gracz2->getKlawisz(0))
-		{
+			}
+			else if(e.key.code == gracz2->getKlawisz(0))
+			{
 
-		}
-		else if (e.key.code == gracz1->getKlawisz(1))
-		{
+			}
+			else if(e.key.code == gracz1->getKlawisz(1))
+			{
 
-		}
-		else if (e.key.code == gracz2->getKlawisz(1))
-		{
+			}
+			else if(e.key.code == gracz2->getKlawisz(1))
+			{
 
+			}
+			break;
 		}
-		break;
-	}
 	}
 }
 
 void Sterowanie::zmienStan(STAN inny_stan) {
-	stan = inny_stan;
+    stan = inny_stan;
 }
 
 void Sterowanie::setGracz(Gracz *g, int who)
 {
-	switch (who)
+	switch(who)
 	{
-	case 1: gracz1 = g; break;
-	case 2: gracz2 = g; break;
-	default: gracz1 = g;
+		case 1: gracz1 = g; break;
+		case 2: gracz2 = g; break;
+		default: gracz1 = g;
 	}
 }
 

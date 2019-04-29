@@ -13,23 +13,23 @@ class IGracz
 {
 public:
 
-	virtual ~IGracz() = default;
+    virtual ~IGracz() = default;
 
-	/**
-	 * Pobranie rakiety od gracza i operowanie na niej.
-	 * Np wykonywanie operacji jak rysowanie na ekranie.
-	 * @return: Referencje obiektu rakiety.
-	 */
-	virtual Rakieta& getRakieta() const = 0;
+    /**
+     * Pobranie rakiety od gracza i operowanie na niej.
+     * Np wykonywanie operacji jak rysowanie na ekranie.
+     * @return: Referencje obiektu rakiety.
+     */
+    virtual Rakieta& getRakieta() const = 0;
 
-	/**
-	 * Przypiuje obiekt rakiety dla gracza.
-	 * @param r: Obiekt rakiety do przypisania dla pola.
-	 */
-	virtual void setRakieta(const Rakieta&) = 0;
+    /**
+     * Przypiuje obiekt rakiety dla gracza.
+     * @param r: Obiekt rakiety do przypisania dla pola.
+     */
+    virtual void setRakieta(const Rakieta&) = 0;
 
 protected:
-	Rakieta* rakieta;
+    Rakieta* rakieta;
 };
 
 

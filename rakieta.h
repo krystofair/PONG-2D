@@ -9,35 +9,35 @@
 
 /**
  * Klasa Rakieta reprezentuje obiekt rakiety na ekranie.
- * TODO: Rozszerzyæ klasê w celu zaimplementowania w silniku.
+ * TODO: RozszerzyÄ‡ klasÄ™ w celu zaimplementowania w silniku.
  */
 class Rakieta
 {
 public:
-	Rakieta(unsigned int x, unsigned int y) : pos_x(x), pos_y(y) {}
+    Rakieta(unsigned int x, unsigned int y) : pos_x(x), pos_y(y) {}
 
-	/**
-	 * Ustawia pozycje rakiety. Gdzie zostanie wyœwietlona na ekranie.
-	 * @param x: pozycja na osi odciêtych.
-	 * @param y: pozycja na osi rzêdnych.
-	 */
-	inline void setPozycja(unsigned int x, unsigned int y);
+    /**
+     * Ustawia pozycje rakiety. Gdzie zostanie wyÅ›wietlona na ekranie.
+     * @param x: pozycja na osi odciÄ™tych.
+     * @param y: pozycja na osi rzÄ™dnych.
+     */
+    inline void setPozycja(unsigned int x, unsigned int y);
 
-	/**
-	 * Metoda ustawiaj¹ca pozycje na osi X.
-	 * @param x: wspó³rzêdna x.
-	 */
-	inline void setPozX(unsigned int x);
+    /**
+     * Metoda ustawiajÄ…ca pozycje na osi X.
+     * @param x: wspÃ³Å‚rzÄ™dna x.
+     */
+    inline void setPozX(unsigned int x);
 
-	/**
-	 * Metoda ustawiaj¹ca pozycje na osi Y.
-	 * @param y: wspó³rzêdna y.
-	 */
-	inline void setPozY(unsigned int y);
+    /**
+     * Metoda ustawiajÄ…ca pozycje na osi Y.
+     * @param y: wspÃ³Å‚rzÄ™dna y.
+     */
+    inline void setPozY(unsigned int y);
 
 private:
-	unsigned int pos_x;
-	unsigned int pos_y;
+    unsigned int pos_x;
+    unsigned int pos_y;
 };
 
 

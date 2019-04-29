@@ -6,16 +6,16 @@
 
 void Rakieta::setPozycja(unsigned int x, unsigned int y)
 {
-	pos_x = x;
-	pos_y = y;
+    pos_x = x;
+    pos_y = y;
 }
 
 void Rakieta::setPozX(unsigned int x)
 {
-	pos_x = x;
+    pos_x = x;
 }
 
 void Rakieta::setPozY(unsigned int y)
 {
-	pos_y = y;
+    pos_y = y;
 }

@@ -11,26 +11,26 @@ using Klawisz = sf::Keyboard::Key;
 class Gracz : public IGracz
 {
 public:
-	Gracz() = default;
-	~Gracz();
-
-	/**
-	 * Opis metody zgodny z opisem w interfejsie `IGracz`.
-	 * @param r: obiekt rakiety, której bêdzie u¿ywa³a klasa `Gracz`.
-	 */
-	void setRakieta(const Rakieta& r) override;
-	Rakieta& getRakieta() const override;
-	void setKlawisze(
-		Klawisz up,
-		Klawisz down,
-		Klawisz left,
-		Klawisz right);
-
-	const Klawisz& getKlawisz(unsigned int index) const;
+    Gracz() = default;
+    ~Gracz();
+    
+    /**
+     * Opis metody zgodny z opisem w interfejsie `IGracz`.
+     * @param r: obiekt rakiety, ktÃ³rej bÄ™dzie uÅ¼ywaÅ‚a klasa `Gracz`.
+     */
+    void setRakieta(const Rakieta& r) override;
+    Rakieta& getRakieta() const override;
+    void setKlawisze(
+            Klawisz up,
+            Klawisz down,
+            Klawisz left,
+            Klawisz right);
+    
+    const Klawisz& getKlawisz(unsigned int index) const;
 
 
 private:
-	Klawisz klawisze[4];
+    Klawisz klawisze[4];
 
 };
 
