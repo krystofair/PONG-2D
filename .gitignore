@@ -270,3 +270,7 @@ __pycache__/
 /sfml-audio-d-2.dll
 /sfml-audio-2.dll
 /openal32.dll
+*.sln
+*.rc
+*.vcxproj
+PONG-2D.vcxproj.filters
