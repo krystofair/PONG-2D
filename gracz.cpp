@@ -26,8 +26,3 @@ const Klawisz& Gracz::getKlawisz(unsigned int index) const
 {
     return klawisze[index];
 }
-
-Gracz::~Gracz()
-{
-    delete rakieta;
-}

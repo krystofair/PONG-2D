@@ -13,9 +13,8 @@ using namespace std;
 
 int main()
 {
-    //sf::Window window(sf::VideoMode(800, 600), "SFML works!");
     sf::RenderWindow window(sf::VideoMode(800,600),
-            "niedzialaLOLZ");
+            "PONG");
     Menu moje_menu = Menu();
     Sterowanie sterowanie(Sterowanie::STAN::MENU);
     sterowanie.setMenu(&moje_menu);

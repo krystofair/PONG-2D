@@ -12,7 +12,7 @@ class Gracz : public IGracz
 {
 public:
     Gracz() = default;
-    ~Gracz();
+	~Gracz() = default;
     
     /**
      * Opis metody zgodny z opisem w interfejsie `IGracz`.
