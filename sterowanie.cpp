@@ -22,14 +22,24 @@ void Sterowanie::operator()(sf::Event e)
 					imenu->odznaczOpcje();
 					imenu->zaznaczOpcje(std::prev(zaz));
 				}
+				else
+				{
+					imenu->odznaczOpcje();
+					imenu->zaznaczOpcje(std::prev(imenu->getKontOpcji().end()));
+				}
 			}
 			else if(e.key.code == Klawisz::Down)
 			{
 			    auto zaz = imenu->getZaz();
-				if (std::next(zaz) != imenu->getKontOpcji().end())
+				if(std::next(zaz) != imenu->getKontOpcji().end())
 				{
 					imenu->odznaczOpcje();
 					imenu->zaznaczOpcje(std::next(zaz));
+				}
+				else
+				{
+					imenu->odznaczOpcje();
+					imenu->zaznaczOpcje(imenu->getKontOpcji().begin());
 				}
 			}
 			break;

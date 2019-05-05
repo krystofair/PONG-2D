@@ -14,51 +14,38 @@
 
 Menu::Menu()
 {
-    if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf")) exit(10);
-    opcje.emplace_back("Uruchom gre", font);
-    opcje.emplace_back("Zmien sterowanie", font);
+	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf")) throw("najlepiej wyrzuciæ wyj¹tek z tej okazji");
+    opcje.emplace_back("Start", font);
+    opcje.emplace_back("Ustaw sterowanie", font);
     opcje.emplace_back("Wyjscie", font);
     zaznaczona = opcje.begin();
     zaznaczona->setFillColor(sf::Color::Blue);
-    int i=0;
+    int i=200;
     for(auto& item : opcje)
     {
-        item.setPosition(200, i);
+        item.setPosition(300, i);
         i+=item.getCharacterSize()+5;
     }
 }
 
 bool Menu::zaznaczOpcje(Menu::Kontener<OptionType>::iterator t)
 {
-    //for(auto item = opcje.begin(); item != opcje.end(); item++)
-    {
-        //if(item == t)
-        {
-            t->setFillColor(sf::Color::Blue);
-            zaznaczona = t;
-            return true;
-        }
-    }
-    return false;
+    t->setFillColor(sf::Color::Blue);
+    zaznaczona = t;
+	return true;
 }
 
 bool Menu::odznaczOpcje()
 {
-    //for(auto item = opcje.begin(); item != opcje.end(); item++)
-    {
-        //if(item == zaznaczona)
-        {
-            zaznaczona->setFillColor(sf::Color::White);
-            zaznaczona = opcje.end();
-            return true;
-        }
-    }
-    return false;
+	zaznaczona->setFillColor(sf::Color::White);
+	zaznaczona = opcje.end();
+	return true;
 }
 
 void Menu::uruchomOpcje(Menu::Kontener<OptionType>::iterator t)
 {
-    if(std::string(t->getString()) == "Wyjscie") exit(0);
+	if (std::string(t->getString()) == "Wyjscie") exit(0);
+	else if (std::string(t->getString()) == "Start") throw("uruchamiam gre XD");
     //callback(t);
 }
 

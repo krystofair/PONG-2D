@@ -16,9 +16,11 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800,600),
             "PONG");
     Menu moje_menu = Menu();
+	//Gracz *player1;
+	//Gracz *player2;
     Sterowanie sterowanie(Sterowanie::STAN::MENU);
     sterowanie.setMenu(&moje_menu);
-
+	//sterowanie.setGracz(player1, 1);
     float i =0;
 
     while (window.isOpen())
