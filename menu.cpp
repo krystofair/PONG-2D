@@ -3,6 +3,7 @@
 //
 
 #include <list>
+#include <Windows.h>
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Drawable.hpp>
@@ -10,14 +11,15 @@
 
 #include "menu.h"
 
-
-
-Menu::Menu()
+void f() {
+}
+MainMenu::MainMenu()
 {
-	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf")) throw("najlepiej wyrzuciæ wyj¹tek z tej okazji");
-    opcje.emplace_back("Start", font);
-    opcje.emplace_back("Ustaw sterowanie", font);
-    opcje.emplace_back("Wyjscie", font);
+	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf")) throw("brakuje czcionki w zasobach systemu.");
+	opcje.emplace_back("Start", font, f);
+	opcje.emplace_back("Ustaw sterowanie", font, f);
+	opcje.emplace_back("Wyniki", font, f);
+	opcje.emplace_back("Wyjscie", font, f);
     zaznaczona = opcje.begin();
     zaznaczona->setFillColor(sf::Color::Blue);
     int i=200;
@@ -28,40 +30,38 @@ Menu::Menu()
     }
 }
 
-bool Menu::zaznaczOpcje(Menu::Kontener<OptionType>::iterator t)
+bool MainMenu::zaznaczOpcje(std::list<OptionType>::iterator t)
 {
     t->setFillColor(sf::Color::Blue);
     zaznaczona = t;
 	return true;
 }
 
-bool Menu::odznaczOpcje()
+bool MainMenu::odznaczOpcje()
 {
 	zaznaczona->setFillColor(sf::Color::White);
 	zaznaczona = opcje.end();
 	return true;
 }
 
-void Menu::uruchomOpcje(Menu::Kontener<OptionType>::iterator t)
+void MainMenu::uruchomOpcje(std::list<OptionType>::iterator t)
 {
-	if (std::string(t->getString()) == "Wyjscie") exit(0);
-	else if (std::string(t->getString()) == "Start") throw("uruchamiam gre XD");
-    //callback(t);
+	if(t->getString() == "Wyjscie") exit(0);
+	else t->uruchom();
 }
 
-Menu::Kontener<Menu::OptionType>::iterator Menu::getZaz()
+std::list<OptionType>::iterator MainMenu::getZaz()
 {
     return zaznaczona;
 }
 
-Menu::Kontener<Menu::OptionType>& Menu::getKontOpcji()
+std::list<OptionType>& MainMenu::getKontOpcji()
 {
     return opcje;
 }
 
-void Menu::draw(sf::RenderTarget &target,
-        sf::RenderStates states = sf::RenderStates::Default) const
+void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::RenderStates::Default) const
 {
-    for(auto& item : opcje)
-        target.draw(item, states);
+	for (auto& item : opcje)
+		target.draw(item, states);
 }
