@@ -17,12 +17,14 @@ public:
 	OptionType(std::string opt_name, sf::Font& font, void(*func_opcji)())
 		: sf::Text(opt_name, font), callback(func_opcji) {}
 	void (*callback)();
+	/**
+	 * Uruchamia odpowiednio przypisany callback dla opcji
+	 */
 	void uruchom()
 	{
 		callback();
 	}
 };
-
 
 
 /**

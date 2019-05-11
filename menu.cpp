@@ -3,7 +3,7 @@
 //
 
 #include <list>
-#include <Windows.h>
+#include <cassert>
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Drawable.hpp>
@@ -11,23 +11,29 @@
 
 #include "menu.h"
 
-void f() {
-}
-MainMenu::MainMenu()
+
+MainMenu::MainMenu(std::list<void(*)()> callback_list)
 {
-	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf")) throw("brakuje czcionki w zasobach systemu.");
-	opcje.emplace_back("Start", font, f);
-	opcje.emplace_back("Ustaw sterowanie", font, f);
-	opcje.emplace_back("Wyniki", font, f);
-	opcje.emplace_back("Wyjscie", font, f);
-    zaznaczona = opcje.begin();
-    zaznaczona->setFillColor(sf::Color::Blue);
+	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf"))
+		throw("brakuje czcionki w zasobach systemu.");
+	auto f = callback_list.begin();
+	opcje.emplace_back("Start", font, *f);
+	f = std::next(f);
+	opcje.emplace_back("Zmien sterowanie", font, *f);
+	f = std::next(f);
+	opcje.emplace_back("Pokaz wyniki", font, *f);
+	f = std::next(f);
+	opcje.emplace_back("Wyjscie", font, *f);
+	f = std::next(f);
+	assert(f == callback_list.end());
     int i=200;
     for(auto& item : opcje)
     {
         item.setPosition(300, i);
         i+=item.getCharacterSize()+5;
     }
+	zaznaczona = opcje.begin();
+	zaznaczona->setFillColor(sf::Color::Blue);
 }
 
 bool MainMenu::zaznaczOpcje(std::list<OptionType>::iterator t)
@@ -46,8 +52,7 @@ bool MainMenu::odznaczOpcje()
 
 void MainMenu::uruchomOpcje(std::list<OptionType>::iterator t)
 {
-	if(t->getString() == "Wyjscie") exit(0);
-	else t->uruchom();
+	t->uruchom();
 }
 
 std::list<OptionType>::iterator MainMenu::getZaz()
@@ -64,4 +69,15 @@ void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::Rend
 {
 	for (auto& item : opcje)
 		target.draw(item, states);
+}
+
+void MainMenu::setCallback(std::list<OptionType>::iterator ito, void(*f)())
+{
+	ito->callback = f;
+}
+
+PauseMenu::PauseMenu(void(*f)())
+{
+	opcje.pop_front();
+	opcje.emplace_front("Resume", font, f);
 }

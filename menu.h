@@ -16,7 +16,8 @@
 class MainMenu : public IMenu, public sf::Drawable
 {
 public:
-    MainMenu();
+	MainMenu() = default;
+	MainMenu(std::list<void(*)()>);
 
     virtual ~MainMenu() = default;
     bool zaznaczOpcje(std::list<OptionType>::iterator);
@@ -24,11 +25,22 @@ public:
     void uruchomOpcje(std::list<OptionType>::iterator);
     std::list<OptionType>::iterator getZaz();
     std::list<OptionType>& getKontOpcji();
+
+	/**
+	 * Ustawienie funkcji zwrotnej dla pojedynczej
+	 * opcji w menu.
+	 */
+	void setCallback(std::list<OptionType>::iterator, void (*)());
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-
-private:
     sf::Font font;
+};
+
+class PauseMenu : public MainMenu
+{
+    PauseMenu();
+	PauseMenu(void(*)());
+    virtual ~PauseMenu() = default;
 };
 
 #endif //PONG_MENU_H

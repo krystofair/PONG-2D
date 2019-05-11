@@ -9,12 +9,15 @@
 
 /**
  * Klasa Rakieta reprezentuje obiekt rakiety na ekranie.
- * TODO: Rozszerzyć klasę w celu zaimplementowania w silniku.
  */
 class Rakieta
 {
 public:
-    Rakieta(unsigned int x, unsigned int y) : pos_x(x), pos_y(y) {}
+    Rakieta(unsigned x,
+			unsigned y,
+			unsigned szer,
+			unsigned dl)
+		: pos_x(x), pos_y(y), szerokosc(szer), dlugosc(dl), lim_y(y) {}
 
     /**
      * Ustawia pozycje rakiety. Gdzie zostanie wyświetlona na ekranie.
@@ -27,17 +30,66 @@ public:
      * Metoda ustawiająca pozycje na osi X.
      * @param x: współrzędna x.
      */
-    inline void setPozX(unsigned int x);
+    void setPozX(unsigned x);
+
+	/**
+	 * Metoda zwracająca pozycje na osi X
+	 * @return: pos_x
+	 */
+	unsigned getPozX();
 
     /**
      * Metoda ustawiająca pozycje na osi Y.
      * @param y: współrzędna y.
      */
-    inline void setPozY(unsigned int y);
+    void setPozY(unsigned y);
+
+	/**
+	 * Metoda zwracająca pozycje na osi Y.
+	 * @return: pos_y
+	 */
+	unsigned getPozY();
+
+	/**
+	 * Zwracanie szerokości rakiety w pikselach
+	 * @return: dlugosc
+	 */
+	unsigned getSzerokosc();
+
+	/**
+	 * Zwracanie długości rakiety w pikselach
+	 * @return: szerokosc
+	 */
+	unsigned getDlugosc();
+
+	/**
+     * Ustawianie szerokości rakiety w pikselach,
+	 * pomimo tego że ta wielkość raczej jest stała.
+	 * @param s: nowa szerokosc dla rakiety
+	 */
+	void setSzerokosc(unsigned s);
+
+	/**
+	 * Ustawianie długości rakiety w pikselach
+	 * @param d: nowa długość dla rakiety
+	 */
+	void setDlugosc(unsigned d);
+
+	/**
+	 * powiadamia o przesunięciu rakiety do pewnego etapu
+	 * @param lim: jest granicą do której maksymalnie
+	 * przesunie się rakieta na osi OY.
+	 */
+	void moveTo(unsigned lim);
+
+public:
+	unsigned lim_y;
 
 private:
-    unsigned int pos_x;
-    unsigned int pos_y;
+    unsigned pos_x;
+    unsigned pos_y;
+	unsigned dlugosc;
+	unsigned szerokosc;
 };
 
 

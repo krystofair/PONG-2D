@@ -4,12 +4,27 @@
 
 #include "gracz.h"
 
+Gracz::Gracz(Rakieta& r, int _id) : id(_id)
+{
+	switch(id)
+	{
+		case 1:
+			setKlawisze(Klawisz::P, Klawisz::L, Klawisz::Unknown, Klawisz::Unknown);
+			break;
+		case 2:
+			setKlawisze(Klawisz::W, Klawisz::A, Klawisz::Unknown, Klawisz::Unknown);
+			break;
+	}
+	rakieta = &r;
+}
+
+
 void Gracz::setRakieta(const Rakieta& r)
 {
     *rakieta = r;
 }
 
-Rakieta& Gracz::getRakieta() const
+Rakieta& Gracz::getRakieta()
 {
     return *rakieta;
 }
@@ -20,9 +35,4 @@ void Gracz::setKlawisze(Klawisz up, Klawisz down, Klawisz left, Klawisz right)
     klawisze[1] = down;
     klawisze[2] = left;
     klawisze[3] = right;
-}
-
-const Klawisz& Gracz::getKlawisz(unsigned int index) const
-{
-    return klawisze[index];
 }
