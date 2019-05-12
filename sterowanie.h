@@ -2,6 +2,7 @@
 // Created by Christofair on 23.04.2019.
 //
 
+
 #include <SFML/Window/Event.hpp>
 #include "gracz.h"
 #include "IMenu.h"
@@ -20,31 +21,23 @@
 class Sterowanie
 {
 public:
-    enum STAN
-    {
-        MENU, GRA
-    };
-    
+	enum STAN
+	{
+		MENU, GRA
+	};
     /**
-     *
-     * @param init_state
+     * Konstruktor sparametryzowany przez aktualny stan gry.
+     * Następnie ten stan będzie zmieniany.
+     * @param s: stan początkowy dla obiektu klasy sterowanie.
      */
-    Sterowanie(STAN init_state) : stan(init_state) {}
+	Sterowanie(STAN s) : stan(s) {}
 
     /**
-     * Operator wywołania pełni role funktora
-     * klasa wykonuje odpowiednie instrukcje ze względu
-     * na przekazany obiekt zdarzenia.
+     * Operator wywołania wykonuje odpowiednie instrukcje
+	 * ze względu na przekazany obiekt zdarzenia.
      * @param e: ww obiekt zdarzenia.
      */
-    void operator()(sf::Event e);
-
-    /**
-     * Zmienia wartość pola stanu, który określa aktualny stan
-     * rozgrywki.
-     * @param s: jest innym stanem, który chcemy ustawić.
-     */
-    void zmienStan(STAN s);
+    void operator()(sf::Event& e);
 
     /**
      * Ustawia referencje graczy do których sterowanie się będzie odnosiło.
@@ -59,8 +52,14 @@ public:
      */
     void setMenu(IMenu* m);
 
+	/**
+	 * Zmienia aktualny stan przypisania klawiszy dla klasy
+	 * @param s: nowy stan dla klasy
+	 */
+	void zmienStan(STAN s);
+
 private:
-    STAN stan{STAN::MENU};
+	STAN stan{STAN::MENU};
     Gracz* gracz1{nullptr};
     Gracz* gracz2{nullptr};
     IMenu* imenu{nullptr};

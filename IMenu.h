@@ -3,11 +3,32 @@
 //
 
 #include <list>
-#include <vector>
 
 #ifndef PONG_IMENU_H
 #define PONG_IMENU_H
 
+/**
+ * Klasa OptionType jest jak wskazuje nazwa jest typem opcji w menu,
+ * jest to nic innego jak rozszerzony przez callbacki sf::Text.
+ */
+class OptionType : public sf::Text
+{
+public:
+	OptionType(const sf::String& option_name,
+			   sf::Font& font,
+			   void(*func)(),
+			   unsigned characterSize = 30)
+		: sf::Text(option_name, font, characterSize), callback(func)
+	{};
+	void(*callback)();
+	/**
+	 * Uruchamia odpowiednio przypisany callback dla opcji
+	 */
+	void uruchom()
+	{
+		callback();
+	}
+};
 
 /**
  * Interface to all menu in game.
@@ -18,9 +39,6 @@
 class IMenu
 {
 public:
-    using OptionType = sf::Text;
-    template <typename T>
-    using Kontener = std::list<T>;
 
     IMenu() = default;
     virtual ~IMenu() = default;
@@ -28,7 +46,7 @@ public:
      * Zaznacza opcje w menu.
      * @param t: jest wskaźnikiem do opcji, która powinna być zaznaczona.
      */
-    virtual bool zaznaczOpcje(Kontener<OptionType>::iterator) = 0;
+    virtual bool zaznaczOpcje(std::list<OptionType>::iterator) = 0;
 
     /**
      * Odznacza opcje w menu.
@@ -40,22 +58,22 @@ public:
      * Wykonuje kod, który powinnien się wykonać w czasie wybrania danej opcji.
      * @param t: jest wskaźnikiem na opcje do uruchomienia.
      */
-    virtual void uruchomOpcje(Kontener<OptionType>::iterator t) = 0;
+    virtual void uruchomOpcje(std::list<OptionType>::iterator t) = 0;
 
     /**
      * Zwraca wskaźnik do obecnie zaznaczonej opcji
      * bo się przyda.
      */
-    virtual Kontener<OptionType>::iterator getZaz() = 0;
+    virtual std::list<OptionType>::iterator getZaz() = 0;
 
     /**
      * Zwraca referencje do kontenera z opcjami.
      */
-    virtual Kontener<OptionType>& getKontOpcji() = 0;
+    virtual std::list<OptionType>& getKontOpcji() = 0;
 
 protected:
-    Kontener<OptionType> opcje;
-    Kontener<OptionType>::iterator zaznaczona;
+    std::list<OptionType> opcje;
+    std::list<OptionType>::iterator zaznaczona;
 };
 
 

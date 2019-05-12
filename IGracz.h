@@ -20,7 +20,7 @@ public:
      * Np wykonywanie operacji jak rysowanie na ekranie.
      * @return: Referencje obiektu rakiety.
      */
-    virtual Rakieta& getRakieta() const = 0;
+    virtual Rakieta& getRakieta() = 0;
 
     /**
      * Przypiuje obiekt rakiety dla gracza.

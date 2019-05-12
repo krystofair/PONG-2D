@@ -1,15 +1,14 @@
 #include "sterowanie.h"
 
 
-void Sterowanie::operator()(sf::Event e)
+void Sterowanie::operator()(sf::Event& e)
 {
 	switch(stan)
 	{
 		case MENU:
 		{
 			/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
-		    if(imenu == nullptr) exit(-1);
-			/* klawisz potwierdzający wybór */
+		    if(imenu == nullptr) throw("brakuje menu");
 			if(e.key.code == Klawisz::Enter)
 			{
 			    imenu->uruchomOpcje(imenu->getZaz());
@@ -48,11 +47,17 @@ void Sterowanie::operator()(sf::Event e)
 		{
 			if(e.key.code == gracz1->getKlawisz(0))
 			{
-
+				Rakieta& R = gracz1->getRakieta();
+				auto pozY = R.getPozY();
+				auto dl = R.getDlugosc();
+				R.setPozY(pozY - (dl/3+1));
 			}
 			else if(e.key.code == gracz2->getKlawisz(0))
 			{
-
+				Rakieta& R = gracz2->getRakieta();
+				auto pozY = R.getPozY();
+				auto dl = R.getDlugosc();
+				R.setPozY(pozY - (dl/3+1));
 			}
 			else if(e.key.code == gracz1->getKlawisz(1))
 			{
@@ -62,13 +67,13 @@ void Sterowanie::operator()(sf::Event e)
 			{
 
 			}
+			else if(e.key.code == Klawisz::Escape)
+			{
+				stan = STAN::MENU;
+			}
 			break;
 		}
 	}
-}
-
-void Sterowanie::zmienStan(STAN inny_stan) {
-    stan = inny_stan;
 }
 
 void Sterowanie::setGracz(Gracz *g, int who)
@@ -84,4 +89,9 @@ void Sterowanie::setGracz(Gracz *g, int who)
 void Sterowanie::setMenu(IMenu* m)
 {
 	imenu = m;
+}
+
+void Sterowanie::zmienStan(STAN s)
+{
+	stan = s;
 }

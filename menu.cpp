@@ -3,6 +3,7 @@
 //
 
 #include <list>
+#include <cassert>
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Drawable.hpp>
@@ -11,57 +12,73 @@
 #include "menu.h"
 
 
-
-Menu::Menu()
+MainMenu::MainMenu(std::list<void(*)()> callback_list)
 {
-	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf")) throw("najlepiej wyrzuciæ wyj¹tek z tej okazji");
-    opcje.emplace_back("Start", font);
-    opcje.emplace_back("Ustaw sterowanie", font);
-    opcje.emplace_back("Wyjscie", font);
-    zaznaczona = opcje.begin();
-    zaznaczona->setFillColor(sf::Color::Blue);
+	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf"))
+		throw("brakuje czcionki w zasobach systemu.");
+	std::list<void(*)()>::iterator f = callback_list.begin();
+	opcje.emplace_back("Start", font, *f);
+	f = std::next(f);
+	opcje.emplace_back("Zmieñ sterowanie", font, *f);
+	f = std::next(f);
+	opcje.emplace_back("Poka¿ wyniki", font, *f);
+	f = std::next(f);
+	opcje.emplace_back("Wyjœcie", font, *f);
+	f = std::next(f);
+	assert(f == callback_list.end());
     int i=200;
     for(auto& item : opcje)
     {
         item.setPosition(300, i);
         i+=item.getCharacterSize()+5;
     }
+	zaznaczona = opcje.begin();
+	zaznaczona->setFillColor(sf::Color::Blue);
 }
 
-bool Menu::zaznaczOpcje(Menu::Kontener<OptionType>::iterator t)
+bool MainMenu::zaznaczOpcje(std::list<OptionType>::iterator t)
 {
     t->setFillColor(sf::Color::Blue);
     zaznaczona = t;
 	return true;
 }
 
-bool Menu::odznaczOpcje()
+bool MainMenu::odznaczOpcje()
 {
 	zaznaczona->setFillColor(sf::Color::White);
 	zaznaczona = opcje.end();
 	return true;
 }
 
-void Menu::uruchomOpcje(Menu::Kontener<OptionType>::iterator t)
+void MainMenu::uruchomOpcje(std::list<OptionType>::iterator t)
 {
-	if (std::string(t->getString()) == "Wyjscie") exit(0);
-	else if (std::string(t->getString()) == "Start") throw("uruchamiam gre XD");
-    //callback(t);
+	t->uruchom();
 }
 
-Menu::Kontener<Menu::OptionType>::iterator Menu::getZaz()
+std::list<OptionType>::iterator MainMenu::getZaz()
 {
     return zaznaczona;
 }
 
-Menu::Kontener<Menu::OptionType>& Menu::getKontOpcji()
+std::list<OptionType>& MainMenu::getKontOpcji()
 {
     return opcje;
 }
 
-void Menu::draw(sf::RenderTarget &target,
-        sf::RenderStates states = sf::RenderStates::Default) const
+void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::RenderStates::Default) const
 {
-    for(auto& item : opcje)
-        target.draw(item, states);
+	for (auto& item : opcje)
+		target.draw(item, states);
+}
+
+void MainMenu::setCallback(std::list<OptionType>::iterator ito,
+						   void(*f)())
+{
+	//ito->callback = f;
+}
+
+PauseMenu::PauseMenu(void(*f)())
+{
+	opcje.pop_front();
+	//opcje.emplace_front("Resume", font, f);
 }
