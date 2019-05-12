@@ -16,14 +16,14 @@ MainMenu::MainMenu(std::list<void(*)()> callback_list)
 {
 	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf"))
 		throw("brakuje czcionki w zasobach systemu.");
-	auto f = callback_list.begin();
+	std::list<void(*)()>::iterator f = callback_list.begin();
 	opcje.emplace_back("Start", font, *f);
 	f = std::next(f);
-	opcje.emplace_back("Zmien sterowanie", font, *f);
+	opcje.emplace_back("Zmieñ sterowanie", font, *f);
 	f = std::next(f);
-	opcje.emplace_back("Pokaz wyniki", font, *f);
+	opcje.emplace_back("Poka¿ wyniki", font, *f);
 	f = std::next(f);
-	opcje.emplace_back("Wyjscie", font, *f);
+	opcje.emplace_back("Wyjœcie", font, *f);
 	f = std::next(f);
 	assert(f == callback_list.end());
     int i=200;
@@ -71,13 +71,14 @@ void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::Rend
 		target.draw(item, states);
 }
 
-void MainMenu::setCallback(std::list<OptionType>::iterator ito, void(*f)())
+void MainMenu::setCallback(std::list<OptionType>::iterator ito,
+						   void(*f)())
 {
-	ito->callback = f;
+	//ito->callback = f;
 }
 
 PauseMenu::PauseMenu(void(*f)())
 {
 	opcje.pop_front();
-	opcje.emplace_front("Resume", font, f);
+	//opcje.emplace_front("Resume", font, f);
 }

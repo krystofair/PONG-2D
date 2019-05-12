@@ -8,15 +8,19 @@
 #define PONG_IMENU_H
 
 /**
- * Klasa OptionType jest jak wskazuje nazwa typem opcji w menu,
+ * Klasa OptionType jest jak wskazuje nazwa jest typem opcji w menu,
  * jest to nic innego jak rozszerzony przez callbacki sf::Text.
  */
 class OptionType : public sf::Text
 {
 public:
-	OptionType(std::string opt_name, sf::Font& font, void(*func_opcji)())
-		: sf::Text(opt_name, font), callback(func_opcji) {}
-	void (*callback)();
+	OptionType(const sf::String& option_name,
+			   sf::Font& font,
+			   void(*func)(),
+			   unsigned characterSize = 30)
+		: sf::Text(option_name, font, characterSize), callback(func)
+	{};
+	void(*callback)();
 	/**
 	 * Uruchamia odpowiednio przypisany callback dla opcji
 	 */
@@ -25,7 +29,6 @@ public:
 		callback();
 	}
 };
-
 
 /**
  * Interface to all menu in game.

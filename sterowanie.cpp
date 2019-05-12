@@ -1,14 +1,14 @@
 #include "sterowanie.h"
 
 
-void Sterowanie::operator()(sf::Event e)
+void Sterowanie::operator()(sf::Event& e)
 {
 	switch(stan)
 	{
 		case MENU:
 		{
 			/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
-		    if(imenu == nullptr) throw("brakuje menu dla operacji");
+		    if(imenu == nullptr) throw("brakuje menu");
 			if(e.key.code == Klawisz::Enter)
 			{
 			    imenu->uruchomOpcje(imenu->getZaz());

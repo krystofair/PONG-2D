@@ -5,7 +5,6 @@
 
 #include <SFML/Window/Event.hpp>
 #include "gracz.h"
-#include "rakieta.h"
 #include "IMenu.h"
 
 #ifndef PONG_STEROWANIE_H
@@ -38,7 +37,7 @@ public:
 	 * ze względu na przekazany obiekt zdarzenia.
      * @param e: ww obiekt zdarzenia.
      */
-    void operator()(sf::Event e);
+    void operator()(sf::Event& e);
 
     /**
      * Ustawia referencje graczy do których sterowanie się będzie odnosiło.
