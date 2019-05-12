@@ -37,5 +37,5 @@ Solution Explorer(right mouse button)->properties
 4. Configuration:  All
 	Configuration Properties->Linker->System->SubSystem->{Windows (/SUBSYSTEM:WINDOWS)}->OK
 
-# ! Save your configuration files if you clone all repo, becouse everyone have certain difference. !
+# ! Save your configuration files if you clone all repo, because everyone have certain difference. !
 	
