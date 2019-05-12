@@ -6,6 +6,7 @@ change only `SFML_DIR` in that file and all be good.
 ## Others information
 Program is written with separatelly logic architecture and graphics etc as much as possible.
 
+## Configuration
 
 
 Solution Explorer(right mouse button)->properties
@@ -35,5 +36,6 @@ Solution Explorer(right mouse button)->properties
 
 4. Configuration:  All
 	Configuration Properties->Linker->System->SubSystem->{Windows (/SUBSYSTEM:WINDOWS)}->OK
-	
+
+# ! Save your configuration files if you clone all repo, becouse everyone have certain difference. !
 	
