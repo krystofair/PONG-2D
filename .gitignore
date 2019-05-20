@@ -275,3 +275,5 @@ __pycache__/
 *.vcxproj
 PONG-2D.vcxproj.filters
 PONG-2D.sln
+*.vcxproj
+*.filters

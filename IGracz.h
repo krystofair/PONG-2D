@@ -24,9 +24,9 @@ public:
 
     /**
      * Przypiuje obiekt rakiety dla gracza.
-     * @param r: Obiekt rakiety do przypisania dla pola.
+     * @param r: obiekt rakiety do przypisania dla pola.
      */
-    virtual void setRakieta(const Rakieta&) = 0;
+    virtual void setRakieta(const Rakieta& r) = 0;
 
 protected:
     Rakieta* rakieta;

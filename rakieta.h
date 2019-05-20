@@ -8,9 +8,9 @@
 
 
 /**
- * Klasa Rakieta reprezentuje obiekt rakiety na ekranie.
+ * Klasa Rakieta reprezentująca obiekt rakiety na ekranie.
  */
-class Rakieta
+class Rakieta : public sf::Drawable
 {
 public:
     Rakieta(unsigned x,
@@ -82,6 +82,9 @@ public:
 	 */
 	void moveTo(unsigned lim);
 
+	// override method from drawable to draw rakieta on the screen
+	void draw(sf::RenderTarget& rt, sf::RenderStates states = sf::RenderStates::Default) const;
+
 public:
 	unsigned lim_y;
 
@@ -91,6 +94,5 @@ private:
 	unsigned dlugosc;
 	unsigned szerokosc;
 };
-
 
 #endif //PONG_RAKIETA_H

@@ -28,8 +28,10 @@ public:
 	/**
 	 * Zmiana ustawień klawiszy
 	 * spersonalizowanych dla gracza.
-	 * @params up, down: przesuwanie rakiety w góre i w dół
-	 * @params left, right: przesuwanie rakiety w lewo i prawo
+	 * @param up: przesuwanie rakiety  w góre.
+	 * @param down: przesuwanie rakiety w dół.
+	 * @param left: przesuwanie rakiety w lewo
+	 * @param right: przesuwanie rakiety w prawo.
 	 */
     void setKlawisze(
             Klawisz up,

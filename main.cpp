@@ -1,60 +1,57 @@
 
 using namespace std;
 
-#include <iostream>
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "sterowanie.h"
 #include "menu.h"
+#include "sterowanie.h"
+#include "gameapp.h"
 
-
-enum STAN
-{
-	MENU, GRA
-};
-
-static STAN stan_gry = STAN::MENU;
-Gracz* gracz1;
-Gracz* gracz2;
-Rakieta* rakieta1;
-Rakieta* rakieta2;
-
-void Exit()
-{
-	exit(0);
-}
+using STATE = GameApp::STAN;
+STATE GameApp::stan_gry = STATE::MENU;
 
 int main()
 {
+	GameApp game_app;
+	sf::RenderWindow window(sf::VideoMode(game_app.screen_width, game_app.screen_height), "xPONG 2D");
+	Sterowanie sterowanie;
 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "PONG");
+	game_app.current_menu = new MainMenu(game_app.gracz1, game_app.gracz2);
+	sterowanie.setMenu(game_app.current_menu);
 
-	Sterowanie sterowanie(Sterowanie::STAN::MENU);
-	MainMenu main_menu({Exit, Exit, Exit, Exit});
-	sterowanie.setMenu(&main_menu);
-	//sterowanie.setGracz(gracz1, 1);
-	//sterowanie.setGracz(gracz2, 2);
-
-	while (window.isOpen())
+	sf::Event event{};
+	//sf::Clock time;
+	while(window.isOpen())
 	{
-		sf::Event event{};
-		while (window.pollEvent(event))
+		while(window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if(event.type == sf::Event::Closed)
+			{
 				window.close();
-			if(event.type == sf::Event::KeyPressed)
-				sterowanie(event);
+			}
+			else if(event.type == sf::Event::KeyPressed)
+			{
+				switch(game_app.stan_gry)
+				{
+					case STATE::MENU: sterowanie.menus(event); break;
+					case STATE::GRA: sterowanie.games(event); break;
+				}
+			}
+		}
+		window.clear(sf::Color::Black);
+		switch(game_app.stan_gry)
+		{
+			case STATE::MENU:
+				game_app.menu_instr(window);
+				break;
+			case STATE::GRA:
+				game_app.gameloop(window);
+				break;
 		}
 
-		window.clear(sf::Color::Black);
-		window.draw(main_menu);
-		//window.draw(player1->getRakieta());
-
 		window.display();
-
 	}
-
 	return 0;
 }

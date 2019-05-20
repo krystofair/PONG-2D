@@ -32,3 +32,11 @@ void Rakieta::moveTo(unsigned lim)
 {
 	lim_y = lim;
 }
+
+void Rakieta::draw(sf::RenderTarget & rt, sf::RenderStates states) const
+{
+	auto prostokat = sf::RectangleShape(sf::Vector2f(szerokosc, dlugosc));
+	prostokat.setPosition(pos_x, pos_y);
+	prostokat.setFillColor(sf::Color::White);
+	rt.draw(prostokat, states);
+}

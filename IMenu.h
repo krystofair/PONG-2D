@@ -2,10 +2,22 @@
 // Created by Christofair on 23.04.2019.
 //
 
+#include <SFML/Graphics/Text.hpp>
 #include <list>
 
 #ifndef PONG_IMENU_H
 #define PONG_IMENU_H
+
+/// Typ dla poleceń menu.
+/// pola są argumentami na których działa polecenie
+/// zaś metoda execute jest funkcją podejmująca na nich działania.
+class ICommand
+{
+public:
+	/// funkcja wykonująca dane polecenie.
+	virtual void execute()=0;
+	virtual ~ICommand(){}
+};
 
 /**
  * Klasa OptionType jest jak wskazuje nazwa jest typem opcji w menu,
@@ -16,17 +28,18 @@ class OptionType : public sf::Text
 public:
 	OptionType(const sf::String& option_name,
 			   sf::Font& font,
-			   void(*func)(),
+			   ICommand* command,
 			   unsigned characterSize = 30)
-		: sf::Text(option_name, font, characterSize), callback(func)
+		: sf::Text(option_name, font, characterSize), polecenie(command)
 	{};
-	void(*callback)();
+	ICommand* polecenie;
 	/**
-	 * Uruchamia odpowiednio przypisany callback dla opcji
+	 * Uruchamia odpowiednie przypisane polecenie.
 	 */
 	void uruchom()
 	{
-		callback();
+		if(polecenie != nullptr)
+			polecenie->execute();
 	}
 };
 
