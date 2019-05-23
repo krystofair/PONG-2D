@@ -1,8 +1,10 @@
+#include <thread>
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "rakieta.h"
-#include "gracz.h"
+#include "IGracz.h"
 #include "menu.h"
 
 #pragma once
@@ -18,6 +20,7 @@ public:
 	Rakieta* rakieta1{nullptr};
 	Rakieta* rakieta2{nullptr};
 	IMenu* current_menu{nullptr};
+	//std::thread si_threads;
 	// Pilka* pilka;
 
 	// Ustawienie œrodowiska gry.
@@ -59,9 +62,9 @@ public:
 		else
 		{
 			if(rakieta1->lim_y > screen_height)
-				rakieta1->setPozY(screen_height-rakieta1->getDlugosc/2);
+				rakieta1->setPozY(screen_height-rakieta1->getDlugosc);
 			else
-				rakieta1->setPozY((rakieta1->getDlugosc)/2);
+				rakieta1->setPozY((rakieta1->getDlugosc));
 		}
 		if(Y2 != rakieta2->lim_y)
 		{
@@ -71,9 +74,9 @@ public:
 		else
 		{
 			if(rakieta2->lim_y > screen_height)
-				rakieta2->setPozY(screen_height - rakieta2->getDlugosc/2);
+				rakieta2->setPozY(screen_height - rakieta2->getDlugosc);
 			else
-				rakieta2->setPozY(rakieta2->getDlugosc/2);
+				rakieta2->setPozY(rakieta2->getDlugosc);
 		}
 		w.draw(*rakieta1);
 		w.draw(*rakieta2);

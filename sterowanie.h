@@ -66,6 +66,10 @@ public:
      * @param m: jest wskaźnikiem na to menu.
      */
     void setMenu(IMenu* m);
+	/**
+	 * Zwracanie wskaźnika na który obecnie wskazuje imenu.
+	 */
+	IMenu* getMenu();
 
 private:
     Gracz* gracz1{nullptr};

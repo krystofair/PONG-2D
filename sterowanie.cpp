@@ -2,16 +2,19 @@
 #include "gameapp.h"
 
 
+#include <chrono>
+
+
 void Sterowanie::menus(sf::Event& e)
 {
 	/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
-	if(imenu == nullptr) throw("brakuje menu");
+	if(!imenu) throw("brakuje menu");
 	auto zaz = imenu->getZaz();
 	switch(e.key.code)
 	{
 		
 		case Klawisz::Enter:
-			imenu->uruchomOpcje(imenu->getZaz());
+			imenu->uruchomOpcje();
 			break;
 		case Klawisz::Up:
 			//auto zaz = imenu->getZaz();
@@ -46,7 +49,7 @@ void Sterowanie::menus(sf::Event& e)
 
 void Sterowanie::games(sf::Event& e)
 {
-	if(gracz1 = dynamic_cast<Gracz*>(gracz1))
+	if(gracz1)
 	{
 		if(e.key.code == gracz1->getKlawisz(0))
 		{
@@ -58,7 +61,7 @@ void Sterowanie::games(sf::Event& e)
 		}
 		else if(e.key.code == gracz1->getKlawisz(1)) {} // na razie ta instrukcja jest pusta.
 	}
-	if(gracz2 = dynamic_cast<Gracz*>(gracz2))
+	if(gracz2)
 	{
 		if(e.key.code == gracz2->getKlawisz(0))
 		{
@@ -92,3 +95,6 @@ void Sterowanie::setMenu(IMenu* m)
 {
 	imenu = m;
 }
+
+IMenu* Sterowanie::getMenu()
+{ return imenu; }

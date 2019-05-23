@@ -13,7 +13,6 @@
 #define PONG_MENU_H
 
 /** 
-* Klasa MainMenu
 * Klasa MainMenu jest implementacją głównego menu, które jest wyświetlane na początku.
 * Klasa dziedziczy po interfejsie `IMenu` więc znane jest przeznaczenie jej metod.
 * U dokumentowane są metody, które nie zostały nadpisane z interfejsu.
@@ -33,37 +32,29 @@ public:
 	MainMenu(IGracz* g1, IGracz* g2);
 
 	virtual ~MainMenu();
-    bool zaznaczOpcje(std::list<OptionType>::iterator);
-    bool odznaczOpcje();
-    void uruchomOpcje(std::list<OptionType>::iterator);
-    std::list<OptionType>::iterator getZaz();
-    std::list<OptionType>& getKontOpcji();
+    //bool zaznaczOpcje(std::list<OptionType>::iterator);
+    //bool odznaczOpcje();
+    //void uruchomOpcje(std::list<OptionType>::iterator);
+    //std::list<OptionType>::iterator getZaz();
+    //std::list<OptionType>& getKontOpcji();
 
-	/**
-	 * Ustawienie polecenia do wykonania dla pojedynczej
-	 * opcji w menu.
-	 * @param i: jest iteratorem, który wskazuje na opcje do której dopisać funkcje
-	 * @param c: jest wskaźnikiem na polecenie o którym mowa wyżej, funktor do wykonania po wybraniu danej opcji.
-	 */
-	void setCommand(std::list<OptionType>::iterator i, ICommand* c);
-	
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-
-	// wektor przechowujący wszystkie obiekty poleceń dla tejże implementacji menu.
-	std::vector<ICommand*> polecenia;
     sf::Font font;
 };
 
 /**
- * Klasa pochodna po menu głównym,
- * która zmienia kilka opcji dla siebie.
+ * Klasa przedstawiająca menu pauzy w grze.
  */
-class PauseMenu : public MainMenu
+class PauseMenu : public IMenu, public sf::Drawable
 {
 public:
 	PauseMenu(IGracz* g1, IGracz* g2);
 	virtual ~PauseMenu() = default;
+protected:
+	void draw(sf::RenderTarget&, sf::RenderStates = sf::RenderStates::Default)const;
+private:
+	sf::Font font;
 };
 
 /// Polecenie rozpoczęcia gry z jednym graczem;
@@ -97,6 +88,7 @@ public:
 class ViewResults : public ICommand
 {
 public:
+	ViewResults(){}
 	void excute(){}
 };
 
@@ -107,5 +99,20 @@ public:
 	Resume(){}
 	void execute();
 };
+/*
+class Wyjscie : public ICommand
+{
+private:
+	GameApp* gap;
+
+public:
+	Wyjscie(int ID_for_si_thread){};
+	void execute()
+	{
+		gap->reset();
+	}
+
+};
+*/
 
 #endif //PONG_MENU_H

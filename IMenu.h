@@ -57,32 +57,74 @@ public:
     virtual ~IMenu() = default;
     /**
      * Zaznacza opcje w menu.
-     * @param t: jest wskaźnikiem do opcji, która powinna być zaznaczona.
+     * @param t: jest wskaźnikiem(iteratorem) do opcji, która powinna być zaznaczona.
      */
-    virtual bool zaznaczOpcje(std::list<OptionType>::iterator) = 0;
+	virtual bool zaznaczOpcje(std::list<OptionType>::iterator t)
+	{
+		try{
+			t->setFillColor(sf::Color::Red);
+			zaznaczona = t;
+			return true;
+		}
+		catch(...)
+		{
+			return false;
+		}
+	}
 
     /**
      * Odznacza opcje w menu.
      * @param t: jest wskaźnikiem do opcji, która powinna być odznaczona.
      */
-    virtual bool odznaczOpcje() = 0;
+	virtual bool odznaczOpcje()
+	{
+		zaznaczona->setFillColor(sf::Color::White);
+		zaznaczona = opcje.end();
+		return true;
+	}
 
     /**
      * Wykonuje kod, który powinnien się wykonać w czasie wybrania danej opcji.
-     * @param t: jest wskaźnikiem na opcje do uruchomienia.
+     * Uruchamia opcje, która jest obecnie zaznaczona.
      */
-    virtual void uruchomOpcje(std::list<OptionType>::iterator t) = 0;
+	virtual void uruchomOpcje()
+	{
+		zaznaczona->uruchom();
+	}
 
     /**
      * Zwraca wskaźnik do obecnie zaznaczonej opcji
      * bo się przyda.
      */
-    virtual std::list<OptionType>::iterator getZaz() = 0;
+	virtual std::list<OptionType>::iterator getZaz()
+	{
+		return zaznaczona;
+	}
 
     /**
      * Zwraca referencje do kontenera z opcjami.
      */
-    virtual std::list<OptionType>& getKontOpcji() = 0;
+	virtual std::list<OptionType>& getKontOpcji()
+	{
+		return opcje;
+	}
+
+	/**
+	 * Ustawienie polecenia do wykonania dla pojedynczej opcji w menu.
+	 * @param i: jest iteratorem, który wskazuje na opcje do której nadpisać lub dopisać obiekt polecenia.
+	 * @param c: jest wskaźnikiem na polecenie o którym mowa wyżej,
+	 * funktor do wykonania po wybraniu danej opcji.
+	 */
+	void changeCommand(std::list<OptionType>::iterator it, ICommand* c)
+	{
+		if(it->polecenie == nullptr)
+			it->polecenie = c;
+		else
+		{
+			delete it->polecenie;
+			it->polecenie = c;
+		}
+	}
 
 protected:
     std::list<OptionType> opcje;

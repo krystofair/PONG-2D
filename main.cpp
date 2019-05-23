@@ -1,6 +1,4 @@
-
-using namespace std;
-
+#include <cassert>
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -9,17 +7,22 @@ using namespace std;
 #include "sterowanie.h"
 #include "gameapp.h"
 
+using namespace std;
+
 using STATE = GameApp::STAN;
 STATE GameApp::stan_gry = STATE::MENU;
 
 int main()
 {
 	GameApp game_app;
-	sf::RenderWindow window(sf::VideoMode(game_app.screen_width, game_app.screen_height), "xPONG 2D");
-	Sterowanie sterowanie;
+	sf::RenderWindow window(
+		sf::VideoMode(game_app.screen_width, game_app.screen_height),"xPONG 2D"
+	);
 
 	game_app.current_menu = new MainMenu(game_app.gracz1, game_app.gracz2);
-	sterowanie.setMenu(game_app.current_menu);
+	Sterowanie sterowanie(static_cast<Gracz*>(game_app.gracz1),
+						  static_cast<Gracz*>(game_app.gracz2),
+						  game_app.current_menu);
 
 	sf::Event event{};
 	//sf::Clock time;
