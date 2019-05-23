@@ -11,6 +11,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "menu.h"
+#include "globals.h"
 
 // usuwanie swoich opcji
 MainMenu::~MainMenu()
@@ -48,7 +49,7 @@ void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::Rend
 
 void StartOnePlayer::execute()
 {
-	//GameApp::stan_gry = GameApp::GRA;
+	stan_gry = STAN::GRA;
 	Rakieta* r = new Rakieta(1, 1, 10, 100);
 	gracz1 = new Gracz(*r, 1);
 	Rakieta* r2 = new Rakieta(800, 1, 10, 100);
@@ -58,7 +59,7 @@ void StartOnePlayer::execute()
 
 void StartTwoPlayer::execute()
 {
-	//GameApp::stan_gry = GameApp::GRA;
+	stan_gry = STAN::GRA;
 	auto rakieta1 = new Rakieta(1, 1, 10, 100); // rakieta dla human
 	auto rakieta2 = new Rakieta(800, 1, 10, 100); // rakieta dla SI
 	gracz1 = new Gracz(*rakieta1, 1);
@@ -72,7 +73,7 @@ PauseMenu::PauseMenu(IGracz* g1, IGracz* g2)
 		throw("brakuje czcionki w zasobach systemu.");
 	opcje.emplace_back(L"Odpauzuj", font, new Resume());
 	opcje.emplace_back(L"Nowa gra", font, nullptr);
-	opcje.emplace_back(L"Wyjœcie", font, nullptr);
+	opcje.emplace_back(L"Wyjœcie", font, new Wyjscie(this));
 	int i=200;
 	for(auto& item : opcje)
 	{

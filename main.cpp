@@ -5,19 +5,12 @@
 
 #include "menu.h"
 #include "sterowanie.h"
-//#include "gameapp.h"
+#include "globals.h"
 
 using namespace std;
 
-//using STATE = GameApp::STAN;
-//STATE GameApp::stan_gry = STATE::MENU;
-
-#include "globals.h"
-
 int screen_width = 800;
 int screen_height = 600;
-IGracz *gracz1;
-IGracz *gracz2;
 
 STAN stan_gry = STATE::MENU;
 
@@ -26,8 +19,8 @@ int main()
 	sf::RenderWindow window(
 		sf::VideoMode(screen_width, screen_height),"xPONG 2D"
 	);
-	gracz1 = nullptr;
-	gracz2 = nullptr;
+	IGracz *gracz1 = nullptr;
+	IGracz *gracz2 = nullptr;
 	IMenu* current_menu = new MainMenu(gracz1, gracz2);
 
 	Sterowanie sterowanie(dynamic_cast<Gracz*>(gracz1),
@@ -57,6 +50,7 @@ int main()
 		switch(stan_gry)
 		{
 			case STATE::MENU:
+				current_menu = sterowanie.getMenu();
 				if(auto menu = dynamic_cast<MainMenu*>(current_menu))
 				{
 					window.draw(*menu);
