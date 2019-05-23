@@ -50,7 +50,9 @@ class PauseMenu : public IMenu, public sf::Drawable
 {
 public:
 	PauseMenu(IGracz* g1, IGracz* g2);
-	virtual ~PauseMenu() = default;
+	/// W destruktorze menu usuwa własne opcji.
+	/// W opcji jest usuwanie własnych poleceń.
+	virtual ~PauseMenu();
 protected:
 	void draw(sf::RenderTarget&, sf::RenderStates = sf::RenderStates::Default)const;
 private:
@@ -99,20 +101,19 @@ public:
 	Resume(){}
 	void execute();
 };
-/*
+
 class Wyjscie : public ICommand
 {
 private:
-	GameApp* gap;
-
+	IMenu* imenu;
 public:
-	Wyjscie(int ID_for_si_thread){};
+	Wyjscie(IMenu* im = nullptr) : imenu(im){};
 	void execute()
 	{
-		gap->reset();
+		if(imenu) delete imenu;
+		exit(0);
 	}
 
 };
-*/
 
 #endif //PONG_MENU_H

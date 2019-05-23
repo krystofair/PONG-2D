@@ -1,8 +1,8 @@
-#include "sterowanie.h"
-#include "gameapp.h"
-
-
 #include <chrono>
+
+#include "sterowanie.h"
+#include "menu.h"
+#include "globals.h"
 
 
 void Sterowanie::menus(sf::Event& e)
@@ -75,7 +75,7 @@ void Sterowanie::games(sf::Event& e)
 	}
 	if(e.key.code == Klawisz::Escape)
 	{
-		GameApp::stan_gry = GameApp::STAN::MENU;
+		stan_gry = STAN::MENU;
 		delete imenu;
 		imenu = new PauseMenu(gracz1, gracz2);
 	}

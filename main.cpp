@@ -5,24 +5,34 @@
 
 #include "menu.h"
 #include "sterowanie.h"
-#include "gameapp.h"
+//#include "gameapp.h"
 
 using namespace std;
 
-using STATE = GameApp::STAN;
-STATE GameApp::stan_gry = STATE::MENU;
+//using STATE = GameApp::STAN;
+//STATE GameApp::stan_gry = STATE::MENU;
+
+#include "globals.h"
+
+int screen_width = 800;
+int screen_height = 600;
+IGracz *gracz1;
+IGracz *gracz2;
+
+STAN stan_gry = STATE::MENU;
 
 int main()
 {
-	GameApp game_app;
 	sf::RenderWindow window(
-		sf::VideoMode(game_app.screen_width, game_app.screen_height),"xPONG 2D"
+		sf::VideoMode(screen_width, screen_height),"xPONG 2D"
 	);
+	gracz1 = nullptr;
+	gracz2 = nullptr;
+	IMenu* current_menu = new MainMenu(gracz1, gracz2);
 
-	game_app.current_menu = new MainMenu(game_app.gracz1, game_app.gracz2);
-	Sterowanie sterowanie(static_cast<Gracz*>(game_app.gracz1),
-						  static_cast<Gracz*>(game_app.gracz2),
-						  game_app.current_menu);
+	Sterowanie sterowanie(dynamic_cast<Gracz*>(gracz1),
+						  dynamic_cast<Gracz*>(gracz2),
+						  current_menu);
 
 	sf::Event event{};
 	//sf::Clock time;
@@ -36,7 +46,7 @@ int main()
 			}
 			else if(event.type == sf::Event::KeyPressed)
 			{
-				switch(game_app.stan_gry)
+				switch(stan_gry)
 				{
 					case STATE::MENU: sterowanie.menus(event); break;
 					case STATE::GRA: sterowanie.games(event); break;
@@ -44,13 +54,19 @@ int main()
 			}
 		}
 		window.clear(sf::Color::Black);
-		switch(game_app.stan_gry)
+		switch(stan_gry)
 		{
 			case STATE::MENU:
-				game_app.menu_instr(window);
+				if(auto menu = dynamic_cast<MainMenu*>(current_menu))
+				{
+					window.draw(*menu);
+				}
+				else if(auto menu = dynamic_cast<PauseMenu*> (current_menu))
+				{
+					window.draw(*menu);
+				}
 				break;
 			case STATE::GRA:
-				game_app.gameloop(window);
 				break;
 		}
 

@@ -55,11 +55,8 @@
     <None Include="README.MD">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="gameapp.h">
+    <None Include="globals.h">
       <Filter>Header Files</Filter>
-    </None>
-    <None Include="gameapp.cpp">
-      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -11,18 +11,12 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "menu.h"
-#include "gameapp.h"
 
-// usuwanie swoich poleceñ.
+// usuwanie swoich opcji
 MainMenu::~MainMenu()
 {
 	std::for_each(opcje.begin(), opcje.end(),
-				  [](auto option){
-					  if(option.polecenie)
-					  {
-						  delete option.polecenie;
-					  }
-				  });
+				  [](auto option){ if(option.polecenie) delete option.polecenie; });
 }
 
 MainMenu::MainMenu(IGracz* g1, IGracz* g2)
@@ -33,7 +27,7 @@ MainMenu::MainMenu(IGracz* g1, IGracz* g2)
 	opcje.emplace_back("Zagraj z przyjacielem.", font, new StartTwoPlayer(g1, g2));
 	opcje.emplace_back(L"Zmieñ sterowanie", font, new ZmienSterowanie());
 	opcje.emplace_back(L"Poka¿ wyniki", font, nullptr);
-	opcje.emplace_back(L"Wyjœcie", font, nullptr);
+	opcje.emplace_back(L"Wyjœcie", font, new Wyjscie(this));
     int i=200;
     for(auto& item : opcje)
     {
@@ -54,7 +48,7 @@ void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::Rend
 
 void StartOnePlayer::execute()
 {
-	GameApp::stan_gry = GameApp::GRA;
+	//GameApp::stan_gry = GameApp::GRA;
 	Rakieta* r = new Rakieta(1, 1, 10, 100);
 	gracz1 = new Gracz(*r, 1);
 	Rakieta* r2 = new Rakieta(800, 1, 10, 100);
@@ -64,7 +58,7 @@ void StartOnePlayer::execute()
 
 void StartTwoPlayer::execute()
 {
-	GameApp::stan_gry = GameApp::GRA;
+	//GameApp::stan_gry = GameApp::GRA;
 	auto rakieta1 = new Rakieta(1, 1, 10, 100); // rakieta dla human
 	auto rakieta2 = new Rakieta(800, 1, 10, 100); // rakieta dla SI
 	gracz1 = new Gracz(*rakieta1, 1);
@@ -92,6 +86,12 @@ void PauseMenu::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
 	for(auto& opcja : opcje)
 		target.draw(opcja, states);
+}
+
+PauseMenu::~PauseMenu()
+{
+	for_each(opcje.begin(), opcje.end(),
+			 [](auto opcja){ if(opcja.polecenie) delete opcja.polecenie; });
 }
 
 void Resume::execute()
