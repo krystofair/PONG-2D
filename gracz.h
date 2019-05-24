@@ -18,13 +18,6 @@ public:
 	 */
     Gracz(Rakieta&, int);
 	virtual ~Gracz() = default;
-    
-    /**
-     * Opis metody zgodny z opisem w interfejsie `IGracz`.
-     * @param r: obiekt rakiety, której będzie używała klasa `Gracz`.
-     */
-    void setRakieta(const Rakieta& r) override;
-    Rakieta& getRakieta() override;
 	/**
 	 * Zmiana ustawień klawiszy
 	 * spersonalizowanych dla gracza.

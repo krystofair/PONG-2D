@@ -4,7 +4,7 @@
 
 #include "gracz.h"
 
-Gracz::Gracz(Rakieta& r, int _id) : id(_id)
+Gracz::Gracz(Rakieta& r, int _id) : IGracz(r), id(_id)
 {
 	switch(id)
 	{
@@ -15,18 +15,6 @@ Gracz::Gracz(Rakieta& r, int _id) : id(_id)
 			setKlawisze(Klawisz::W, Klawisz::A, Klawisz::Unknown, Klawisz::Unknown);
 			break;
 	}
-	rakieta = &r;
-}
-
-
-void Gracz::setRakieta(const Rakieta& r)
-{
-    *rakieta = r;
-}
-
-Rakieta& Gracz::getRakieta()
-{
-    return *rakieta;
 }
 
 void Gracz::setKlawisze(Klawisz up, Klawisz down, Klawisz left, Klawisz right)
