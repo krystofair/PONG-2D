@@ -8,7 +8,7 @@
 void Sterowanie::menus(sf::Event& e)
 {
 	/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
-	if(!imenu) throw("brakuje menu");
+	if(current_menu == nullptr) throw("brakuje menu");
 	auto zaz = imenu->getZaz();
 	switch(e.key.code)
 	{
@@ -77,7 +77,7 @@ void Sterowanie::games(sf::Event& e)
 	{
 		stan_gry = STAN::MENU;
 		delete imenu;
-		imenu = new PauseMenu(gracz1, gracz2);
+		imenu = new(imenu) PauseMenu(gracz1, gracz2); //utworzenie nowego menu w tym samym miejscu. o_O
 	}
 }
 
