@@ -28,8 +28,15 @@
 class MainMenu : public IMenu, public sf::Drawable
 {
 public:
+	//przyjmuje główny obiekt aplikacji gry, aby móc działać na jej obiektach.
 	MainMenu(IGracz* g1, IGracz* g2);
+
 	virtual ~MainMenu();
+    //bool zaznaczOpcje(std::list<OptionType>::iterator);
+    //bool odznaczOpcje();
+    //void uruchomOpcje(std::list<OptionType>::iterator);
+    //std::list<OptionType>::iterator getZaz();
+    //std::list<OptionType>& getKontOpcji();
 
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
@@ -99,16 +106,11 @@ class Wyjscie : public ICommand
 {
 private:
 	IMenu* imenu;
-	IGracz* gracz1;
-	IGracz* gracz2;
 public:
-	Wyjscie(IMenu* im, IGracz* g1, IGracz* g2) 
-		: imenu(im), gracz1(g1), gracz2(g2){};
+	Wyjscie(IMenu* im = nullptr) : imenu(im){};
 	void execute()
 	{
 		if(imenu) delete imenu;
-		if(gracz1) delete gracz1;
-		if(gracz2) delete gracz2;
 		exit(0);
 	}
 
