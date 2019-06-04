@@ -16,7 +16,7 @@ public:
 	 * @param id: identyfikator gracza.
 	 * @param r: obiekt rakiety dla danego gracza.
 	 */
-    Gracz(Rakieta&, int);
+    Gracz(Rakieta*, int);
 	virtual ~Gracz() = default;
 	/**
 	 * Zmiana ustawień klawiszy

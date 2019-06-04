@@ -43,8 +43,6 @@ class PauseMenu : public IMenu, public sf::Drawable
 {
 public:
 	PauseMenu(IGracz* g1, IGracz* g2);
-	/// W destruktorze menu usuwa własne opcji.
-	/// W opcji jest usuwanie własnych poleceń.
 	virtual ~PauseMenu();
 protected:
 	void draw(sf::RenderTarget&, sf::RenderStates = sf::RenderStates::Default)const;
@@ -94,6 +92,15 @@ public:
 	Resume(){}
 	void execute();
 };
+class Powrot : public ICommand
+{
+private:
+	IGracz* g1;
+	IGracz* g2;
+public:
+	Powrot(IGracz* gg, IGracz* ggg) : g1(gg), g2(ggg){}
+	void execute();
+};
 
 class Wyjscie : public ICommand
 {
@@ -107,8 +114,6 @@ public:
 	void execute()
 	{
 		if(imenu) delete imenu;
-		if(gracz1) delete gracz1;
-		if(gracz2) delete gracz2;
 		exit(0);
 	}
 

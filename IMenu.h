@@ -78,6 +78,7 @@ public:
      */
 	virtual bool odznaczOpcje()
 	{
+		if(zaznaczona == opcje.end()) return false;
 		zaznaczona->setFillColor(sf::Color::White);
 		zaznaczona = opcje.end();
 		return true;

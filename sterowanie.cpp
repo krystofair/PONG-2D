@@ -53,10 +53,10 @@ void Sterowanie::games(sf::Event& e)
 	{
 		if(e.key.code == gracz1->getKlawisz(0))
 		{
-			Rakieta& R = gracz1->getRakieta();
-			auto pozY = R.getPozY();
-			auto dl = R.getDlugosc();
-			R.setPozY(pozY - (dl/3+1));
+			Rakieta* R = gracz1->getRakieta();
+			auto pozY = R->getPozY();
+			auto dl = R->getDlugosc();
+			R->setPozY(pozY - (dl/3+1));
 			//R.moveTo(pozY+ batspeed);
 		}
 		else if(e.key.code == gracz1->getKlawisz(1)) {} // na razie ta instrukcja jest pusta.
@@ -66,18 +66,28 @@ void Sterowanie::games(sf::Event& e)
 		if(e.key.code == gracz2->getKlawisz(0))
 		{
 
-			Rakieta& R = gracz2->getRakieta();
-			auto pozY = R.getPozY();
-			auto dl = R.getDlugosc();
-			R.setPozY(pozY - (dl/3+1));
+			Rakieta* R = gracz2->getRakieta();
+			auto pozY = R->getPozY();
+			auto dl = R->getDlugosc();
+			R->setPozY(pozY - (dl/3+1));
 		}
 		else if(e.key.code == gracz2->getKlawisz(1)) {} //na razie ta instrukcja jest pusta.
 	}
 	if(e.key.code == Klawisz::Escape)
 	{
-		stan_gry = STAN::MENU;
-		delete imenu;
-		imenu = new(imenu) PauseMenu(gracz1, gracz2); //utworzenie nowego menu w tym samym miejscu. o_O
+		/* not here.
+		if(gracz1->getRakieta())
+		{
+			delete gracz1->getRakieta();
+			gracz1->setRakieta(nullptr);
+		}
+		if(gracz2->getRakieta())
+		{
+			delete gracz2->getRakieta();
+			gracz2->setRakieta(nullptr);
+		}
+		*/
+		stan_gry = STAN::PAUZA;
 	}
 }
 
