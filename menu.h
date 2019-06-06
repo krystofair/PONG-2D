@@ -74,15 +74,18 @@ public:
 
 class ZmienSterowanie : public ICommand
 {
+private:
+	IGracz *g1, *g2;
 public:
-	void execute(){}
+	ZmienSterowanie(IGracz* g, IGracz* gg) : g1(g), g2(gg) {}
+	void execute();
 };
 
 class ViewResults : public ICommand
 {
 public:
 	ViewResults(){}
-	void excute(){}
+	void execute(){}
 };
 
 

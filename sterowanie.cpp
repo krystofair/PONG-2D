@@ -87,6 +87,7 @@ void Sterowanie::games(sf::Event& e)
 			gracz2->setRakieta(nullptr);
 		}
 		*/
+		this->setMenu(new PauseMenu(gracz1, gracz2));
 		stan_gry = STAN::PAUZA;
 	}
 }
@@ -107,4 +108,6 @@ void Sterowanie::setMenu(IMenu* m)
 }
 
 IMenu* Sterowanie::getMenu()
-{ return imenu; }
+{
+	return imenu; 
+}

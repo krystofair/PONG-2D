@@ -62,8 +62,14 @@ void StartTwoPlayer::execute()
 {
 	auto rakieta1 = new Rakieta(1, 1, 10, 100); // rakieta dla pierwszego gracza.
 	auto rakieta2 = new Rakieta(800, 1, 10, 100); // rakieta dla drugiego gracza.
+	auto g = Gracz(nullptr, 1);
+	
 	gracz1->setRakieta(rakieta1);
 	gracz2->setRakieta(rakieta2);
+	static_cast<Gracz*>(gracz1)->setKlawisze(pl1_set.up, pl1_set.down,
+											 pl1_set.left,pl1_set.right);
+	static_cast<Gracz*>(gracz1)->setKlawisze(pl2_set.up, pl2_set.down,
+											 pl2_set.left, pl2_set.right);
 	stery.setGracz(static_cast<Gracz*> (gracz1), 1);
 	stery.setGracz(static_cast<Gracz*> (gracz2), 2);
 	stan_gry = STAN::GRA;
@@ -112,5 +118,6 @@ void Powrot::execute()
 	if(g2) if(g2->getRakieta()) {
 		delete g2->getRakieta(); g2->setRakieta(nullptr);
 	}
+	stery.setMenu(new MainMenu(g1, g2));
 	stan_gry = STAN::MENU;
 }

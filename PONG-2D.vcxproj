@@ -151,6 +151,8 @@
     <ClInclude Include="sterowanie.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="game.cpp" />
+    <None Include="game.h" />
     <None Include="globals.h" />
     <None Include="gameapp.h" />
     <None Include="README.MD" />

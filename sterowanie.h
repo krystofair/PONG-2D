@@ -70,6 +70,17 @@ public:
 	 * Zwracanie wskaźnika na który obecnie wskazuje imenu.
 	 */
 	IMenu* getMenu();
+	/**
+	 * zwalnia zasoby utrzymywane dla obiektu menu
+	 */
+	void zwolnijMenu()
+	{
+		if(imenu)
+		{
+			delete imenu;
+			imenu = nullptr;
+		}
+	}
 
 private:
     Gracz* gracz1{nullptr};

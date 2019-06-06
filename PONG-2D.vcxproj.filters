@@ -58,5 +58,11 @@
     <None Include="globals.h">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="game.h">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
