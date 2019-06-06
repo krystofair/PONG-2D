@@ -16,20 +16,15 @@ public:
 	 * @param id: identyfikator gracza.
 	 * @param r: obiekt rakiety dla danego gracza.
 	 */
-    Gracz(Rakieta&, int);
+    Gracz(Rakieta*, int);
 	virtual ~Gracz() = default;
-    
-    /**
-     * Opis metody zgodny z opisem w interfejsie `IGracz`.
-     * @param r: obiekt rakiety, której będzie używała klasa `Gracz`.
-     */
-    void setRakieta(const Rakieta& r) override;
-    Rakieta& getRakieta() override;
 	/**
 	 * Zmiana ustawień klawiszy
 	 * spersonalizowanych dla gracza.
-	 * @params up, down: przesuwanie rakiety w góre i w dół
-	 * @params left, right: przesuwanie rakiety w lewo i prawo
+	 * @param up: przesuwanie rakiety  w góre.
+	 * @param down: przesuwanie rakiety w dół.
+	 * @param left: przesuwanie rakiety w lewo
+	 * @param right: przesuwanie rakiety w prawo.
 	 */
     void setKlawisze(
             Klawisz up,

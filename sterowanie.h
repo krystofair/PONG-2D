@@ -4,6 +4,7 @@
 
 
 #include <SFML/Window/Event.hpp>
+
 #include "gracz.h"
 #include "IMenu.h"
 
@@ -21,23 +22,37 @@
 class Sterowanie
 {
 public:
-	enum STAN
-	{
-		MENU, GRA
-	};
     /**
-     * Konstruktor sparametryzowany przez aktualny stan gry.
-     * Następnie ten stan będzie zmieniany.
-     * @param s: stan początkowy dla obiektu klasy sterowanie.
+     * Konstruktor parametryczny przyjmuje adresy do obiektów,
+	 * z których potrzebuje odbierać dane. 
+     * @param g1: wskaźnik do obiektu gracza numer 1,
+	 * @param g2: wskaźnik do obiektu gracza numer 2,
+	 * @param menu: wskaźnik do obiektu menu, w celu sterowania nim.
      */
-	Sterowanie(STAN s) : stan(s) {}
+	/// Wskaźniki do obiektów typu Gracz są używane do obierania ustawień
+	/// klawiszy, które sobie każdy gracz spersonalizował. Oraz po to, aby
+	/// pośrednio przez graczy sterować ich rakietami.
+	/// Menu przekazywane jest w celu wysyłania komunikatów typu którą opcje
+	/// zaznaczyć, którą odznaczyć oraz którą uruchmić. Wszystkie te metody są
+	/// zadeklarowane w typie IMenu.
+	/// Stan gry w tej klasie jest pobierany z głównej klasy programu GameApp.
+	Sterowanie(Gracz* g1 = nullptr, Gracz* g2 = nullptr, IMenu* menu = nullptr)
+		: gracz1(g1), gracz2(g2), imenu(menu) {}
 
     /**
-     * Operator wywołania wykonuje odpowiednie instrukcje
-	 * ze względu na przekazany obiekt zdarzenia.
+     * Games wykonuje metody na podstawie zdefiniowanych klawiszy
+	 * w obiektach typu Gracz. Obiekt typu Event jest informacją
+	 * o przyciśniętym klawiszu na klawiaturze.
      * @param e: ww obiekt zdarzenia.
      */
-    void operator()(sf::Event& e);
+    void games(sf::Event& e);
+
+	/**
+	 * Obsługa klawiatury zgodna z interfejsem IMenu.
+	 * przekazywany do niej jest argument typu Event, który posiada informacje
+	 * o przyciśniętym klawiszu.
+	 */
+	void menus(sf::Event& e);
 
     /**
      * Ustawia referencje graczy do których sterowanie się będzie odnosiło.
@@ -51,15 +66,23 @@ public:
      * @param m: jest wskaźnikiem na to menu.
      */
     void setMenu(IMenu* m);
-
 	/**
-	 * Zmienia aktualny stan przypisania klawiszy dla klasy
-	 * @param s: nowy stan dla klasy
+	 * Zwracanie wskaźnika na który obecnie wskazuje imenu.
 	 */
-	void zmienStan(STAN s);
+	IMenu* getMenu();
+	/**
+	 * zwalnia zasoby utrzymywane dla obiektu menu
+	 */
+	void zwolnijMenu()
+	{
+		if(imenu)
+		{
+			delete imenu;
+			imenu = nullptr;
+		}
+	}
 
 private:
-	STAN stan{STAN::MENU};
     Gracz* gracz1{nullptr};
     Gracz* gracz2{nullptr};
     IMenu* imenu{nullptr};

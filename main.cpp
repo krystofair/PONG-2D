@@ -1,60 +1,81 @@
-
-using namespace std;
-
-#include <iostream>
+#include <cassert>
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "sterowanie.h"
 #include "menu.h"
+#include "sterowanie.h"
+#include "globals.h"
 
+using namespace std;
 
-enum STAN
-{
-	MENU, GRA
-};
+int screen_width = 800;
+int screen_height = 600;
 
-static STAN stan_gry = STAN::MENU;
-Gracz* gracz1;
-Gracz* gracz2;
-Rakieta* rakieta1;
-Rakieta* rakieta2;
-
-void Exit()
-{
-	exit(0);
-}
+STAN stan_gry = STATE::MENU;
+Sterowanie stery;
 
 int main()
 {
+	sf::RenderWindow window(
+		sf::VideoMode(screen_width, screen_height), "xPONG 2D"
+	);
+	IGracz* gracz1{nullptr};
+	IGracz* gracz2{nullptr};
+	// wskazniki do wyswietlania
+	Rakieta *r1, *r2;
+	IMenu* current_menu;
 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "PONG");
+	sf::Event event{};
+	//sf::Clock time;
 
-	Sterowanie sterowanie(Sterowanie::STAN::MENU);
-	MainMenu main_menu({Exit, Exit, Exit, Exit});
-	sterowanie.setMenu(&main_menu);
-	//sterowanie.setGracz(gracz1, 1);
-	//sterowanie.setGracz(gracz2, 2);
-
-	while (window.isOpen())
+	stan_gry = STAN::MENU;
+	stery.setMenu(new MainMenu(gracz1, gracz2));
+	while(window.isOpen())
 	{
-		sf::Event event{};
-		while (window.pollEvent(event))
+		while(window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if(event.type == sf::Event::Closed)
+			{
 				window.close();
-			if(event.type == sf::Event::KeyPressed)
-				sterowanie(event);
+			}
+			else if(event.type == sf::Event::KeyPressed)
+			{
+				switch(stan_gry)
+				{
+					case STATE::PAUZA:
+					case STATE::MENU:
+						stery.menus(event);
+						break;
+					case STATE::GRA:
+						stery.games(event);
+						break;
+				}
+			}
 		}
 
+
+		//drawing
 		window.clear(sf::Color::Black);
-		window.draw(main_menu);
-		//window.draw(player1->getRakieta());
+		current_menu = stery.getMenu();
+		r1 = gracz1->getRakieta();
+		r2 = gracz2->getRakieta();
+		switch(stan_gry)
+		{
+			case STATE::PAUZA:
+			case STATE::MENU:
+				window.draw(*dynamic_cast<sf::Drawable*>(current_menu));
+				break;
+			case STATE::GRA:
+			{
+				stery.zwolnijMenu();
+				if(r1) window.draw(*r1);
+				if(r2) window.draw(*r2);
+				break;
+			}
+		}
 
 		window.display();
-
 	}
-
 	return 0;
 }

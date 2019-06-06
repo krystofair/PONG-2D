@@ -55,5 +55,14 @@
     <None Include="README.MD">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="globals.h">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="game.h">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

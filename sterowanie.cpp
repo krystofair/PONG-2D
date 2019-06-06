@@ -1,78 +1,94 @@
+#include <chrono>
+
 #include "sterowanie.h"
+#include "menu.h"
+#include "globals.h"
 
 
-void Sterowanie::operator()(sf::Event& e)
+void Sterowanie::menus(sf::Event& e)
 {
-	switch(stan)
+	/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
+	if(imenu == nullptr) throw("brakuje menu");
+	auto zaz = imenu->getZaz();
+	switch(e.key.code)
 	{
-		case MENU:
-		{
-			/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
-		    if(imenu == nullptr) throw("brakuje menu");
-			if(e.key.code == Klawisz::Enter)
+		
+		case Klawisz::Enter:
+			imenu->uruchomOpcje();
+			break;
+		case Klawisz::Up:
+			//auto zaz = imenu->getZaz();
+			if(zaz != imenu->getKontOpcji().begin())
 			{
-			    imenu->uruchomOpcje(imenu->getZaz());
+				imenu->odznaczOpcje();
+				imenu->zaznaczOpcje(std::prev(zaz));
 			}
-			else if(e.key.code == Klawisz::Up)
+			else
 			{
-				auto zaz = imenu->getZaz();
-				if(zaz != imenu->getKontOpcji().begin())
-				{
-					imenu->odznaczOpcje();
-					imenu->zaznaczOpcje(std::prev(zaz));
-				}
-				else
-				{
-					imenu->odznaczOpcje();
-					imenu->zaznaczOpcje(std::prev(imenu->getKontOpcji().end()));
-				}
-			}
-			else if(e.key.code == Klawisz::Down)
-			{
-			    auto zaz = imenu->getZaz();
-				if(std::next(zaz) != imenu->getKontOpcji().end())
-				{
-					imenu->odznaczOpcje();
-					imenu->zaznaczOpcje(std::next(zaz));
-				}
-				else
-				{
-					imenu->odznaczOpcje();
-					imenu->zaznaczOpcje(imenu->getKontOpcji().begin());
-				}
+				imenu->odznaczOpcje();
+				imenu->zaznaczOpcje(std::prev(imenu->getKontOpcji().end()));
 			}
 			break;
-		}
-		case GRA:
-		{
-			if(e.key.code == gracz1->getKlawisz(0))
+		case Klawisz::Down:
+			//auto zaz = imenu->getZaz();
+			if(std::next(zaz) != imenu->getKontOpcji().end())
 			{
-				Rakieta& R = gracz1->getRakieta();
-				auto pozY = R.getPozY();
-				auto dl = R.getDlugosc();
-				R.setPozY(pozY - (dl/3+1));
+				imenu->odznaczOpcje();
+				imenu->zaznaczOpcje(std::next(zaz));
 			}
-			else if(e.key.code == gracz2->getKlawisz(0))
+			else
 			{
-				Rakieta& R = gracz2->getRakieta();
-				auto pozY = R.getPozY();
-				auto dl = R.getDlugosc();
-				R.setPozY(pozY - (dl/3+1));
-			}
-			else if(e.key.code == gracz1->getKlawisz(1))
-			{
-
-			}
-			else if(e.key.code == gracz2->getKlawisz(1))
-			{
-
-			}
-			else if(e.key.code == Klawisz::Escape)
-			{
-				stan = STAN::MENU;
+				imenu->odznaczOpcje();
+				imenu->zaznaczOpcje(imenu->getKontOpcji().begin());
 			}
 			break;
+		default:
+			zaz->setFillColor(sf::Color::Green);
+	}
+}
+
+void Sterowanie::games(sf::Event& e)
+{
+	if(gracz1)
+	{
+		if(e.key.code == gracz1->getKlawisz(0))
+		{
+			Rakieta* R = gracz1->getRakieta();
+			auto pozY = R->getPozY();
+			auto dl = R->getDlugosc();
+			R->setPozY(pozY - (dl/3+1));
+			//R.moveTo(pozY+ batspeed);
 		}
+		else if(e.key.code == gracz1->getKlawisz(1)) {} // na razie ta instrukcja jest pusta.
+	}
+	if(gracz2)
+	{
+		if(e.key.code == gracz2->getKlawisz(0))
+		{
+
+			Rakieta* R = gracz2->getRakieta();
+			auto pozY = R->getPozY();
+			auto dl = R->getDlugosc();
+			R->setPozY(pozY - (dl/3+1));
+		}
+		else if(e.key.code == gracz2->getKlawisz(1)) {} //na razie ta instrukcja jest pusta.
+	}
+	if(e.key.code == Klawisz::Escape)
+	{
+		/* not here.
+		if(gracz1->getRakieta())
+		{
+			delete gracz1->getRakieta();
+			gracz1->setRakieta(nullptr);
+		}
+		if(gracz2->getRakieta())
+		{
+			delete gracz2->getRakieta();
+			gracz2->setRakieta(nullptr);
+		}
+		*/
+		this->setMenu(new PauseMenu(gracz1, gracz2));
+		stan_gry = STAN::PAUZA;
 	}
 }
 
@@ -91,7 +107,7 @@ void Sterowanie::setMenu(IMenu* m)
 	imenu = m;
 }
 
-void Sterowanie::zmienStan(STAN s)
+IMenu* Sterowanie::getMenu()
 {
-	stan = s;
+	return imenu; 
 }
