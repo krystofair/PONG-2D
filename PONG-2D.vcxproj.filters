@@ -33,6 +33,12 @@
     <ClCompile Include="plansza.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Silnik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gracz.h">
@@ -56,6 +62,9 @@
     <ClInclude Include="plansza.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.MD">
@@ -68,6 +77,9 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="game.h">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="gameapp.h">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
