@@ -1,6 +1,9 @@
 //
 // Created by Christofair on 23.04.2019.
 //
+
+#pragma once
+
 #include "IGracz.h"
 
 #ifndef PONG_GRACZ_H
@@ -29,8 +32,9 @@ public:
     void setKlawisze(
             Klawisz up,
             Klawisz down,
-            Klawisz left,
-            Klawisz right);
+            Klawisz left = Klawisz::Unknown,
+            Klawisz right = Klawisz::Unknown);
+
     /**
 	 * Zwraca klawisz przypisany dla danego gracza z tablicy klawisze
 	 * @param index: wskazuje index na ktorym zapisany jest kod klawisza.
