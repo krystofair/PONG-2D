@@ -78,7 +78,7 @@ private:
 	IGracz *g1, *g2;
 public:
 	ZmienSterowanie(IGracz* g, IGracz* gg) : g1(g), g2(gg) {}
-	void execute();
+	void execute(){};
 };
 
 class ViewResults : public ICommand

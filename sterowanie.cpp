@@ -75,18 +75,6 @@ void Sterowanie::games(sf::Event& e)
 	}
 	if(e.key.code == Klawisz::Escape)
 	{
-		/* not here.
-		if(gracz1->getRakieta())
-		{
-			delete gracz1->getRakieta();
-			gracz1->setRakieta(nullptr);
-		}
-		if(gracz2->getRakieta())
-		{
-			delete gracz2->getRakieta();
-			gracz2->setRakieta(nullptr);
-		}
-		*/
 		this->setMenu(new PauseMenu(gracz1, gracz2));
 		stan_gry = STAN::PAUZA;
 	}

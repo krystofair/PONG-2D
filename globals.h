@@ -15,6 +15,7 @@ struct KeysGlobalSet
 extern KeysGlobalSet pl1_set;
 extern KeysGlobalSet pl2_set;
 */// we'll see.
+
 typedef STAN STATE;
 extern STAN stan_gry;
 extern Sterowanie stery;

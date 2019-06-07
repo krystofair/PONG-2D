@@ -26,7 +26,7 @@ MainMenu::MainMenu(IGracz* g1, IGracz* g2)
 		throw("brakuje czcionki w zasobach systemu.");
 	opcje.emplace_back("Zagraj z komputerem.", font, new StartOnePlayer(g1, g2));
 	opcje.emplace_back("Zagraj z przyjacielem.", font, new StartTwoPlayer(g1, g2));
-	opcje.emplace_back(L"Zmieñ sterowanie", font, new ZmienSterowanie());
+	opcje.emplace_back(L"Zmieñ sterowanie", font, new ZmienSterowanie(g1,g2));
 	opcje.emplace_back(L"Poka¿ wyniki", font, nullptr);
 	opcje.emplace_back(L"Wyjœcie", font, new Wyjscie(this, g1, g2));
     int i=200;
@@ -66,10 +66,9 @@ void StartTwoPlayer::execute()
 	
 	gracz1->setRakieta(rakieta1);
 	gracz2->setRakieta(rakieta2);
-	static_cast<Gracz*>(gracz1)->setKlawisze(pl1_set.up, pl1_set.down,
-											 pl1_set.left,pl1_set.right);
-	static_cast<Gracz*>(gracz1)->setKlawisze(pl2_set.up, pl2_set.down,
-											 pl2_set.left, pl2_set.right);
+	static_cast<Gracz*>(gracz1)->setKlawisze(Klawisz::W, Klawisz::A, Klawisz::Unknown, Klawisz::Unknown);
+	//static_cast<Gracz*>(gracz1)->setKlawisze(pl2_set.up, pl2_set.down,
+	//										 pl2_set.left, pl2_set.right);
 	stery.setGracz(static_cast<Gracz*> (gracz1), 1);
 	stery.setGracz(static_cast<Gracz*> (gracz2), 2);
 	stan_gry = STAN::GRA;
