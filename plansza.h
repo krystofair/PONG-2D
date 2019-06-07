@@ -22,7 +22,16 @@ public:
 	/// Pozwala innym obiektom otrzymaæ potrzebnego im gracza, po numerze id.
 	/// id oznacza numer gracza w klasie.
 	/// zwraca nullptr je¿eli id jest niew³aœciwe.
-	IGracz* getGracz(int id) const;
+	IGracz* getGracz(int id) const
+	{
+		switch(id)
+		{
+			case 1: return gracz1;
+			case 2: return gracz2;
+			default: return nullptr;
+		}
+	}
+
 
 	/// Metoda tworzy instancje gracza w zale¿noœci od jego id
 	/// Rozró¿niono 3 rodzaje id.

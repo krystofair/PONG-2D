@@ -1,14 +1,5 @@
 #include "plansza.h"
 
-IGracz* Plansza::getGracz(int id) const
-{
-	switch(id)
-	{
-		case 1: return gracz1;
-		case 2: return gracz2;
-		default: return nullptr;
-	}
-}
 
 IGracz* Plansza::createPlayer(Rakieta* r, int id)
 {
