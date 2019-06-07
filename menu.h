@@ -28,7 +28,7 @@
 class MainMenu : public IMenu, public sf::Drawable
 {
 public:
-	MainMenu(IGracz* g1, IGracz* g2);
+	MainMenu();
 	virtual ~MainMenu();
 
 protected:
@@ -42,7 +42,7 @@ protected:
 class PauseMenu : public IMenu, public sf::Drawable
 {
 public:
-	PauseMenu(IGracz* g1, IGracz* g2);
+	PauseMenu();
 	virtual ~PauseMenu();
 protected:
 	void draw(sf::RenderTarget&, sf::RenderStates = sf::RenderStates::Default)const;
@@ -53,34 +53,28 @@ private:
 /// Polecenie rozpoczęcia gry z jednym graczem;
 class StartOnePlayer : public ICommand
 {
-private:
-	IGracz* gracz1;
-	IGracz* si;
 public:
-	StartOnePlayer(IGracz* g1, IGracz* g2) : gracz1(g1), si(g2) {}
+	StartOnePlayer(){}
 	void execute();
 };
 
 /// Polecenie rozpoczęcia gry z dwojgiem graczy.
 class StartTwoPlayer : public ICommand
 {
-private:
-	IGracz* gracz1;
-	IGracz* gracz2;
 public:
-	StartTwoPlayer(IGracz* g1, IGracz* g2) : gracz1(g1), gracz2(g2) {}
+	StartTwoPlayer(){}
 	void execute();
 };
 
+/// Ustawienie nowych zestawów klawiszy dla graczy.
 class ZmienSterowanie : public ICommand
 {
-private:
-	IGracz *g1, *g2;
 public:
-	ZmienSterowanie(IGracz* g, IGracz* gg) : g1(g), g2(gg) {}
+	ZmienSterowanie(){}
 	void execute(){};
 };
 
+/// Wyświetlanie tablicy wynikow najlepszych graczy.
 class ViewResults : public ICommand
 {
 public:
@@ -88,38 +82,34 @@ public:
 	void execute(){}
 };
 
-
+/// Wznowienie gry poprzez zmiane stanu gry.
 class Resume : public ICommand
 {
 public:
 	Resume(){}
 	void execute();
 };
+
+/// Powrot do menu głównego z pauzy.
 class Powrot : public ICommand
 {
-private:
-	IGracz* g1;
-	IGracz* g2;
 public:
-	Powrot(IGracz* gg, IGracz* ggg) : g1(gg), g2(ggg){}
+	Powrot(){}
 	void execute();
 };
 
+/// Wyjście z gry
+/**
+* Polecenie zwolni wszystkie zasoby pobrane przez program.
+*/
 class Wyjscie : public ICommand
 {
 private:
 	IMenu* imenu;
-	IGracz* gracz1;
-	IGracz* gracz2;
 public:
-	Wyjscie(IMenu* im, IGracz* g1, IGracz* g2) 
-		: imenu(im), gracz1(g1), gracz2(g2){};
-	void execute()
-	{
-		if(imenu) delete imenu;
-		exit(0);
-	}
-
+	Wyjscie(IMenu* im) 
+		: imenu(im){};
+	void execute();
 };
 
 #endif //PONG_MENU_H

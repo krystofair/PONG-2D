@@ -20,15 +20,15 @@ MainMenu::~MainMenu()
 				  [](auto option){ if(option.polecenie) delete option.polecenie; });
 }
 
-MainMenu::MainMenu(IGracz* g1, IGracz* g2)
+MainMenu::MainMenu()
 {
 	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf"))
 		throw("brakuje czcionki w zasobach systemu.");
-	opcje.emplace_back("Zagraj z komputerem.", font, new StartOnePlayer(g1, g2));
-	opcje.emplace_back("Zagraj z przyjacielem.", font, new StartTwoPlayer(g1, g2));
-	opcje.emplace_back(L"Zmieñ sterowanie", font, new ZmienSterowanie(g1,g2));
+	opcje.emplace_back("Zagraj z komputerem.", font, new StartOnePlayer());
+	opcje.emplace_back("Zagraj z przyjacielem.", font, new StartTwoPlayer());
+	opcje.emplace_back(L"Zmieñ sterowanie", font, new ZmienSterowanie());
 	opcje.emplace_back(L"Poka¿ wyniki", font, nullptr);
-	opcje.emplace_back(L"Wyjœcie", font, new Wyjscie(this, g1, g2));
+	opcje.emplace_back(L"Wyjœcie", font, new Wyjscie(this));
     int i=200;
     for(auto& item : opcje)
     {
@@ -49,10 +49,11 @@ void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::Rend
 
 void StartOnePlayer::execute()
 {
-	Rakieta* r = new Rakieta(1, 1, 10, 100); // rakieta dla human.
-	gracz1->setRakieta(r);
-	//Rakieta* r2 = new Rakieta(800, 1, 10, 100); // rakieta dla si.
-	//si = new klasaSI(*r, 2);
+	Rakieta* rsi = new Rakieta(1, 1, 10, 100); // rakieta dla si.
+	Rakieta* rh = new Rakieta(788, 1, 10, 100); // rakieta dla human.
+	auto gracz1 = plansza.createPlayer(rh, 1);
+	
+	plansza.createPlayer(rsi, 3);
 	stery.setGracz(static_cast<Gracz*>(gracz1), 1);
 	stan_gry = STAN::GRA;
 }
@@ -60,29 +61,27 @@ void StartOnePlayer::execute()
 
 void StartTwoPlayer::execute()
 {
-	auto rakieta1 = new Rakieta(1, 1, 10, 100); // rakieta dla pierwszego gracza.
-	auto rakieta2 = new Rakieta(800, 1, 10, 100); // rakieta dla drugiego gracza.
-	auto g = Gracz(nullptr, 1);
 	
-	gracz1->setRakieta(rakieta1);
-	gracz2->setRakieta(rakieta2);
-	static_cast<Gracz*>(gracz1)->setKlawisze(Klawisz::W, Klawisz::A, Klawisz::Unknown, Klawisz::Unknown);
-	//static_cast<Gracz*>(gracz1)->setKlawisze(pl2_set.up, pl2_set.down,
-	//										 pl2_set.left, pl2_set.right);
-	stery.setGracz(static_cast<Gracz*> (gracz1), 1);
-	stery.setGracz(static_cast<Gracz*> (gracz2), 2);
+	auto rakieta1 = new Rakieta(780, 1, 10, 100); // rakieta dla pierwszego gracza.
+	auto rakieta2 = new Rakieta(1, 1, 10, 100); // rakieta dla drugiego gracza.
+	auto g1 = plansza.createPlayer(rakieta2, 1);
+	auto g2 = plansza.createPlayer(rakieta1, 2);
+	static_cast<Gracz*>(g1)->setKlawisze(Klawisz::W, Klawisz::A);
+	static_cast<Gracz*>(g2)->setKlawisze(Klawisz::P, Klawisz::L);
+	stery.setGracz(static_cast<Gracz*> (g1), 1);
+	stery.setGracz(static_cast<Gracz*> (g2), 2);
 	stan_gry = STAN::GRA;
 }
 
 
-PauseMenu::PauseMenu(IGracz* g1, IGracz* g2)
+PauseMenu::PauseMenu()
 {
 	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf"))
 		throw("brakuje czcionki w zasobach systemu.");
 	opcje.emplace_back(L"Odpauzuj", font, new Resume());
-	opcje.emplace_back(L"PrzejdŸ do menu g³ównego",font, new Powrot(g1,g2));
-	opcje.emplace_back(L"Nowa gra", font, nullptr);
-	opcje.emplace_back(L"Wyjœcie", font, new Wyjscie(this, g1, g2));
+	opcje.emplace_back(L"PrzejdŸ do menu g³ównego",font, new Powrot());
+	//opcje.emplace_back(L"Nowa gra", font, nullptr);
+	opcje.emplace_back(L"Wyjœcie", font, new Wyjscie(this));
 	int i=200;
 	for(auto& item : opcje)
 	{
@@ -111,12 +110,32 @@ void Resume::execute()
 
 void Powrot::execute()
 {
+	auto g1 = plansza.getGracz(1);
+	auto g2 = plansza.getGracz(2);
 	if(g1) if(g1->getRakieta()) {
 		delete g1->getRakieta(); g1->setRakieta(nullptr);
+		plansza.deletePlayer(1);
 	}
 	if(g2) if(g2->getRakieta()) {
 		delete g2->getRakieta(); g2->setRakieta(nullptr);
+		plansza.deletePlayer(2);
 	}
-	stery.setMenu(new MainMenu(g1, g2));
+	stery.setMenu(new MainMenu());
 	stan_gry = STAN::MENU;
+}
+
+void Wyjscie::execute()
+{
+	auto g1 = plansza.getGracz(1);
+	auto g2 = plansza.getGracz(2);
+	if(g1) if(g1->getRakieta()) {
+		delete g1->getRakieta(); g1->setRakieta(nullptr);
+		plansza.deletePlayer(1);
+	}
+	if(g2) if(g2->getRakieta()) {
+		delete g2->getRakieta(); g2->setRakieta(nullptr);
+		plansza.deletePlayer(2);
+	}
+	delete imenu;
+	exit(0);
 }

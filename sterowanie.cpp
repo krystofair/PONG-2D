@@ -59,7 +59,14 @@ void Sterowanie::games(sf::Event& e)
 			R->setPozY(pozY - (dl/3+1));
 			//R.moveTo(pozY+ batspeed);
 		}
-		else if(e.key.code == gracz1->getKlawisz(1)) {} // na razie ta instrukcja jest pusta.
+		else if(e.key.code == gracz1->getKlawisz(1))
+		{
+			Rakieta* R = gracz1->getRakieta();
+			auto pozY = R->getPozY();
+			auto dl = R->getDlugosc();
+			R->setPozY(pozY + (dl/3+1));
+			//R.moveTo(pozY+ batspeed);
+		} 
 	}
 	if(gracz2)
 	{
@@ -71,11 +78,17 @@ void Sterowanie::games(sf::Event& e)
 			auto dl = R->getDlugosc();
 			R->setPozY(pozY - (dl/3+1));
 		}
-		else if(e.key.code == gracz2->getKlawisz(1)) {} //na razie ta instrukcja jest pusta.
+		else if(e.key.code == gracz2->getKlawisz(1)) 
+		{
+			Rakieta* R = gracz2->getRakieta();
+			auto pozY = R->getPozY();
+			auto dl = R->getDlugosc();
+			R->setPozY(pozY + (dl/3+1));
+		} 
 	}
 	if(e.key.code == Klawisz::Escape)
 	{
-		this->setMenu(new PauseMenu(gracz1, gracz2));
+		this->setMenu(new PauseMenu());
 		stan_gry = STAN::PAUZA;
 	}
 }

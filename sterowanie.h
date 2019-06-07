@@ -2,6 +2,7 @@
 // Created by Christofair on 23.04.2019.
 //
 
+#pragma once
 
 #include <SFML/Window/Event.hpp>
 
