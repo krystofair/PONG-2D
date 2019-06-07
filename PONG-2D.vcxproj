@@ -136,14 +136,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="gracz.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="plansza.cpp" />
     <ClCompile Include="rakieta.cpp" />
+    <ClCompile Include="Silnik.cpp" />
     <ClCompile Include="sterowanie.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="gracz.h" />
     <ClInclude Include="IGracz.h" />
     <ClInclude Include="IMenu.h" />
@@ -153,8 +156,6 @@
     <ClInclude Include="sterowanie.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="game.cpp" />
-    <None Include="game.h" />
     <None Include="globals.h" />
     <None Include="gameapp.h" />
     <None Include="README.MD" />
