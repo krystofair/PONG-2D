@@ -36,6 +36,8 @@ void gorapaletkatrue(int &predkosc, int &rotacja, int bs, int br)//||| domysla u
 	if (rotacja > 100) rotacja = 100;/////
 	if (rotacja < -100) rotacja = -100;///
 }
+
+
 void dolnapaletkatrue(int &predkosc, int &rotacja, int bs, int br)//||| domyslna dodatnia rotacja
 {
 	predkosc = predkosc + 2 * bs;
@@ -56,6 +58,36 @@ void dolnapaletkatrue(int &predkosc, int &rotacja, int bs, int br)//||| domyslna
 	if (rotacja > 100) rotacja = 100;//////
 	if (rotacja < -100) rotacja = -100;////
 }
+
+/*
+Funkcjamodyfukuje parametry pilki
+
+parametry:
+	...
+	czesc-ktora czesc paletki odbija pilke 1: gora, 0:srodek, -1 dol
+*/
+void ZmianaParametrowPilkiPoOdbiciuOdPaletki(int &predkosc, int &rotacja, int bs, int br, char CzescPaletki)
+{	predkosc = predkosc + 2 * bs;
+	if (rotacja == 0) rotacja = rotacja -(CzescPaletki*br);//pi³ka bez rotacji
+	if (rotacja != 0)// pi³ka z rotacja
+	{
+		if ((CzescPaletki = 1 && rotacja > 0) || (CzescPaletki = -1 && rotacja < 0))
+		{
+			rotacja=rotacja+ CzescPaletki* br;//zwieksza bezwgledn¹ wartoœæ wspolczynnika rotacji
+		}
+		else
+		{
+			rotacja = rotacja - CzescPaletki * br;//zmniejsza bezwgledn¹ wartoœæ wspolczynnika rotacji
+		}
+
+	}
+	if (predkosc > 1000) predkosc = 1000;//nie przekraczanie wartosci maksymalnej
+	if (rotacja > 100) rotacja = 100;//////
+	if (rotacja < -100) rotacja = -100;////
+}
+
+
+
 void srodkowapaletka(int &predkosc, int &rotacja, int bs, int br)
 {
 	predkosc = predkosc + (2 * bs);
