@@ -107,21 +107,6 @@ float silnik()
 	bool rodzaj=true; // true =w paletka || false = banda
 	bool banda=true; // true = górna banda || false = dolna banda (wa¿ne do prostej)
 	int palecz=1;//jaka czêœæ paletki (1=góra, 2=œrodek 3=do³)
-	while (true)//TESTER
-	{
-		printf("\npodaj predkosc:");
-		scanf_s("%d", &speed);
-		printf("\npodaj rotacja:");
-		scanf_s("%d", &rota);
-		printf("\nrodzaj kolizji(0 do banda):");
-		scanf_s("%d", &rodzaj);
-		if (rodzaj == false) break;
-		printf("\nktora paletka (prawa to true):");
-		scanf_s("%d", &paletka);
-		printf("\nkolizja pilki wspolrzêdna:");
-		scanf_s("%d", &palecz);
-		break;
-	}
 	if(!rodzaj) // kolizja z band¹
 	{
 		if (speed > bs*2) // algorytm na speeda

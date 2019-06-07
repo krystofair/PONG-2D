@@ -46,14 +46,14 @@ public:
 	/// id = 2 analogicznie z numerem 2.
 	void deletePlayer(int id);
 
-	//Pilka* getPilka() const;
-	//Pilka* setPilka(Pilka* pilka);
+	//Ball* getPilka() const;
+	//Ball* setPilka(Pilka* pilka);
 
 public:
 
 private:
 	IGracz* gracz1;
 	IGracz* gracz2;
-	//Pilka pilka;
+	//Ball* pilka;
 
 };
