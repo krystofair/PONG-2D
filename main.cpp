@@ -144,6 +144,7 @@ int main()
 					throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
 				else
 				{
+					if(detectCollision(*ball, *r1) || detectCollision(*ball, *r2)) kierunek*=-1;
 					//r1
 					r1->move();
 					window.draw(*r1);
@@ -156,7 +157,7 @@ int main()
 					auto size = ball->GetSize().x;
 					X += 0.5*kierunek;
 					//if(X > screen_width- 2*size || X < size) kierunek *= -1;
-					if(detectCollision(*ball, *r1) || detectCollision(*ball, *r2)) kierunek*=-1;
+					//
 					//if(detectCollision(*ball, true)|| detectCollision(*ball, false)) a *= -1;
 					trace = wylicz(0);
 				}
