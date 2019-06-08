@@ -4,16 +4,16 @@
 
 #include "rakieta.h"
 
-void Rakieta::setPozycja(unsigned int x, unsigned int y)
+void Rakieta::setPozycja(float x, float y)
 {
     pos_x = x;
     pos_y = y;
 }
 
-void Rakieta::setPozX(unsigned int x)
+void Rakieta::setPozX(float x)
 { pos_x = x; }
 
-void Rakieta::setPozY(unsigned int y)
+void Rakieta::setPozY(float y)
 { pos_y = y; }
 
 unsigned Rakieta::getPozX() { return pos_x; }
@@ -24,13 +24,23 @@ unsigned Rakieta::getSzerokosc() { return szerokosc; }
 
 unsigned Rakieta::getDlugosc() { return dlugosc; }
 
-void Rakieta::setSzerokosc(unsigned s) { szerokosc = s; }
+void Rakieta::setSzerokosc(float s) { szerokosc = s; }
 
-void Rakieta::setDlugosc(unsigned dl) { dlugosc = dl; }
+void Rakieta::setDlugosc(float dl) { dlugosc = dl; }
 
-void Rakieta::moveTo(unsigned lim)
+unsigned Rakieta::getSzybkosc() const { return szybkosc; }
+
+void Rakieta::moveTo(float lim)
 {
 	lim_y = lim;
+}
+
+void Rakieta::move()
+{
+	//if(pos_y < lim_y-szybkosc*10 || pos_y > lim_y + dlugosc + szybkosc*2);
+	if(pos_y < lim_y) pos_y += szybkosc;
+	else pos_y -= szybkosc;
+	//sf::RectangleShape::move(sf::Vector2f(pos_x, lim_y)); 
 }
 
 void Rakieta::draw(sf::RenderTarget & rt, sf::RenderStates states) const

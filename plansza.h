@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gracz.h"
-// #include "pilka.h"
+#include "Ball.h"
 
 struct KeysGlobalSet
 {
@@ -17,7 +17,10 @@ struct KeysGlobalSet
 class Plansza
 {
 public:
-	Plansza(){}
+	/// Konstruktor przyjmuj¹cy wymiary planszy.
+	/// @param width - szerokosc planszy
+	/// @param height - wysokosc planszy.
+	Plansza(int _width, int _height) : width(_width), height(_height){}
 
 	/// Pozwala innym obiektom otrzymaæ potrzebnego im gracza, po numerze id.
 	/// id oznacza numer gracza w klasie.
@@ -38,7 +41,7 @@ public:
 	/// id == 1 - instancja Gracza1 - zawsze jako klasa Gracz dla cz³owieka.
 	/// id == 2 - instancja gracza2 jako klasa Gracz dla cz³owieka
 	/// id == 3 - instancja gracza2 jako klasa IGracz dla si
-	/// zwraca informacje instancje gracza, w przypadku niepowodzenia nullptr.
+	/// zwraca instancje gracza, w przypadku niepowodzenia nullptr.
 	IGracz* createPlayer(Rakieta* r, int id);
 
 	/// Usuwanie instancji graczy. Rozró¿nia tylko dwie liczby id: 1 oraz 2
@@ -46,14 +49,27 @@ public:
 	/// id = 2 analogicznie z numerem 2.
 	void deletePlayer(int id);
 
-	//Ball* getPilka() const;
-	//Ball* setPilka(Pilka* pilka);
+	Ball* getPilka() const
+	{
+		return pilka;
+	}
+
+	/// Tworzy now¹ instancje dla pi³ki.
+	/// @return: referencje do utworzonego obiektu.
+	/// @return: w przypadku niepowodzenia nullptr.
+	Ball* createPilka();
+
+	/// Usuwa wewnêtrzn¹ instancje pi³ki.
+	void deletePilka();
 
 public:
+
 
 private:
 	IGracz* gracz1;
 	IGracz* gracz2;
-	//Ball* pilka;
-
+	Ball* pilka;
+private:
+	int width;
+	int height;
 };
