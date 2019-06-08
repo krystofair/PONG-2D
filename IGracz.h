@@ -28,6 +28,12 @@ public:
      * @param r: obiekt rakiety do przypisania dla pola.
      */
 	virtual void setRakieta(Rakieta* r) { rakieta = r; }
+    /**
+     * Zwraca wartosc flagi SI, w celu możliwości sprawdzenia czy dla klasy utworzyć nowy wątek czy nie.
+     * domyślną wartością tej flagi jest true, co oznacza że obiekty są tworzone domyślnie dla sterowania przez PC
+     * @return boolean from SI flag.
+     */
+	virtual bool checkSI() { return SI; }
 
 protected:
 	Rakieta* rakieta{nullptr};
