@@ -31,6 +31,7 @@ public:
 
 protected:
 	Rakieta* rakieta{nullptr};
+	bool SI;
 };
 
 
