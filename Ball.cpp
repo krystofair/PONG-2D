@@ -89,7 +89,7 @@ void Ball::Bounce(int a, int b)
 ////////Niby detekcja kolizji//////////
 /*
 
-bool Ball::DetectCollision(Paddle p)
+bool Ball::DetectCollision(Rakieta* p)
 {
 	if (GetPosition().y > p.GetPosition().y + p.GetSize().y
 		|| GetPosition().y + GetSize().y < p.GetPosition().y
