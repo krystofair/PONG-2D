@@ -1,5 +1,6 @@
 #pragma once
 #include "plansza.h"
+#include "sterowanie.h"
 
 enum STAN
 {

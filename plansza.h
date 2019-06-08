@@ -20,7 +20,7 @@ public:
 	/// Konstruktor przyjmuj¹cy wymiary planszy.
 	/// @param width - szerokosc planszy
 	/// @param height - wysokosc planszy.
-	Plansza(int _width, int _height) : width(_width), height(_height){}
+	Plansza(float _width, float _height) : width(_width), height(_height){}
 
 	/// Pozwala innym obiektom otrzymaæ potrzebnego im gracza, po numerze id.
 	/// id oznacza numer gracza w klasie.
@@ -63,13 +63,14 @@ public:
 	void deletePilka();
 
 public:
-
+	float getWidth() const { return width; }
+	float getHeight() const { return height; }
 
 private:
 	IGracz* gracz1;
 	IGracz* gracz2;
 	Ball* pilka;
 private:
-	int width;
-	int height;
+	float width;
+	float height;
 };

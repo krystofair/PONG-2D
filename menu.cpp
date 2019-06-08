@@ -49,8 +49,9 @@ void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::Rend
 
 void StartOnePlayer::execute()
 {
-	Rakieta* rsi = new Rakieta(4, 1, 10, 100); // rakieta dla si.
-	Rakieta* rh = new Rakieta(786, 1, 10, 100); // rakieta dla human.
+	auto middle = plansza.getHeight()/2-50;
+	Rakieta* rsi = new Rakieta(4, middle, 10, 100); // rakieta dla si.
+	Rakieta* rh = new Rakieta(786, middle, 10, 100); // rakieta dla human.
 	auto gracz1 = plansza.createPlayer(rh, 1);
 	
 	plansza.createPlayer(rsi, 3);
@@ -62,9 +63,9 @@ void StartOnePlayer::execute()
 
 void StartTwoPlayer::execute()
 {
-	
-	auto rakieta1 = new Rakieta(786, 1, 10, 100); // rakieta dla pierwszego gracza.
-	auto rakieta2 = new Rakieta(4, 1, 10, 100); // rakieta dla drugiego gracza.
+	auto middle = plansza.getHeight()/2-50;
+	auto rakieta1 = new Rakieta(786, middle, 10, 100); // rakieta dla pierwszego gracza.
+	auto rakieta2 = new Rakieta(4, middle, 10, 100); // rakieta dla drugiego gracza.
 	auto g1 = plansza.createPlayer(rakieta2, 1);
 	auto g2 = plansza.createPlayer(rakieta1, 2);
 	static_cast<Gracz*>(g1)->setKlawisze(Klawisz::W, Klawisz::A);

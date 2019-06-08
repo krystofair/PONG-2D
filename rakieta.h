@@ -13,11 +13,11 @@
 class Rakieta : public sf::Drawable
 {
 public:
-    Rakieta(unsigned x,
-			unsigned y,
-			unsigned szer,
-			unsigned dl)
-		: pos_x(x), pos_y(y), szerokosc(szer), dlugosc(dl), lim_y(y), szybkosc(0.3) {}
+    Rakieta(float x,
+			float y,
+			float szer,
+			float dl)
+		: pos_x(x), pos_y(y), szerokosc(szer), dlugosc(dl), lim_y(y), szybkosc(0.3){}
 
     /**
      * Ustawia pozycje rakiety. Gdzie zostanie wyświetlona na ekranie.
@@ -36,7 +36,7 @@ public:
 	 * Metoda zwracająca pozycje na osi X
 	 * @return: pos_x
 	 */
-	unsigned getPozX();
+	float getPozX();
 
     /**
      * Metoda ustawiająca pozycje na osi Y.
@@ -48,19 +48,19 @@ public:
 	 * Metoda zwracająca pozycje na osi Y.
 	 * @return: pos_y
 	 */
-	unsigned getPozY();
+	float getPozY();
 
 	/**
 	 * Zwracanie szerokości rakiety w pikselach
 	 * @return: dlugosc
 	 */
-	unsigned getSzerokosc();
+	float getSzerokosc();
 
 	/**
 	 * Zwracanie długości rakiety w pikselach
 	 * @return: szerokosc
 	 */
-	unsigned getDlugosc();
+	float getDlugosc();
 
 	/**
      * Ustawianie szerokości rakiety w pikselach,
@@ -79,7 +79,7 @@ public:
 	 * Zwracanie szybkosci rakiety w trakcie trwania rozgrywki.
 	 * @return : this->szybkosc.
 	 */
-	unsigned getSzybkosc() const;
+	float getSzybkosc() const;
 
 	/**
 	 * powiadamia o przesunięciu rakiety do pewnego etapu
