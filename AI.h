@@ -1,7 +1,7 @@
 #pragma once
 
-#define AiBounce=true;
-#define UserBounce=false;
+#define AiBounce true;
+#define UserBounce false;
 
 class AiTreeNode
 {
@@ -25,11 +25,11 @@ private:
 public:
 	AiTreeNode();//tylko dla roota
 	
-	AiTreeNode(int a_before, int b_before, int rotation_before);//dla kolejnych elementow
+	AiTreeNode(int a_before, int b_before, int rotation_before, bool who);//dla kolejnych elementow
 	~AiTreeNode();
 	void CalculateBallTargetPosition();
 	void CanIBounceBall();
-
+	void DeleteNode(AiTreeNode*);
 
 	void CreateNextLevel();
 
