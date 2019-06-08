@@ -24,18 +24,20 @@ sf::RenderWindow window(
 
 
 //fast and furious function - only for test
-bool detectCollision(Ball& b, Rakieta& r, bool prawa)
+bool detectCollision(Ball& b, Rakieta& r)
 {
-	if(prawa)
-		if(b.GetPosition().x + b.GetSize().x >= r.getPozX()
-		   && (b.GetPosition().y >= r.getPozY() && b.GetPosition().y < r.getPozY() + r.getDlugosc())
-		   ) return true;
-		else return false;
-	else
-		if(b.GetPosition().x <= r.getPozX()+r.getSzerokosc()
-		   && (b.GetPosition().y >= r.getPozY() && b.GetPosition().y < r.getPozY() + r.getDlugosc())
-		   ) return true;
-		else return false;
+	float pktRy = (r.getPozY() + r.getDlugosc())/2;
+	float pktBy = (b.GetPosition().y + b.GetSize().y)/2;
+	float pktRx = (r.getPozX() + r.getSzerokosc())/2;
+	float pktBx = (b.GetPosition().x + b.GetSize().x)/2;
+
+	float dX=pktBx-pktRx;
+	dX = (dX<0) ? -dX : dX;
+	float dY=pktBy-pktRy;
+	dY = (dY<0) ? -dY : dY;
+	if(dY <= r.getDlugosc()/2 && dX <= r.getSzerokosc()/2 + b.GetSize().x/2)
+		return true;
+	else return false;
 }
 
 bool detectCollision(Ball& b, bool gorna)
@@ -81,7 +83,7 @@ int main()
 	IGracz *g1{nullptr}, *g2{nullptr};
 	Ball *ball{nullptr};
 	IMenu* current_menu{nullptr};
-	Trasa trace = wylicz(a);
+	Trasa trace = wylicz(0);
 
 	sf::Event event{};
 	//sf::Clock time;
@@ -151,17 +153,11 @@ int main()
 					ball->Draw(&window);
 					ball->SetPosition(X, trace(X));
 					auto size = ball->GetSize().x;
-					X += 0.1*kierunek;
+					X += 0.5*kierunek;
 					//if(X > screen_width- 2*size || X < size) kierunek *= -1;
-					if(detectCollision(*ball, *r1, true)
-					   || detectCollision(*ball, *r2, false)
-					   || detectCollision(*ball, true)
-					   || detectCollision(*ball, false)) kierunek *= -1;
-					else
-					{
-						stan_gry = STAN::MENU;
-					}	
-					trace = wylicz(a);
+					if(detectCollision(*ball, *r1) || detectCollision(*ball, *r2)) kierunek*=-1;
+					//if(detectCollision(*ball, true)|| detectCollision(*ball, false)) a *= -1;
+					trace = wylicz(0);
 				}
 				break;
 			}
