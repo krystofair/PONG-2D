@@ -58,10 +58,10 @@ AiTreeNode* create_root()
 	{
 		who = UserBounce;
 	}
-
-	AiTreeNode* root = new AiTreeNode(a_before, b_before, rotation_before, who);//pobierz zmienne z silnika
-
-
+	AiTreeNode* root;
+	//root = new AiTreeNode(a_before, b_before, rotation_before, who);//pobierz zmienne z silnika
+	root = new AiTreeNode(1, 1, 0, who);
+	return root;
 }
 
 void AiTreeNode::DeleteNode(AiTreeNode* i)
@@ -78,7 +78,7 @@ void AiTreeNode::DeleteNode(AiTreeNode* i)
 	
 }
 
-AiTreeNode::~AiTreeNode();//destruktor drzewa
+AiTreeNode::~AiTreeNode()//destruktor drzewa
 {
 	if (up != nullptr)
 		DeleteNode(up);
