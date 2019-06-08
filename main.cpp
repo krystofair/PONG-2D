@@ -16,18 +16,20 @@ int screen_height = 600;
 
 STAN stan_gry = STATE::MENU;
 Sterowanie stery;
-Plansza plansza;
+Plansza plansza(screen_width, screen_height);
+sf::RenderWindow window(
+	sf::VideoMode(screen_width, screen_height), "xPONG 2D"
+);
+//sf::Time t;
 
 int main()
 {
-	sf::RenderWindow window(
-		sf::VideoMode(screen_width, screen_height), "xPONG 2D"
-	);
+
 
 	// wskazniki do wyswietlania
 	Rakieta *r1, *r2;
 	IGracz *g1, *g2;
-	//Pilka *pilka;
+	Ball *ball;
 	IMenu* current_menu;
 
 	sf::Event event{};
@@ -77,11 +79,14 @@ int main()
 				g2 = plansza.getGracz(2);
 				r1 = g1->getRakieta();
 				r2 = g2->getRakieta();
+				ball = plansza.getPilka();
 				//pilka = plansza.getPilka();
 				stery.zwolnijMenu();
+				r1->move();
+				r2->move();
 				if(r1) window.draw(*r1);
 				if(r2) window.draw(*r2);
-				//if(pilka) window.draw(*pilka);
+				if(ball) ball->Draw(&window);
 				break;
 			}
 		}

@@ -49,12 +49,13 @@ void MainMenu::draw(sf::RenderTarget &target, sf::RenderStates states = sf::Rend
 
 void StartOnePlayer::execute()
 {
-	Rakieta* rsi = new Rakieta(1, 1, 10, 100); // rakieta dla si.
-	Rakieta* rh = new Rakieta(788, 1, 10, 100); // rakieta dla human.
+	Rakieta* rsi = new Rakieta(4, 1, 10, 100); // rakieta dla si.
+	Rakieta* rh = new Rakieta(786, 1, 10, 100); // rakieta dla human.
 	auto gracz1 = plansza.createPlayer(rh, 1);
 	
 	plansza.createPlayer(rsi, 3);
 	stery.setGracz(static_cast<Gracz*>(gracz1), 1);
+	plansza.createPilka();
 	stan_gry = STAN::GRA;
 }
 
@@ -62,14 +63,15 @@ void StartOnePlayer::execute()
 void StartTwoPlayer::execute()
 {
 	
-	auto rakieta1 = new Rakieta(780, 1, 10, 100); // rakieta dla pierwszego gracza.
-	auto rakieta2 = new Rakieta(1, 1, 10, 100); // rakieta dla drugiego gracza.
+	auto rakieta1 = new Rakieta(786, 1, 10, 100); // rakieta dla pierwszego gracza.
+	auto rakieta2 = new Rakieta(4, 1, 10, 100); // rakieta dla drugiego gracza.
 	auto g1 = plansza.createPlayer(rakieta2, 1);
 	auto g2 = plansza.createPlayer(rakieta1, 2);
 	static_cast<Gracz*>(g1)->setKlawisze(Klawisz::W, Klawisz::A);
 	static_cast<Gracz*>(g2)->setKlawisze(Klawisz::P, Klawisz::L);
 	stery.setGracz(static_cast<Gracz*> (g1), 1);
 	stery.setGracz(static_cast<Gracz*> (g2), 2);
+	plansza.createPilka();
 	stan_gry = STAN::GRA;
 }
 
@@ -120,6 +122,7 @@ void Powrot::execute()
 		delete g2->getRakieta(); g2->setRakieta(nullptr);
 		plansza.deletePlayer(2);
 	}
+	if(plansza.getPilka()) plansza.deletePilka();
 	stery.setMenu(new MainMenu());
 	stan_gry = STAN::MENU;
 }
@@ -128,6 +131,7 @@ void Wyjscie::execute()
 {
 	auto g1 = plansza.getGracz(1);
 	auto g2 = plansza.getGracz(2);
+	auto pilka = plansza.getPilka();
 	if(g1) if(g1->getRakieta()) {
 		delete g1->getRakieta(); g1->setRakieta(nullptr);
 		plansza.deletePlayer(1);
@@ -136,6 +140,8 @@ void Wyjscie::execute()
 		delete g2->getRakieta(); g2->setRakieta(nullptr);
 		plansza.deletePlayer(2);
 	}
+	if(pilka) delete pilka;
 	delete imenu;
+	//window.close();
 	exit(0);
 }
