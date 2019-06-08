@@ -116,14 +116,17 @@ void Powrot::execute()
 	auto g1 = plansza.getGracz(1);
 	auto g2 = plansza.getGracz(2);
 	if(g1) if(g1->getRakieta()) {
-		delete g1->getRakieta(); g1->setRakieta(nullptr);
-		plansza.deletePlayer(1);
+		delete g1->getRakieta();
+		g1->setRakieta(nullptr);
 	}
 	if(g2) if(g2->getRakieta()) {
 		delete g2->getRakieta(); g2->setRakieta(nullptr);
-		plansza.deletePlayer(2);
 	}
-	if(plansza.getPilka()) plansza.deletePilka();
+	plansza.deletePlayer(1);
+	plansza.deletePlayer(2);
+	plansza.deletePilka();
+	auto stare_menu = stery.getMenu();
+	if(stare_menu) delete stare_menu;
 	stery.setMenu(new MainMenu());
 	stan_gry = STAN::MENU;
 }
@@ -134,7 +137,8 @@ void Wyjscie::execute()
 	auto g2 = plansza.getGracz(2);
 	auto pilka = plansza.getPilka();
 	if(g1) if(g1->getRakieta()) {
-		delete g1->getRakieta(); g1->setRakieta(nullptr);
+		delete g1->getRakieta();
+		g1->setRakieta(nullptr);
 		plansza.deletePlayer(1);
 	}
 	if(g2) if(g2->getRakieta()) {

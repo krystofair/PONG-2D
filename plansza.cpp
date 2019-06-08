@@ -20,11 +20,23 @@ void Plansza::deletePlayer(int id)
 {
 	if(id == 1 && gracz1 != nullptr)
 	{
+		auto r = gracz1->getRakieta();
+		if(r != nullptr)
+		{
+			delete r;
+			gracz1->setRakieta(nullptr);
+		}
 		delete gracz1;
 		gracz1 = nullptr;
 	}
 	if(id == 2 && gracz2 != nullptr)
 	{
+		auto r = gracz2->getRakieta();
+		if(r != nullptr)
+		{
+			delete r;
+			gracz2->setRakieta(nullptr);
+		}
 		delete gracz2;
 		gracz2 = nullptr;
 	}
