@@ -37,7 +37,8 @@ bool detectCollision(Ball& b, Rakieta& r)
 	dY = (dY<0) ? -dY : dY;
 	if(dY <= r.getDlugosc()/2 && dX <= r.getSzerokosc()/2 + b.GetSize().x/2)
 		return true;
-	else return false;
+	else
+		return false;
 }
 
 bool detectCollision(Ball& b, bool gorna)
