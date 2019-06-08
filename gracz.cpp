@@ -4,7 +4,7 @@
 
 #include "gracz.h"
 
-Gracz::Gracz(Rakieta* r, int _id) : IGracz(r), id(_id)
+Gracz::Gracz(Rakieta* r, int _id) : IGracz(r), id(_id), SI(false)
 {
 	switch(id)
 	{
