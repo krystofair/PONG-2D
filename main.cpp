@@ -141,7 +141,6 @@ int main()
 					throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
 				else
 				{
-					stery.zwolnijMenu();
 					//r1
 					r1->move();
 					window.draw(*r1);
