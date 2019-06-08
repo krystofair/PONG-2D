@@ -57,6 +57,7 @@ void StartOnePlayer::execute()
 	plansza.createPlayer(rsi, 3);
 	stery.setGracz(static_cast<Gracz*>(gracz1), 1);
 	plansza.createPilka();
+	stery.zwolnijMenu();
 	stan_gry = STAN::GRA;
 }
 
@@ -73,6 +74,7 @@ void StartTwoPlayer::execute()
 	stery.setGracz(static_cast<Gracz*> (g1), 1);
 	stery.setGracz(static_cast<Gracz*> (g2), 2);
 	plansza.createPilka();
+	stery.zwolnijMenu();
 	stan_gry = STAN::GRA;
 }
 
@@ -108,6 +110,7 @@ PauseMenu::~PauseMenu()
 
 void Resume::execute()
 {
+	stery.zwolnijMenu();
 	stan_gry = STAN::GRA;
 }
 
@@ -125,8 +128,7 @@ void Powrot::execute()
 	plansza.deletePlayer(1);
 	plansza.deletePlayer(2);
 	plansza.deletePilka();
-	auto stare_menu = stery.getMenu();
-	if(stare_menu) delete stare_menu;
+	stery.zwolnijMenu();
 	stery.setMenu(new MainMenu());
 	stan_gry = STAN::MENU;
 }
