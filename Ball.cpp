@@ -84,12 +84,30 @@ void Ball::Bounce(int a, int b)
 	velocity = sf::Vector2f(velocity.x * a, velocity.y * b);
 }
 
+int Ball::GetSpeed()
+{
+	return speed;
+}
 
-
+int Ball::GetRotation()
+{
+	return rotation;
+}
+int Ball::SetSpeed(int x)
+{
+	if (x > 1000) x = 1000;
+	speed = x;
+}
+int Ball::SetRotation(int x)
+{
+	if (x > 100) x = 100;
+	if (x < -100) x = -100;
+	rotation = x;
+}
 ////////Niby detekcja kolizji//////////
 /*
 
-bool Ball::DetectCollision(Paddle p)
+bool Ball::DetectCollision(Rakieta* p)
 {
 	if (GetPosition().y > p.GetPosition().y + p.GetSize().y
 		|| GetPosition().y + GetSize().y < p.GetPosition().y

@@ -57,6 +57,7 @@ void StartOnePlayer::execute()
 	plansza.createPlayer(rsi, 3);
 	stery.setGracz(static_cast<Gracz*>(gracz1), 1);
 	plansza.createPilka();
+	stery.zwolnijMenu();
 	stan_gry = STAN::GRA;
 }
 
@@ -73,6 +74,7 @@ void StartTwoPlayer::execute()
 	stery.setGracz(static_cast<Gracz*> (g1), 1);
 	stery.setGracz(static_cast<Gracz*> (g2), 2);
 	plansza.createPilka();
+	stery.zwolnijMenu();
 	stan_gry = STAN::GRA;
 }
 
@@ -108,6 +110,7 @@ PauseMenu::~PauseMenu()
 
 void Resume::execute()
 {
+	stery.zwolnijMenu();
 	stan_gry = STAN::GRA;
 }
 
@@ -116,14 +119,16 @@ void Powrot::execute()
 	auto g1 = plansza.getGracz(1);
 	auto g2 = plansza.getGracz(2);
 	if(g1) if(g1->getRakieta()) {
-		delete g1->getRakieta(); g1->setRakieta(nullptr);
-		plansza.deletePlayer(1);
+		delete g1->getRakieta();
+		g1->setRakieta(nullptr);
 	}
 	if(g2) if(g2->getRakieta()) {
 		delete g2->getRakieta(); g2->setRakieta(nullptr);
-		plansza.deletePlayer(2);
 	}
-	if(plansza.getPilka()) plansza.deletePilka();
+	plansza.deletePlayer(1);
+	plansza.deletePlayer(2);
+	plansza.deletePilka();
+	stery.zwolnijMenu();
 	stery.setMenu(new MainMenu());
 	stan_gry = STAN::MENU;
 }
@@ -134,7 +139,8 @@ void Wyjscie::execute()
 	auto g2 = plansza.getGracz(2);
 	auto pilka = plansza.getPilka();
 	if(g1) if(g1->getRakieta()) {
-		delete g1->getRakieta(); g1->setRakieta(nullptr);
+		delete g1->getRakieta();
+		g1->setRakieta(nullptr);
 		plansza.deletePlayer(1);
 	}
 	if(g2) if(g2->getRakieta()) {
