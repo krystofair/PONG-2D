@@ -1,4 +1,4 @@
-#include <cmath>
+ï»¿#include <cmath>
 
 #include "silnik.h"
 
@@ -8,8 +8,8 @@ void Silnik::gorapaletkatrue()
 	int rotacja = ball->GetRotation();
 	
 	predkosc = predkosc + 2 * bs;
-	if(rotacja == 0) rotacja = rotacja - br;//pi³ka bez rotacji
-	if(rotacja != 0)// pi³ka z rotacja
+	if(rotacja == 0) rotacja = rotacja - br;//piÅ‚ka bez rotacji
+	if(rotacja != 0)// piÅ‚ka z rotacja
 	{
 		if(rotacja > 0)// +r
 		{
@@ -45,8 +45,8 @@ void Silnik::dolnapaletkatrue()
 	int predkosc = ball->GetSpeed();
 	int rotacja = ball->GetRotation();
 	predkosc = predkosc + 2 * bs;
-	if(rotacja == 0) rotacja = rotacja + br;//pi³ka bez rotacji
-	if(rotacja != 0)// pi³ka z rotacja
+	if(rotacja == 0) rotacja = rotacja + br;//piÅ‚ka bez rotacji
+	if(rotacja != 0)// piÅ‚ka z rotacja
 	{
 		if(rotacja < 0)// -r
 		{
@@ -74,8 +74,8 @@ void Silnik::dowolnapaletka(char CzescPaletki)
 	predkosc = predkosc + 2 * bs;
 	if (CzescPaletki == part_down || CzescPaletki == part_up)
 	{
-		if (rotacja == 0) rotacja = rotacja + br;//pi³ka bez rotacji
-		if (rotacja != 0)// pi³ka z rotacja
+		if (rotacja == 0) rotacja = rotacja - CzescPaletki* br;//piÅ‚ka bez rotacji
+		if (rotacja != 0)// piÅ‚ka z rotacja
 		{
 			if ((CzescPaletki == part_down && rotacja < 0) || (CzescPaletki == part_up && rotacja > 0))// -r
 			{
@@ -94,6 +94,31 @@ void Silnik::dowolnapaletka(char CzescPaletki)
 	ball->SetSpeed(predkosc);
 	ball->SetRotation(rotacja);
 
+}
+
+
+void ZmianaParametrowPilkiPoOdbiciuOdPaletki(int &predkosc, int &rotacja, int bs, int br, char CzescPaletki)
+{
+	predkosc = predkosc + 2 * bs;
+	if (CzescPaletki == part_down || CzescPaletki == part_up)
+	{
+		if (rotacja == 0) rotacja = rotacja - (CzescPaletki*br);//piï¿½ka bez rotacji
+		if (rotacja != 0)// piï¿½ka z rotacja
+		{
+			if ((CzescPaletki = 1 && rotacja > 0) || (CzescPaletki = -1 && rotacja < 0))
+			{
+				rotacja = rotacja + CzescPaletki * br;//zwieksza bezwglednï¿½ wartoï¿½ï¿½ wspolczynnika rotacji
+			}
+			else
+			{
+				rotacja = rotacja * -1;
+				rotacja = rotacja - CzescPaletki * br;//zmniejsza bezwglednï¿½ wartoï¿½ï¿½ wspolczynnika rotacji
+			}
+		}
+	}
+	if (predkosc > 1000) predkosc = 1000;//nie przekraczanie wartosci maksymalnej
+	if (rotacja > 100) rotacja = 100;//////
+	if (rotacja < -100) rotacja = -100;////
 }
 
 
@@ -119,7 +144,7 @@ void Silnik::odbicieBanda()
 		pomocna = speed - bs;
 		speed = speed - pomocna;
 	}
-	if(rota > br || rota < - br)// sprawdza czy rot jest w przedzia³e z liczb¹ odejmowan¹ wiekszy lub mniejszy od bs(-bs)
+	if(rota > br || rota < - br)// sprawdza czy rot jest w przedziaÅ‚e z liczbÄ… odejmowanÄ… wiekszy lub mniejszy od bs(-bs)
 	{
 		pomocna = rota;
 		rota = abs((float)rota) - br;
@@ -134,7 +159,7 @@ void Silnik::odbicieBanda()
 
 
 
-	rota = 0;//musi byæ aby zawsze by³¹ prosta
+	rota = 0;//musi byÄ‡ aby zawsze byÅ‚Ä… prosta
 	if(rota == 0)
 	{
 		prosta();
@@ -153,7 +178,7 @@ void Silnik::odbiciePaletka()
 	int speed = ball->GetSpeed();
 	int pomocna;
 	rodzaj = true;
-	if(paletka == true)// sprawdza która paletka (true dla prawej)
+	if(paletka == true)// sprawdza ktÃ³ra paletka (true dla prawej)
 	{
 		switch(palecz)
 		{
@@ -200,7 +225,7 @@ void Silnik::odbiciePaletka()
 		}
 	}
 
-	rota = 0;//musi byæ aby zawsze by³¹ prosta
+	rota = 0;//musi byÄ‡ aby zawsze byÅ‚Ä… prosta
 	if(rota == 0)
 	{
 		prosta();

@@ -81,7 +81,7 @@ AiTreeNode* create_root()
 	AiTreeNode* root;
 	
 	//TODO pobierz zmienne o locie z silnika
-	root = new AiTreeNode(a_before, b_before, rotation_before, AiBounce);//pobierz zmienne z silnika
+	root = new AiTreeNode(1,1,0, AiBounce);//pobierz zmienne z silnika
 	return root;
 }
 
@@ -128,7 +128,7 @@ void StartAI()
 	if (root->get_can())
 	{
 		root->CreateNextLevel();
-		root->up.CalculateBallParams()
+//		root->up.CalculateBallParams()
 
 
 
