@@ -96,7 +96,7 @@ public:
 	void draw(sf::RenderTarget& rt, sf::RenderStates states = sf::RenderStates::Default) const;
 
 public:
-	unsigned lim_y;
+	float lim_y;
 
 private:
     float pos_x;
