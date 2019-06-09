@@ -72,16 +72,19 @@ void Silnik::dowolnapaletka(char CzescPaletki)
 	int predkosc = ball->GetSpeed();
 	int rotacja = ball->GetRotation();
 	predkosc = predkosc + 2 * bs;
-	if ( rotacja != 0)// pi³ka z rotacja
+	if (CzescPaletki == part_down || CzescPaletki == part_up)
 	{
-		if ((CzescPaletki == part_down && rotacja < 0) || (CzescPaletki == part_up && rotacja > 0))// -r
+		if (rotacja != 0)// pi³ka z rotacja
 		{
-			rotacja = rotacja + CzescPaletki* br;
-		}
-		else
-		{
-			rotacja = rotacja * -1;
-			rotacja = rotacja - CzescPaletki* br;//zmniejsza
+			if ((CzescPaletki == part_down && rotacja < 0) || (CzescPaletki == part_up && rotacja > 0))// -r
+			{
+				rotacja = rotacja + CzescPaletki * br;
+			}
+			else
+			{
+				rotacja = rotacja * -1;
+				rotacja = rotacja - CzescPaletki * br;//zmniejsza
+			}
 		}
 	}
 	if (predkosc > 1000) predkosc = 1000;//nie przekraczanie wartosci maksymalnej
