@@ -37,18 +37,20 @@ public:
 
 
 	/// Metoda tworzy instancje gracza w zale¿noœci od jego id
-	/// Rozró¿niono 3 rodzaje id.
+	/** Rozró¿niono 3 rodzaje id.
 	/// id == 1 - instancja Gracza1 - zawsze jako klasa Gracz dla cz³owieka.
 	/// id == 2 - instancja gracza2 jako klasa Gracz dla cz³owieka
 	/// id == 3 - instancja gracza2 jako klasa IGracz dla si
 	/// zwraca instancje gracza, w przypadku niepowodzenia nullptr.
+	 */
 	IGracz* createPlayer(Rakieta* r, int id);
 
 	/// Usuwanie instancji graczy. Rozró¿nia tylko dwie liczby id: 1 oraz 2
-	/// id = 1 usuwa gracza z numerem 1 w klasie,
-	/// id = 2 analogicznie z numerem 2.
+	/** id = 1 usuwa gracza z numerem 1 w klasie,
+	/// id = 2 analogicznie z numerem 2. */
 	void deletePlayer(int id);
 
+	/// Zwraca obiekt pilki dla klas.
 	Ball* getPilka() const
 	{
 		return pilka;
