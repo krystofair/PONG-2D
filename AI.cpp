@@ -78,7 +78,7 @@ void AiTreeNode::DeleteNode(AiTreeNode* i)
 	
 }
 
-AiTreeNode::~AiTreeNode();//destruktor drzewa
+AiTreeNode::~AiTreeNode()//destruktor drzewa
 {
 	if (up != nullptr)
 		DeleteNode(up);
