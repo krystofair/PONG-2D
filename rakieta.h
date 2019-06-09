@@ -92,7 +92,7 @@ public:
 	 */
 	void move();
 
-	// override method from drawable to draw rakieta on the screen
+	/// override method from drawable to draw rakieta on the screen
 	void draw(sf::RenderTarget& rt, sf::RenderStates states = sf::RenderStates::Default) const;
 
 public:
