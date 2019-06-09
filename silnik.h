@@ -1,7 +1,9 @@
 #pragma once
 #include <cmath>
 #include "Ball.h"
-
+#define part_up 1
+#define part_middle  0
+#define part_down -1
 class Silnik
 {
 public:
@@ -15,6 +17,7 @@ public:
 	void dolnapaletkatrue();//||| domyslna dodatnia rotacja
 	void odbiciePaletka(); // silnikpaletka nazwa zmieniona
 	void odbicieBanda(); //silnikbanda nazwa zmieniona.
+	void dowolnapaletka(char CzescPaletki);
 
 private:
 	Ball* ball;

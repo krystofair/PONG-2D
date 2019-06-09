@@ -1,10 +1,10 @@
 #pragma once
 
-#define AiBounce true;
-#define UserBounce false;
-#define part_up =1;
-#define part_middle = 0;
-#define part_down=-1;
+#define AiBounce true
+#define UserBounce false
+#define part_up 1
+#define part_middle  0
+#define part_down -1
 class AiTreeNode
 {
 private:
