@@ -180,7 +180,6 @@ void silnikpaletka(float &a, float &b, int &alfa)
 }
 void silnikbanda(float &a, float &b, int &alfa)
 {
-	Ball* ball = plansza.getPilka();
 	int pomocna;
 	Silnik lol(a, b, alfa);
 	Stala x;
