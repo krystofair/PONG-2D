@@ -80,7 +80,6 @@ int main()
 				r1 = g1->getRakieta();
 				r2 = g2->getRakieta();
 				ball = plansza.getPilka();
-				//pilka = plansza.getPilka();
 				stery.zwolnijMenu();
 				r1->move();
 				r2->move();
