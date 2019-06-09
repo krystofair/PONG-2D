@@ -74,6 +74,7 @@ void Silnik::dowolnapaletka(char CzescPaletki)
 	predkosc = predkosc + 2 * bs;
 	if (CzescPaletki == part_down || CzescPaletki == part_up)
 	{
+		if (rotacja == 0) rotacja = rotacja + br;//pi³ka bez rotacji
 		if (rotacja != 0)// pi³ka z rotacja
 		{
 			if ((CzescPaletki == part_down && rotacja < 0) || (CzescPaletki == part_up && rotacja > 0))// -r
