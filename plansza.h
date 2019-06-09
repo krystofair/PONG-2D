@@ -57,8 +57,10 @@ public:
 	}
 
 	/// Tworzy now¹ instancje dla pi³ki.
+	/**
 	/// @return: referencje do utworzonego obiektu.
 	/// @return: w przypadku niepowodzenia nullptr.
+	 */
 	Ball* createPilka();
 
 	/// Usuwa wewnêtrzn¹ instancje pi³ki.
