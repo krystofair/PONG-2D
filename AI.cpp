@@ -2,6 +2,7 @@
 
 
 #include "AI.h"
+#include "Silnik.cpp"
 AiTreeNode::AiTreeNode()
 {
 	up = nullptr;
@@ -24,11 +25,38 @@ AiTreeNode::AiTreeNode(int a_before, int b_before, int rotation_before, bool who
 
 
 }
-/*Oblicza docelowe miejsce pilki
+/*Oblicza docelowe miejsce pilki 
 ustawia zmienne BallTargetPosition*/
 void AiTreeNode::CalculateBallTargetPosition()
 {
 	//kod z silnika
+}
+
+/*Oblicza zmienne pi³ki po odbiciu od danej rakietki
+ustawia a_after, b_after_ rotation_after
+*/
+void AiTreeNode::CalculateBallParams()
+{
+	
+	int bs = 50;
+	int br = 15;
+	this->speed_after = this->speed_before + 2 * bs;
+	if (this->rotation_before == 0) this->rotation_after = this->rotation_before - (me*br);//pi³ka bez rotacji
+	if (this->rotation_before != 0)// pi³ka z rotacja
+	{
+		if ((me = 1 && this->rotation_before > 0) || (me = -1 && rotation_before < 0))
+		{
+			this->rotation_after = this->rotation_before + me * br;//zwieksza bezwgledn¹ wartoœæ wspolczynnika rotacji
+		}
+		else
+		{
+			this->rotation_after = this->rotation_before - me * br;//zmniejsza bezwgledn¹ wartoœæ wspolczynnika rotacji
+		}
+
+	}
+	if (this->speed_before > 1000) this->speed_after = 1000;//nie przekraczanie wartosci maksymalnej
+	if (this->rotation_after > 100) this->rotation_after = 100;//////
+	if (this->rotation_after < -100) this->rotation_after = -100;////
 }
 
 /*Sprawdza czy uda siê odbiæ pi³kê
@@ -49,19 +77,12 @@ void AiTreeNode::CreateNextLevel()
 
 AiTreeNode* create_root()
 {
-	bool who;
-	if (1)//pilka leci do AI
-	{
-		who =  AiBounce;
-	}
-	else
-	{
-		who = UserBounce;
-	}
 
-	AiTreeNode* root = new AiTreeNode(a_before, b_before, rotation_before, who);//pobierz zmienne z silnika
-
-
+	AiTreeNode* root;
+	
+	//TODO pobierz zmienne o locie z silnika
+	root = new AiTreeNode(a_before, b_before, rotation_before, AiBounce);//pobierz zmienne z silnika
+	return root;
 }
 
 void AiTreeNode::DeleteNode(AiTreeNode* i)
@@ -90,6 +111,33 @@ AiTreeNode::~AiTreeNode()//destruktor drzewa
 		DeleteNode(down);
 	delete down;
 }
+
+
+
+bool AiTreeNode::get_can()//destruktor drzewa
+{
+	return this->can;
+}
+
+void StartAI()
+{
+	AiTreeNode* root = create_root();
+	root->CalculateBallTargetPosition();
+	root->CanIBounceBall();
+
+	if (root->get_can())
+	{
+		root->CreateNextLevel();
+		root->up.CalculateBallParams()
+
+
+
+	}
+
+}
+
+
+
 
 
 
