@@ -9,7 +9,7 @@ public:
 	float getA() { return a; }
 	float getB() { return b; }
 	int getAlfa() { return alfa; }
-	void prosta(float&, float&, bool rodzaj);
+	void prosta();
 	void gorapaletkatrue();
 	void srodkowapaletka();
 	void dolnapaletkatrue();//||| domyslna dodatnia rotacja

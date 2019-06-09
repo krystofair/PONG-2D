@@ -65,7 +65,7 @@ void Silnik::dolnapaletkatrue()
 	ball->SetRotation(rotacja);
 }
 
-void Silnik::prosta(float& _a, float &_b, bool rodzaj)
+void Silnik::prosta()
 {
 	a = -a;
 	if(rodzaj == 0) b = -b;
@@ -74,7 +74,6 @@ void Silnik::prosta(float& _a, float &_b, bool rodzaj)
 void Silnik::odbicieBanda()
 {
 	int pomocna;
-	Silnik lol(a, b, alfa);
 	int rota = ball->GetRotation();
 	int speed = ball->GetSpeed();
 	rodzaj = false;
@@ -105,11 +104,11 @@ void Silnik::odbicieBanda()
 	rota = 0;//musi byæ aby zawsze by³¹ prosta
 	if(rota == 0)
 	{
-		lol.prosta(lol.getA, lol.getB, rodzaj);
+		prosta();
 	}
 	else
 	{
-
+		//
 	}
 	ball->SetSpeed(speed);
 	ball->SetRotation(rota);
@@ -171,7 +170,7 @@ void Silnik::odbiciePaletka()
 	rota = 0;//musi byæ aby zawsze by³¹ prosta
 	if(rota == 0)
 	{
-		lol.prosta(lol.getA, lol.getB, x.rodzaj);
+		prosta();
 	}
 	else
 	{
