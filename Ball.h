@@ -29,7 +29,8 @@ public:
 	//bool DetectCollision(Paddle p);
 	int GetSpeed();
 	int GetRotation();
-
+	void SetSpeed(int x);
+	void SetRotation(int x);
 private:
 
 	sf::CircleShape circleShape;

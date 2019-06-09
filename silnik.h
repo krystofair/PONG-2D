@@ -110,12 +110,12 @@ void ZmianaParametrowPilkiPoOdbiciuOdPaletki(int &predkosc, int &rotacja, int bs
 
 
 
-float silnik()
+void silnik(float &a, float &b, int &alfa)
 {
 	Silnik lol();
 	Stala x;
-	int rota;
-	int speed;
+	int rota = Ball::Getrotation();
+	int speed = Ball::GetSpeed();
 	int pomocna;
 	if (!x.rodzaj) // kolizja z bandą
 	{
@@ -200,7 +200,5 @@ float silnik()
 	{
 
 	}
-
-	return lol().getA, lol().getB, lol().getAlfa();
 }
 #pragma once

@@ -93,6 +93,17 @@ int Ball::GetRotation()
 {
 	return rotation;
 }
+int Ball::SetSpeed(int x)
+{
+	if (x > 1000) x = 1000;
+	speed = x;
+}
+int Ball::SetRotation(int x)
+{
+	if (x > 100) x = 100;
+	if (x < -100) x = -100;
+	rotation = x;
+}
 ////////Niby detekcja kolizji//////////
 /*
 
