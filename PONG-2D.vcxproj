@@ -143,7 +143,6 @@
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="plansza.cpp" />
     <ClCompile Include="rakieta.cpp" />
-    <ClCompile Include="Silnik.cpp" />
     <ClCompile Include="sterowanie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +160,9 @@
     <None Include="globals.h" />
     <None Include="gameapp.h" />
     <None Include="README.MD" />
+    <None Include="silnik.cpp" />
+    <None Include="silnik.h" />
+    <None Include="silnik_before_refaktor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

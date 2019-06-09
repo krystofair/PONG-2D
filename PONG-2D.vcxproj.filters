@@ -33,9 +33,6 @@
     <ClCompile Include="plansza.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Silnik.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -80,6 +77,15 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="gameapp.h">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="silnik_before_refaktor.h">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="silnik.cpp">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="silnik.h">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
