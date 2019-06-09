@@ -56,14 +56,14 @@ void Sterowanie::games(sf::Event& e)
 			Rakieta* R = gracz1->getRakieta();
 			auto pozY = R->getPozY();
 			auto dl = R->getDlugosc();
-			R->moveTo(0);
+			R->moveTo(pozY-dl/2);
 		}
 		else if(e.key.code == gracz1->getKlawisz(1))
 		{
 			Rakieta* R = gracz1->getRakieta();
 			auto pozY = R->getPozY();
 			auto dl = R->getDlugosc();
-			R->moveTo(plansza.getHeight());
+			R->moveTo(pozY+dl/2);
 		} 
 	}
 	if(gracz2)
@@ -74,14 +74,14 @@ void Sterowanie::games(sf::Event& e)
 			Rakieta* R = gracz2->getRakieta();
 			auto pozY = R->getPozY();
 			auto dl = R->getDlugosc();
-			R->moveTo(0);
+			R->moveTo(pozY-dl/2);
 		}
 		else if(e.key.code == gracz2->getKlawisz(1)) 
 		{
 			Rakieta* R = gracz2->getRakieta();
 			auto pozY = R->getPozY();
 			auto dl = R->getDlugosc();
-			R->moveTo(plansza.getHeight());
+			R->moveTo(pozY+dl/2);
 		} 
 	}
 	if(e.key.code == Klawisz::Escape)

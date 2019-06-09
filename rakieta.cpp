@@ -34,15 +34,15 @@ float Rakieta::getSzybkosc() const { return szybkosc; }
 void Rakieta::moveTo(float lim)
 {
 	lim_y = lim;
-	if(lim_y < dlugosc) lim_y = 0;
+	if(lim_y < szybkosc) lim_y = 0;
 	else if(lim_y > plansza.getHeight()-dlugosc) lim_y = plansza.getHeight()-dlugosc;
 }
 
 void Rakieta::move()
 {
 	//if(pos_y == lim_y);
-	if(pos_y < lim_y) pos_y += szybkosc;
-	else if(pos_y > lim_y) pos_y -= szybkosc;
+	if(pos_y <= lim_y) pos_y += szybkosc;
+	else if(pos_y >= lim_y) pos_y -= szybkosc;
 }
 
 void Rakieta::draw(sf::RenderTarget & rt, sf::RenderStates states) const
