@@ -13,6 +13,7 @@
 
 class Ball
 {
+	int speed, rotation;
 public:
 	Ball();
 	~Ball();
@@ -26,6 +27,8 @@ public:
 	void Rest();
 	void Bounce(int a, int b);
 	//bool DetectCollision(Paddle p);
+	int GetSpeed();
+	int GetRotation();
 
 private:
 

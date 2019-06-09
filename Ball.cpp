@@ -84,8 +84,15 @@ void Ball::Bounce(int a, int b)
 	velocity = sf::Vector2f(velocity.x * a, velocity.y * b);
 }
 
+int Ball::GetSpeed()
+{
+	return speed;
+}
 
-
+int Ball::GetRotation()
+{
+	return rotation;
+}
 ////////Niby detekcja kolizji//////////
 /*
 
