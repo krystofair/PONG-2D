@@ -134,7 +134,7 @@ void Silnik::prosta()
 	b = y / a*x;
 }
 
-void Silnik::odbicieBanda(bool dolna=false)
+void Silnik::odbicieBanda()
 {
 	int pomocna;
 	int rota = ball->GetRotation();
