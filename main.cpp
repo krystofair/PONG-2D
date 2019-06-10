@@ -53,6 +53,7 @@ int main()
 {
 	float X = plansza.getWidth()/2;
 	float Y = plansza.getHeight()/2;
+	int kierunek = 1;
 	bool kolizjaB = false, kolizjaR = false;
 	chrono::steady_clock clk;
 	auto czas_start = clk.now();
@@ -140,17 +141,18 @@ int main()
 				silnik.setBall(ball);
 				if(kolizjaR)
 				{
-					if(ball->GetPosition().x <= 0) 
+					if(ball->GetPosition().x ) 
 						silnik.odbiciePaletka(false);
-					if(ball->GetPosition().x >= plansza.getWidth()) 
+					if(ball->GetPosition().x >= plansza.getWidth())
 						silnik.odbiciePaletka(true);
+					kierunek = -kierunek;
 				}
 				if(kolizjaB)
 				{
 					silnik.odbicieBanda();
 				}
 				
-				X += ball->GetSpeed()*silnik.getA(); // kierunek dla prostej.
+				X += ball->GetSpeed()*kierunek*0.1; // kierunek dla prostej.
 				Y += silnik.getA()*X + silnik.getB(); // prosta
 				update();
 
