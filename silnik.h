@@ -16,8 +16,8 @@ public:
 	void gorapaletkatrue();
 	void srodkowapaletka();
 	void dolnapaletkatrue();//||| domyslna dodatnia rotacja
-	void odbiciePaletka(); // silnikpaletka nazwa zmieniona
-	void odbicieBanda(); //silnikbanda nazwa zmieniona.
+	void odbiciePaletka(bool prawa); // silnikpaletka nazwa zmieniona
+	void odbicieBanda(); // silnikbanda nazwa zmieniona. (bez flagi czy dolna czy gorna)
 	void dowolnapaletka(char CzescPaletki);
 
 private:
@@ -29,9 +29,6 @@ private:
 	//zmienne srodowiskowe
 	int bs{50}; // basic speed
 	int br{15}; // basic rotation
-	// jakies pomocnicze niewiem.
-	bool rodzaj; //false - banda, true - rakieta
-	bool paletka{true};
-	bool banda{true};
+	// jakies pomocnicze.
 	int palecz{1}; // czeœæ paletki 1-up, 2-mid, 3-bottom (1, 0, -1)
 };

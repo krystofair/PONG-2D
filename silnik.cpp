@@ -128,16 +128,17 @@ void ZmianaParametrowPilkiPoOdbiciuOdPaletki(int &predkosc, int &rotacja, int bs
 
 void Silnik::prosta()
 {
+	float y = ball->GetPosition().y;
+	float x = ball->GetPosition().x; // x znany z momentu kolizji.
 	a = -a;
-	if(rodzaj == 0) b = -b;
+	b = y / a*x;
 }
 
-void Silnik::odbicieBanda()
+void Silnik::odbicieBanda(bool dolna=false)
 {
 	int pomocna;
 	int rota = ball->GetRotation();
 	int speed = ball->GetSpeed();
-	rodzaj = false;
 	if(speed > bs * 2) // algorytm na speeda
 	{
 		speed = speed - bs;
@@ -165,7 +166,7 @@ void Silnik::odbicieBanda()
 	rota = 0;//musi być aby zawsze byłą prosta
 	if(rota == 0)
 	{
-		prosta();
+		prosta(); 
 	}
 	else
 	{
@@ -175,12 +176,12 @@ void Silnik::odbicieBanda()
 	ball->SetRotation(rota);
 }
 
-void Silnik::odbiciePaletka()
+void Silnik::odbiciePaletka(bool prawa)
 {
 	int rota = ball->GetRotation();
 	int speed = ball->GetSpeed();
 	int pomocna;
-	rodzaj = true;
+	bool paletka = prawa;
 	if(paletka == true)// sprawdza która paletka (true dla prawej)
 	{
 		switch(palecz)
