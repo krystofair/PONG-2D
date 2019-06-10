@@ -1,15 +1,12 @@
 #pragma once
-#include <iostream>
 
+#include <cmath>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+
 #ifndef BALL_H
 #define BALL_H
-//#include "paddle.h"
-#include <stdio.h> 
-#include <stdlib.h>  
-#include <math.h>
 
 class Ball
 {
@@ -26,7 +23,10 @@ public:
 	sf::Vector2f GetSize();
 	void Rest();
 	void Bounce(int a, int b);
-	//bool DetectCollision(Paddle p);
+	/// Wykrywanie kolizji z banda.
+	bool DetectCollision();
+	/// WYkrywanie kolizji z rakiet¹.
+	bool DetectCollision(Rakieta* r);
 	int GetSpeed();
 	int GetRotation();
 	void SetSpeed(int x);

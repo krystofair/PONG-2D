@@ -92,6 +92,12 @@ public:
 	 */
 	void move();
 
+	/**
+	 * przesuwanie rakiety do ustalonego miejsca
+	 * w okreslonym czasie.
+	 */
+	void move(float sekundy);
+
 	/// override method from drawable to draw rakieta on the screen
 	void draw(sf::RenderTarget& rt, sf::RenderStates states = sf::RenderStates::Default) const;
 

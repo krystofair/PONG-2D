@@ -45,6 +45,12 @@ void Rakieta::move()
 	else if(pos_y > lim_y) pos_y -= szybkosc;
 }
 
+void Rakieta::move(float seconds)
+{
+	if(pos_y < lim_y) pos_y += szybkosc*seconds;
+	else if(pos_y > lim_y) pos_y -= szybkosc*seconds;
+}
+
 void Rakieta::draw(sf::RenderTarget & rt, sf::RenderStates states) const
 {
 	auto prostokat = sf::RectangleShape(sf::Vector2f(szerokosc, dlugosc));

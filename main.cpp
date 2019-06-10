@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "plansza.h"
 #include "sterowanie.h"
+#include "silnik.h"
 
 #include "globals.h"
 
@@ -24,47 +25,16 @@ sf::RenderWindow window(
 	sf::VideoMode(screen_width, screen_height), "xPONG 2D"
 );
 
-/*
-
-//fast and furious function - only for test
-bool detectCollision(Ball& b, Rakieta& r)
-{
-	float pktRy = (r.getPozY() + r.getDlugosc())/2;
-	float pktBy = (b.GetPosition().y + b.GetSize().y)/2;
-	float pktRx = (r.getPozX() + r.getSzerokosc())/2;
-	float pktBx = (b.GetPosition().x + b.GetSize().x)/2;
-
-	float dX = pktBx - pktRx;
-	dX = (dX<0) ? -dX : dX;
-	float dY = pktBy - pktRy;
-	dY = (dY<0) ? -dY : dY;
-	if(dY >= (r.getDlugosc()/2 + b.GetSize().y/2) || dX > (r.getSzerokosc()/2 + b.GetSize().x/2))
-		return false;
-	else
-		return true;
-}
-
-bool detectCollision(Ball& b)
-{
-	if(b.GetPosition().y + b.GetSize().y/2 <= 0) return true;
-	else return false;
-	if(b.GetPosition().y + b.GetSize().y/2 >= screen_height) return true;
-	else return false;
-}
-
-struct Silnik{};
-
 struct Trasa
 {
-	Silnik *s;
-	Trasa(float _a, float _b, float(Silnik::*f)(float a, float b, float x), Silnik *sil)
-		: a(_a), b(_b), function_trace(f), s(sil){}
+	Trasa(float _a, float _b, float(*f)(float a, float b, float x))
+		: a(_a), b(_b), function_trace(f){}
 	float a;
 	float b;
-	float (Silnik::*function_trace)(float, float, float);
+	float (*function_trace)(float, float, float);
 	float operator()(float x)
 	{
-		return (s->*function_trace)(a, b, x);
+		return function_trace(a, b, x);
 	}
 };
 
@@ -78,22 +48,37 @@ Trasa wylicz(float a, float b)
 {
 	return Trasa(a, b, prosta);
 }
-*/
 
 int main()
 {
 	float kierunek = 1;
-	float X;
+	float X; 
 	float a=0.5, b=300;
+	bool kolizjaB = false, kolizjaR = false;
+	chrono::steady_clock clk;
+	auto czas_start = clk.now();
 	// wskazniki do wyswietlania
 	Rakieta *r1{nullptr}, *r2{nullptr};
 	IGracz *g1{nullptr}, *g2{nullptr};
 	Ball *ball{nullptr};
 	IMenu* current_menu{nullptr};
+	Silnik silnik;
 	//Trasa trace = wylicz(0,screen_height/2);
 
 	sf::Event event{};
 	//sf::Clock time;
+
+	auto update = [&]{
+		auto czas_stop = clk.now();
+		auto elapsed = chrono::duration<double>(czas_stop-czas_start).count();
+		r1->move(elapsed);
+		r2->move(elapsed);
+		//ball->GetPosition().x = X;
+		// ball move
+		if(!(kolizjaR = ball->DetectCollision(r1) || ball->DetectCollision(r2)))
+			kolizjaB = ball->DetectCollision();
+		czas_start = clk.now();
+	};
 
 	// pocz¹tkowe warunki.
 	stan_gry = STAN::MENU;
@@ -148,35 +133,41 @@ int main()
 			{
 				if(r1 == nullptr || r2 == nullptr || ball == nullptr)
 					throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
-				else
+				window.draw(*r1);
+				window.draw(*r2);
+				ball->Draw(&window);
+				//ball->SetPosition(X, trace(X));
+				//ball->Move(10, 10);
+				auto size = ball->GetSize().x;
+				X += 0.4*a;
+				// sekcja silnika
+				if(kolizjaR)
 				{
-					//r1
-					r1->move();
-					window.draw(*r1);
-					//r2
-					r2->move();
-					window.draw(*r2);
-					//ball
-					ball->Draw(&window);
-					//ball->SetPosition(X, trace(X));
-					//ball->Move(10, 10);
-					auto size = ball->GetSize().x;
-					X += 0.4*kierunek;
-					//if(X > screen_width- 2*size || X < size) kierunek *= -1;
-					/*
-					if(detectCollision(*ball, *r1) || detectCollision(*ball, *r2))
-					{
-						kierunek*=-1;
-						a= -a;
-					}
-					if(detectCollision(*ball))
-					{
-						a =-a;
-						b= -b;
-					}
-					trace = wylicz(a,b);
-					*/
+					siln
 				}
+				if(kolizjaB)
+				{
+
+				}
+				//
+				//
+				
+				update();
+
+				//if(X > screen_width- 2*size || X < size) kierunek *= -1;
+				/*
+				if(detectCollision(*ball, *r1) || detectCollision(*ball, *r2))
+				{
+					kierunek*=-1;
+					a= -a;
+				}
+				if(detectCollision(*ball))
+				{
+					a =-a;
+					b= -b;
+				}
+				trace = wylicz(a,b);
+				*/
 				break;
 			}
 		}

@@ -2,15 +2,17 @@
 using namespace std;
 
 #include "Ball.h"
+#include "globals.h"
 
 Ball::Ball()
 {
-	maxAxisSpeed = 12;
+	//maxAxisSpeed = 12;
 	circleShape.setRadius(10);
 	circleShape.setFillColor(sf::Color::White);
-	GenerateVelocity();
+	//GenerateVelocity();
 }
 
+/*
 float RandomNumber(float Min, float Max)
 {
 	return ((float(rand()) / float(RAND_MAX)) * (Max - Min));
@@ -38,6 +40,7 @@ void Ball::GenerateVelocity()
 	velocity.x = velocity.x * maxAxisSpeed;
 	velocity.y = velocity.y * maxAxisSpeed;
 }
+*/
 
 Ball::~Ball()
 {
@@ -104,25 +107,29 @@ void Ball::SetRotation(int x)
 	if (x < -100) x = -100;
 	rotation = x;
 }
-////////Niby detekcja kolizji//////////
-/*
 
-bool Ball::DetectCollision(Rakieta* p)
+
+bool Ball::DetectCollision(Rakieta* r)
 {
-	if (GetPosition().y > p.GetPosition().y + p.GetSize().y
-		|| GetPosition().y + GetSize().y < p.GetPosition().y
-		|| GetPosition().x > p.GetPosition().x + p.GetSize().x
-		|| GetPosition().x + GetSize().x < p.GetPosition().x)
-	{
-		return false;
-	}
-	else
-	{
-		Bounce(-1, 1);
-	}
+	float pktRy = (r->getPozY() + r->getDlugosc())/2;
+	float pktBy = (GetPosition().y + GetSize().y)/2;
+	float pktRx = (r->getPozX() + r->getSzerokosc())/2;
+	float pktBx = (GetPosition().x + GetSize().x)/2;
 
-	
-	return true;
+	float dX = pktBx - pktRx;
+	dX = (dX<0) ? -dX : dX;
+	float dY = pktBy - pktRy;
+	dY = (dY<0) ? -dY : dY;
+	if(dY >= (r->getDlugosc()/2 + GetSize().y/2) || dX >(r->getSzerokosc()/2 + GetSize().x/2))
+		return false;
+	else
+		return true;
 }
 
-*/
+bool Ball::DetectCollision()
+{
+	if(GetPosition().y + GetSize().y/2 <= 0) return true;
+	else return false;
+	if(GetPosition().y + GetSize().y/2 >= plansza.getHeight()) return true;
+	else return false;
+}

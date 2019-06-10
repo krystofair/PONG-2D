@@ -12,19 +12,24 @@ struct KeysGlobalSet
 };
 
 /// Klasa Plansza jest manad¿erem graczy oraz pi³ki.
+/**
 /// Obiekt tej klasy jest wyexternowany w globals.h
 /// Utrzymuje ona obiekty graczy w odpowiednim stanie.
+**/
 class Plansza
 {
 public:
 	/// Konstruktor przyjmuj¹cy wymiary planszy.
+	/**
 	/// @param width - szerokosc planszy
 	/// @param height - wysokosc planszy.
+	**/
 	Plansza(float _width, float _height) : width(_width), height(_height){}
 
 	/// Pozwala innym obiektom otrzymaæ potrzebnego im gracza, po numerze id.
-	/// id oznacza numer gracza w klasie.
+	/** id oznacza numer gracza w klasie.
 	/// zwraca nullptr je¿eli id jest niew³aœciwe.
+	**/
 	IGracz* getGracz(int id) const
 	{
 		switch(id)
