@@ -7,7 +7,6 @@
 class Silnik
 {
 public:
-	Silnik(Ball* b);
 	Silnik(float x, float y, int kat) : a(x), b(y), alfa(kat) {}
 	float getA() { return a; }
 	float getB() { return b; }
@@ -20,6 +19,10 @@ public:
 	void odbicieBanda(); // silnikbanda nazwa zmieniona. (bez flagi czy dolna czy gorna)
 	void dowolnapaletka(char CzescPaletki);
 
+
+public:
+	/// dostarczenie obiektu pilki do silnika
+	void setBall(Ball* b) { ball = b; }
 private:
 	Ball* ball;
 

@@ -51,7 +51,6 @@ Trasa wylicz(float a, float b)
 
 int main()
 {
-	float kierunek = 1;
 	float X; 
 	float a=0.5, b=300;
 	bool kolizjaB = false, kolizjaR = false;
@@ -109,20 +108,14 @@ int main()
 
 		//drawing
 		window.clear(sf::Color::Black);
-		current_menu = stery.getMenu();
-		g1 = plansza.getGracz(1);
-		g2 = plansza.getGracz(2);
-		if(g1) r1 = g1->getRakieta();
-		if(g2) r2 = g2->getRakieta();
-		ball = plansza.getPilka();
-		
-
 		switch(stan_gry)
 		{
 			case STATE::PAUZA:
+				current_menu = stery.getMenu();
 				window.draw(*dynamic_cast<sf::Drawable*>(current_menu));
 				break;
 			case STATE::MENU:
+				current_menu = stery.getMenu();
 				plansza.deletePilka();
 				plansza.deletePlayer(1);
 				plansza.deletePlayer(2);
@@ -131,6 +124,12 @@ int main()
 				break;
 			case STATE::GRA:
 			{
+				// do nowej funkcji.
+				g1 = plansza.getGracz(1);
+				g2 = plansza.getGracz(2);
+				if(g1) r1 = g1->getRakieta();
+				if(g2) r2 = g2->getRakieta();
+				ball = plansza.getPilka();
 				if(r1 == nullptr || r2 == nullptr || ball == nullptr)
 					throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
 				window.draw(*r1);
@@ -139,15 +138,19 @@ int main()
 				//ball->SetPosition(X, trace(X));
 				//ball->Move(10, 10);
 				auto size = ball->GetSize().x;
-				X += 0.4*a;
+				X += ball->GetSpeed()*silnik.getA(); // kierunek dla prostej.
 				// sekcja silnika
+				silnik.setBall(ball);
 				if(kolizjaR)
 				{
-					siln
+					if(ball->GetPosition().x <= 0) 
+						silnik.odbiciePaletka(false);
+					if(ball->GetPosition().x >= plansza.getWidth()) 
+						silnik.odbiciePaletka(true);
 				}
 				if(kolizjaB)
 				{
-
+					silnik.odbicieBanda();
 				}
 				//
 				//
@@ -156,16 +159,6 @@ int main()
 
 				//if(X > screen_width- 2*size || X < size) kierunek *= -1;
 				/*
-				if(detectCollision(*ball, *r1) || detectCollision(*ball, *r2))
-				{
-					kierunek*=-1;
-					a= -a;
-				}
-				if(detectCollision(*ball))
-				{
-					a =-a;
-					b= -b;
-				}
 				trace = wylicz(a,b);
 				*/
 				break;
