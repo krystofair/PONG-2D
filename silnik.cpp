@@ -2,6 +2,9 @@
 
 #include "silnik.h"
 
+
+Silnik::Silnik(Ball* b) : ball(b) {}
+
 void Silnik::gorapaletkatrue()
 {
 	int predkosc = ball->GetSpeed();

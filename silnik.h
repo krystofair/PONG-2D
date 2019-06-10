@@ -7,6 +7,7 @@
 class Silnik
 {
 public:
+	Silnik(Ball* b);
 	Silnik(float x, float y, int kat) : a(x), b(y), alfa(kat) {}
 	float getA() { return a; }
 	float getB() { return b; }
@@ -32,5 +33,5 @@ private:
 	bool rodzaj; //false - banda, true - rakieta
 	bool paletka{true};
 	bool banda{true};
-	int palecz{1}; // czeœæ paletki 1-up, 2-mid, 4-bottom (1, 0, -1)
+	int palecz{1}; // czeœæ paletki 1-up, 2-mid, 3-bottom (1, 0, -1)
 };
