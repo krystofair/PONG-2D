@@ -57,7 +57,7 @@ void Ball::Draw(sf::RenderWindow* win)
 	win->draw(circleShape);
 }
 
-void Ball::SetPosition(int x, int y)
+void Ball::SetPosition(float x, float y)
 {
 	circleShape.setPosition(x, y);
 }
@@ -79,7 +79,7 @@ sf::Vector2f Ball::GetPosition()
 
 void Ball::Rest()
 {
-	GenerateVelocity();
+	//GenerateVelocity();
 }
 
 void Ball::Bounce(int a, int b)

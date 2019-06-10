@@ -51,8 +51,8 @@ Trasa wylicz(float a, float b)
 
 int main()
 {
-	float X; 
-	float a=0.5, b=300;
+	float X = plansza.getWidth()/2;
+	float Y = plansza.getHeight()/2;
 	bool kolizjaB = false, kolizjaR = false;
 	chrono::steady_clock clk;
 	auto czas_start = clk.now();
@@ -61,7 +61,7 @@ int main()
 	IGracz *g1{nullptr}, *g2{nullptr};
 	Ball *ball{nullptr};
 	IMenu* current_menu{nullptr};
-	Silnik silnik;
+	Silnik silnik(0.5, plansza.getHeight()/2, 0);
 	//Trasa trace = wylicz(0,screen_height/2);
 
 	sf::Event event{};
@@ -70,8 +70,9 @@ int main()
 	auto update = [&]{
 		auto czas_stop = clk.now();
 		auto elapsed = chrono::duration<double>(czas_stop-czas_start).count();
-		r1->move(elapsed);
-		r2->move(elapsed);
+		ball->SetPosition(X, Y);
+		r1->move();
+		r2->move();
 		//ball->GetPosition().x = X;
 		// ball move
 		if(!(kolizjaR = ball->DetectCollision(r1) || ball->DetectCollision(r2)))
@@ -135,10 +136,6 @@ int main()
 				window.draw(*r1);
 				window.draw(*r2);
 				ball->Draw(&window);
-				//ball->SetPosition(X, trace(X));
-				//ball->Move(10, 10);
-				auto size = ball->GetSize().x;
-				X += ball->GetSpeed()*silnik.getA(); // kierunek dla prostej.
 				// sekcja silnika
 				silnik.setBall(ball);
 				if(kolizjaR)
@@ -152,9 +149,9 @@ int main()
 				{
 					silnik.odbicieBanda();
 				}
-				//
-				//
 				
+				X += ball->GetSpeed()*silnik.getA(); // kierunek dla prostej.
+				Y += silnik.getA()*X + silnik.getB(); // prosta
 				update();
 
 				//if(X > screen_width- 2*size || X < size) kierunek *= -1;

@@ -4,6 +4,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "rakieta.h"
+
 
 #ifndef BALL_H
 #define BALL_H
@@ -14,11 +16,11 @@ class Ball
 public:
 	Ball();
 	~Ball();
-	void GenerateVelocity();
+	//void GenerateVelocity();
 	sf::Vector2f GetVelocity();
 	void Move(float x, float y);
 	void Draw(sf::RenderWindow* win);
-	void SetPosition(int x, int y);
+	void SetPosition(float x, float y);
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetSize();
 	void Rest();
