@@ -32,6 +32,7 @@ public:
 	void CalculateBallParams();
 	void CanIBounceBall();
 	void DeleteNode(AiTreeNode*);
+	AiTreeNode *get_child(char part);
 
 	void CreateNextLevel();
 

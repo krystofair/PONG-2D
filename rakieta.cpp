@@ -34,7 +34,7 @@ float Rakieta::getSzybkosc() const { return szybkosc; }
 void Rakieta::moveTo(float lim)
 {
 	lim_y = lim;
-	if(lim_y < dlugosc) lim_y = 0;
+	if(lim_y < 0) lim_y = 0;
 	else if(lim_y > plansza.getHeight()-dlugosc) lim_y = plansza.getHeight()-dlugosc;
 }
 

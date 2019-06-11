@@ -101,39 +101,39 @@ int main()
 
 	while(window.isOpen())
 	{
-		while(window.pollEvent(event))
+		
+		while (window.waitEvent(event))
 		{
-			if(event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
-			else if(event.type == sf::Event::KeyPressed)
+			else if (event.type == sf::Event::KeyPressed)
 			{
-				switch(stan_gry)
+				switch (stan_gry)
 				{
-					case STATE::PAUZA:
-					case STATE::MENU:
-						stery.menus(event);
-						break;
-					case STATE::GRA:
-						stery.games(event);
-						break;
+				case STATE::PAUZA:
+				case STATE::MENU:
+					stery.menus(event);
+					break;
+				case STATE::GRA:
+					stery.games(event);
+					break;
 				}
 			}
-		}
 
-		//drawing
-		window.clear(sf::Color::Black);
-		current_menu = stery.getMenu();
-		g1 = plansza.getGracz(1);
-		g2 = plansza.getGracz(2);
-		if(g1) r1 = g1->getRakieta();
-		if(g2) r2 = g2->getRakieta();
-		ball = plansza.getPilka();
-		
+			//drawing
+			window.clear(sf::Color::Black);
+			current_menu = stery.getMenu();
+			g1 = plansza.getGracz(1);
+			g2 = plansza.getGracz(2);
+			if (g1) r1 = g1->getRakieta();
+			if (g2) r2 = g2->getRakieta();
+			ball = plansza.getPilka();
 
-		switch(stan_gry)
-		{
+
+			switch (stan_gry)
+			{
 			case STATE::PAUZA:
 				window.draw(*dynamic_cast<sf::Drawable*>(current_menu));
 				break;
@@ -141,12 +141,12 @@ int main()
 				plansza.deletePilka();
 				plansza.deletePlayer(1);
 				plansza.deletePlayer(2);
-				X = screen_width/2;
+				X = screen_width / 2;
 				window.draw(*dynamic_cast<sf::Drawable*>(current_menu));
 				break;
 			case STATE::GRA:
 			{
-				if(r1 == nullptr || r2 == nullptr || ball == nullptr)
+				if (r1 == nullptr || r2 == nullptr || ball == nullptr)
 					throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
 				else
 				{
@@ -179,8 +179,10 @@ int main()
 				}
 				break;
 			}
+			
+			}
+			window.display();
 		}
-		window.display();
 	}
 	return 0;
 }
