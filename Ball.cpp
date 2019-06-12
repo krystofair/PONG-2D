@@ -87,21 +87,21 @@ void Ball::Bounce(int a, int b)
 	velocity = sf::Vector2f(velocity.x * a, velocity.y * b);
 }
 
-int Ball::GetSpeed()
+float Ball::GetSpeed()
 {
 	return speed;
 }
 
-int Ball::GetRotation()
+float Ball::GetRotation()
 {
 	return rotation;
 }
-void Ball::SetSpeed(int x)
+void Ball::SetSpeed(float x)
 {
 	if (x > 1000) x = 1000;
 	speed = x;
 }
-void Ball::SetRotation(int x)
+void Ball::SetRotation(float x)
 {
 	if (x > 100) x = 100;
 	if (x < -100) x = -100;

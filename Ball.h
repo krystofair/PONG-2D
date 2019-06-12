@@ -29,10 +29,10 @@ public:
 	bool DetectCollision();
 	/// WYkrywanie kolizji z rakiet¹.
 	bool DetectCollision(Rakieta* r);
-	int GetSpeed();
-	int GetRotation();
-	void SetSpeed(int x);
-	void SetRotation(int x);
+	float GetSpeed();
+	float GetRotation();
+	void SetSpeed(float x);
+	void SetRotation(float x);
 private:
 
 	sf::CircleShape circleShape;
