@@ -2,7 +2,7 @@
 
 
 #include "AI.h"
-#include "Silnik.cpp"
+
 AiTreeNode::AiTreeNode()
 {
 	up = nullptr;
@@ -114,13 +114,14 @@ AiTreeNode::~AiTreeNode()//destruktor drzewa
 
 
 
-bool AiTreeNode::get_can()//destruktor drzewa
+bool AiTreeNode::get_can()
 {
 	return this->can;
 }
 
-void StartAI()
+void AI::StartAI()
 {
+
 	AiTreeNode* root = create_root();
 	root->CalculateBallTargetPosition();
 	root->CanIBounceBall();
