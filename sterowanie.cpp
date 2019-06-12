@@ -9,7 +9,7 @@ void Sterowanie::menus(sf::Event& e)
 {
 	/* jeśli nie ma obiektu menu, a stan gry jest w stanie MENU to wystąpi błąd. */
 	if(imenu == nullptr) throw("brakuje menu");
-	auto zaz = imenu->getZaz();
+ 	auto zaz = imenu->getZaz();
 	switch(e.key.code)
 	{
 		
