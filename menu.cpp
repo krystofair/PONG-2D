@@ -54,7 +54,7 @@ void StartOnePlayer::execute()
 	Rakieta* rh = new Rakieta(786, middle, 10, 100); // rakieta dla human.
 	auto gracz1 = plansza.createPlayer(rh, 1);
 	
-	plansza.createPlayer(rsi, 3);
+	//plansza.createPlayer(rsi, 3);
 	stery.setGracz(static_cast<Gracz*>(gracz1), 1);
 	plansza.createPilka();
 	stery.zwolnijMenu();
