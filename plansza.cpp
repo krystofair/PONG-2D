@@ -1,5 +1,5 @@
 #include "plansza.h"
-
+#include "AI.h"
 
 IGracz* Plansza::createPlayer(Rakieta* r, int id)
 {

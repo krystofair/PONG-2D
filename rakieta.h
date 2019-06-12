@@ -17,7 +17,7 @@ public:
 			float y,
 			float szer,
 			float dl)
-		: pos_x(x), pos_y(y), szerokosc(szer), dlugosc(dl), lim_y(y), szybkosc(0.3){}
+		: pos_x(x), pos_y(y), szerokosc(szer), dlugosc(dl), lim_y(y), szybkosc(0.5){}
 
     /**
      * Ustawia pozycje rakiety. Gdzie zostanie wyświetlona na ekranie.
