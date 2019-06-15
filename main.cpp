@@ -85,17 +85,17 @@ void game_loop()
 		throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
 	while(stan_gry == STAN::GRA)
 	{
-		while(window.pollEvent(event))
+		
+		while (window.pollEvent(event))
 		{
-			if(event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
-			else if(event.type == sf::Event::KeyPressed)
+			else if (event.type == sf::Event::KeyPressed)
 			{
 				stery.games(event);
 			}
-		}
 
 		window.clear(sf::Color::Black);
 		window.draw(*r1);

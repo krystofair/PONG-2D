@@ -10,21 +10,17 @@
 /**
  * Klasa Rakieta reprezentująca obiekt rakiety na ekranie.
  */
-class Rakieta : public sf::Drawable
+class Rakieta : public sf::RectangleShape
 {
 public:
     Rakieta(float x,
 			float y,
 			float szer,
 			float dl)
-		: pos_x(x), pos_y(y), szerokosc(szer), dlugosc(dl), lim_y(y), szybkosc(0.5){}
-
-    /**
-     * Ustawia pozycje rakiety. Gdzie zostanie wyświetlona na ekranie.
-     * @param x: pozycja na osi odciętych.
-     * @param y: pozycja na osi rzędnych.
-     */
-    inline void setPozycja(float x, float y);
+		: sf::RectangleShape(sf::Vector2f(szer,dl)), lim_y(y), szybkosc(0.5)	{
+		setPosition(x, y);
+		setFillColor(sf::Color::White);
+	}
 
     /**
      * Metoda ustawiająca pozycje na osi X.
@@ -97,18 +93,10 @@ public:
 	 * w okreslonym czasie.
 	 */
 	void move(float sekundy);
-
-	/// override method from drawable to draw rakieta on the screen
-	void draw(sf::RenderTarget& rt, sf::RenderStates states = sf::RenderStates::Default) const;
-
 public:
 	float lim_y;
 
 private:
-    float pos_x;
-    float pos_y;
-	float dlugosc;
-	float szerokosc;
 	float szybkosc;
 };
 
