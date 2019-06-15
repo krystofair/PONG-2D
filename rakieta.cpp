@@ -54,4 +54,5 @@ void Rakieta::move()
 	//if(pos_y == lim_y);
 	if(pos_y < lim_y) pos_y += szybkosc;
 	else if(pos_y > lim_y) pos_y -= szybkosc;
+	setPosition(pos_x, pos_y);
 }

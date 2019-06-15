@@ -86,16 +86,17 @@ void game_loop()
 	while(stan_gry == STAN::GRA)
 	{
 		
-		while (window.pollEvent(event))
+		while(window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if(event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
-			else if (event.type == sf::Event::KeyPressed)
+			else if(event.type == sf::Event::KeyPressed)
 			{
 				stery.games(event);
 			}
+		}
 
 		window.clear(sf::Color::Black);
 		window.draw(*r1);
@@ -120,14 +121,14 @@ void game_loop()
 		*/
 	}
 }
-#include <fstream>
+
 int main()
 {
 	window.setFramerateLimit(100);
 	//thread si_thread(StartAi)
 	IMenu* current_menu{nullptr};
 	
-	ofstream logfile("pong.log");
+	//ofstream logfile("pong.log");
 	// pocz¹tkowe warunki.
 	stan_gry = STAN::MENU;
 	stery.setMenu(new MainMenu());
@@ -145,7 +146,7 @@ int main()
 					stery.menus(event);
 				}
 
-				logfile << "[!] przed if(stan_gry == STAN::GRA)" << endl;
+				//logfile << "[!] przed if(stan_gry == STAN::GRA)" << endl;
 
 				if(stan_gry == STAN::GRA)
 				{
@@ -167,6 +168,6 @@ int main()
 				window.display();
 			}
 	}
-	logfile.close();
+	//logfile.close();
 	return 0;
 }
