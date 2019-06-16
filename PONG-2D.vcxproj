@@ -160,7 +160,10 @@
     <None Include="globals.h" />
     <None Include="gameapp.h" />
     <None Include="README.MD" />
-    <None Include="silnik.cpp" />
+    <ClCompile Include="silnik.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
     <None Include="silnik.h" />
     <None Include="silnik_before_refaktor.h" />
   </ItemGroup>

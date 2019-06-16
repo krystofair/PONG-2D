@@ -203,9 +203,7 @@ void ZmienSterowanie::execute()
 	};
 	auto odznacz = [&]{
 		for(auto& item : texts)
-		//std::for_each(texts, texts+4, [](auto& item){
 			if(item.getFillColor() == sf::Color::Red) item.setFillColor(sf::Color::White);
-		//});
 	};
 	window.clear(sf::Color::Black);
 	int index = 0;
