@@ -68,8 +68,8 @@ void StartTwoPlayer::execute()
 	auto middle = plansza.getHeight()/2-50;
 	auto rakieta1 = new Rakieta(786, middle, 10, 100); // rakieta dla pierwszego gracza.
 	auto rakieta2 = new Rakieta(4, middle, 10, 100); // rakieta dla drugiego gracza.
-	auto g1 = plansza.createPlayer(rakieta2, 1);
-	auto g2 = plansza.createPlayer(rakieta1, 2);
+	auto g1 = plansza.createPlayer(rakieta1, 1);
+	auto g2 = plansza.createPlayer(rakieta2, 2);
 	static_cast<Gracz*>(g1)->loadKeyboardSet();
 	static_cast<Gracz*>(g2)->loadKeyboardSet();
 	stery.setGracz(static_cast<Gracz*> (g1), 1);
