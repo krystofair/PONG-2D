@@ -43,8 +43,10 @@ public:
 	IGracz* createPlayer(Rakieta* r, int id);
 
 	/// Usuwanie instancji graczy. Rozró¿nia tylko dwie liczby id: 1 oraz 2
-	/** id = 1 usuwa gracza z numerem 1 w klasie,
-	/// id = 2 analogicznie z numerem 2. */
+	/**
+	/// id = 1 usuwa gracza z numerem 1 w klasie,
+	/// id = 2 analogicznie z numerem 2. 
+	**/
 	void deletePlayer(int id);
 
 	/// Zwraca obiekt pilki dla klas.

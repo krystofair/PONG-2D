@@ -26,41 +26,17 @@ sf::RenderWindow window(
 	sf::VideoMode(screen_width, screen_height), "xPONG 2D"
 );
 
-
-struct Trasa
-{
-	Trasa(float _a, float _b, float(*f)(float a, float b, float x))
-		: a(_a), b(_b), function_trace(f){}
-	float a;
-	float b;
-	float (*function_trace)(float, float, float);
-	float operator()(float x)
-	{
-		return function_trace(a, b, x);
-	}
-};
-
-
-float prosta(float a, float b, float x)
-{
-	return (a*x + b)-200;
-}
-
-Trasa wylicz(float a, float b)
-{
-	return Trasa(a, b, prosta);
-}
 sf::Event event{};
 
 void game_loop()
 {
-	//window.setFramerateLimit(25);
+	window.setFramerateLimit(30);
 	float X = plansza.getWidth()/2;
 	float Y = plansza.getHeight()/2;
 	chrono::steady_clock clk;
 	auto czas_start = clk.now();
 	// wskazniki do wyswietlania
-	Rakieta *r1{nullptr}, *r2{nullptr};
+	Rakieta *r1{nullptr}, *r2{nullptr}; // r1-rakieta tylko gracza, r2- albo albo.
 	IGracz *g1{nullptr}, *g2{nullptr};
 	Ball *ball{nullptr};
 	Silnik silnik(0.5, plansza.getHeight()/2, 0);
@@ -69,11 +45,11 @@ void game_loop()
 		auto czas_stop = clk.now();
 		auto elapsed = chrono::duration<double>(czas_stop-czas_start).count();
 		ball->SetPosition(X, Y);
-		r1->move();
-		r2->move();
+		r1->move(elapsed);
+		r2->move(elapsed);
 		//ball->GetPosition().x = X;
 		// ball move
-		
+		//X += ball->GetSpeed()*elapsed;
 		czas_start = clk.now();
 	};
 	g1 = plansza.getGracz(1);
@@ -108,11 +84,20 @@ void game_loop()
 		if(ball->DetectCollision(r1))
 		{
 			if(g2->checkSI()) static_cast<AI*>(g2)->StartAI();
+			silnik.odbiciePaletka(r1->getStrona());
+		}
+		else if(ball->DetectCollision(r2))
+		{
+			silnik.odbiciePaletka(r2->getStrona());
+		}
+		else
+		{
+			silnik.odbicieBanda();
 		}
 
 
-		X += ball->GetSpeed()*0.1; // kierunek dla prostej.
-		Y += silnik.getA()*X + silnik.getB(); // prosta
+		//X += ball->GetSpeed(); // kierunek dla prostej.
+		//Y += silnik.getA()*X + silnik.getB(); // prosta
 		update();
 
 		//if(X > screen_width- 2*size || X < size) kierunek *= -1;
@@ -124,7 +109,7 @@ void game_loop()
 
 int main()
 {
-	window.setFramerateLimit(100);
+	window.setFramerateLimit(35);
 	//thread si_thread(StartAi)
 	IMenu* current_menu{nullptr};
 	

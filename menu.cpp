@@ -52,7 +52,9 @@ void StartOnePlayer::execute()
 {
 	auto middle = plansza.getHeight()/2-50;
 	Rakieta* rsi = new Rakieta(4, middle, 10, 100); // rakieta dla si.
+	rsi->setStrona(false);
 	Rakieta* rh = new Rakieta(786, middle, 10, 100); // rakieta dla human.
+	rh->setStrona(true);
 	auto gracz1 = plansza.createPlayer(rh, 1);
 	
 	plansza.createPlayer(rsi, 3);
@@ -68,6 +70,8 @@ void StartTwoPlayer::execute()
 	auto middle = plansza.getHeight()/2-50;
 	auto rakieta1 = new Rakieta(786, middle, 10, 100); // rakieta dla pierwszego gracza.
 	auto rakieta2 = new Rakieta(4, middle, 10, 100); // rakieta dla drugiego gracza.
+	rakieta1->setStrona(true);
+	rakieta2->setStrona(false);
 	auto g1 = plansza.createPlayer(rakieta1, 1);
 	auto g2 = plansza.createPlayer(rakieta2, 2);
 	static_cast<Gracz*>(g1)->loadKeyboardSet();

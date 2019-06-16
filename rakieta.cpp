@@ -56,3 +56,23 @@ void Rakieta::move()
 	else if(pos_y > lim_y) pos_y -= szybkosc;
 	setPosition(pos_x, pos_y);
 }
+
+void Rakieta::move(double seconds)
+{
+	auto pos_x = getPozX();
+	auto pos_y = getPozY();
+	if(abs(pos_y-lim_y) < 5) return;
+	if(pos_y < lim_y) pos_y += szybkosc*seconds;
+	else if(pos_y > lim_y) pos_y -= szybkosc*seconds;
+	setPosition(pos_x, pos_y);
+}
+
+bool Rakieta::getStrona() const
+{
+	return prawa;
+}
+
+void Rakieta::setStrona(bool _prawa)
+{
+	prawa = _prawa;
+}

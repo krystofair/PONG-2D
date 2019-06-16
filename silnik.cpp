@@ -239,3 +239,9 @@ void Silnik::odbiciePaletka(bool prawa)
 	ball->SetSpeed(speed);
 	ball->SetRotation(rota);
 }
+
+Silnik::Silnik(float _a, float _b, int kat) : a(_a), b(_b), alfa(kat){}
+
+float Silnik::getA() const { return a; }
+float Silnik::getB() const { return b; }
+int Silnik::getAlfa() const { return alfa; }

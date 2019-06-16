@@ -1,16 +1,17 @@
 #pragma once
-#include <cmath>
 #include "Ball.h"
+
 #define part_up 1
 #define part_middle  0
 #define part_down -1
+
 class Silnik
 {
 public:
-	Silnik(float x, float y, int kat) : a(x), b(y), alfa(kat) {}
-	float getA() { return a; }
-	float getB() { return b; }
-	int getAlfa() { return alfa; }
+	Silnik(float x, float y, int kat);
+	float getA() const;
+	float getB() const;
+	int getAlfa() const;
 	void prosta();
 	void gorapaletkatrue();
 	void srodkowapaletka();
