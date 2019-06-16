@@ -71,7 +71,7 @@ class ZmienSterowanie : public ICommand
 {
 public:
 	ZmienSterowanie(){}
-	void execute(){};
+	void execute();
 };
 
 /// Wyświetlanie tablicy wynikow najlepszych graczy.

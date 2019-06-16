@@ -10,7 +10,10 @@ IGracz* Plansza::createPlayer(Rakieta* r, int id)
 	}
 	else
 	{
-		if(id == 2) gracz2 = new Gracz(r, id);
+		if(id == 2)
+		{
+			gracz2 = new Gracz(r, id);
+		}
 		else if(id == 3) gracz2 = new AI(r);
 		return gracz2;
 	}

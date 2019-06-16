@@ -3,14 +3,6 @@
 #include "gracz.h"
 #include "Ball.h"
 
-struct KeysGlobalSet
-{
-	Klawisz up = Klawisz::Unknown;
-	Klawisz down = Klawisz::Unknown;
-	Klawisz left = Klawisz::Unknown;
-	Klawisz right = Klawisz::Unknown;
-};
-
 /// Klasa Plansza jest manad¿erem graczy oraz pi³ki.
 /**
 /// Obiekt tej klasy jest wyexternowany w globals.h
@@ -76,9 +68,9 @@ public:
 	float getHeight() const { return height; }
 
 private:
-	IGracz* gracz1;
-	IGracz* gracz2;
-	Ball* pilka;
+	IGracz* gracz1{nullptr};
+	IGracz* gracz2{nullptr};
+	Ball* pilka{nullptr};
 private:
 	float width;
 	float height;
