@@ -85,31 +85,15 @@ AiTreeNode* create_root()
 	return root;
 }
 
-void AiTreeNode::DeleteNode(AiTreeNode* i)
-{
-	if (up != nullptr)
-		DeleteNode(up);
-	delete up;
-	if (middle != nullptr)
-		DeleteNode(middle);
-	delete middle;
-	if (down != nullptr)
-		DeleteNode(down);
-	delete down;
-	
-}
 
 AiTreeNode::~AiTreeNode()//destruktor drzewa
 {
 	if (up != nullptr)
-		DeleteNode(up);
-	delete up;
+		delete up;
 	if (middle != nullptr)
-		DeleteNode(middle);
-	delete middle;
+		delete middle;
 	if (down != nullptr)
-		DeleteNode(down);
-	delete down;
+		delete down;
 }
 AiTreeNode* AiTreeNode::get_child(char part)
 {
