@@ -104,14 +104,14 @@ void game_loop()
 		if(ball->DetectCollision(r1))
 		{
 			if(g2->checkSI()) static_cast<AI*>(g2)->StartAI();
-			silnik.setPalecz(trafionaCzesc(r1->getStrona()));
+			silnik.setCzesc(trafionaCzesc(r1->getStrona()));
 			silnik.odbiciePaletka(r1->getStrona());
 
 		}
 		else if(ball->DetectCollision(r2))
 		{
 			//if(g1->checkSI()) static_cast<AI*>(g1)->StartAI();
-			silnik.setPalecz(trafionaCzesc(r2->getStrona()));
+			silnik.setCzesc(trafionaCzesc(r2->getStrona()));
 			silnik.odbiciePaletka(r2->getStrona());
 		}
 		else

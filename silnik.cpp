@@ -205,7 +205,7 @@ void Silnik::odbiciePaletka(bool prawa)
 	}
 	else
 	{
-		switch(czesc_rakieta)
+		switch(czesc_rakiety)
 		{
 			case 1:
 			{
