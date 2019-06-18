@@ -180,6 +180,9 @@ void Silnik::odbiciePaletka(bool prawa)
 	int speed = ball->GetSpeed();
 	int pomocna;
 	bool paletka = prawa;
+
+	//dowolnapaletka(czesc_rakiety);
+
 	if(paletka == true)// sprawdza która paletka (true dla prawej)
 	{
 		switch(czesc_rakiety)

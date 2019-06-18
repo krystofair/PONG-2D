@@ -42,23 +42,15 @@ void game_loop()
 	Ball *ball{nullptr};
 	Silnik silnik(0.5, plansza.getHeight()/2, 0);
 
-	auto trafionaCzesc = [&](bool which)->int{
+	auto trafionaCzesc = [&](Rakieta* r)->int{
 		float yr = 0.0;
 		float dl = 0.0;
-		if(which == true)
-		{
-			yr = r1->getPozY();
-			dl = r1->getDlugosc();
-		}
-		else
-		{
-			yr = r2->getPozY();
-			dl = r2->getDlugosc();
-		}
 		float yb = ball->GetPosition().y;
-		if(yb <= dl/3) return part_up;
-		else if(yb > dl/3 && yb < 2*dl/3) return part_middle;
-		else if(yb > 2*dl/3) return part_down;
+		yr = r->getPozY();
+		dl = r->getDlugosc();
+		if(yb <= dl/3) return 1; // part_up
+		else if(yb > dl/3 && yb < 2*dl/3) return 2; // part_middle
+		else if(yb > 2*dl/3) return 3; // part_down
 	};
 
 	auto update = [&]{
@@ -104,14 +96,14 @@ void game_loop()
 		if(ball->DetectCollision(r1))
 		{
 			if(g2->checkSI()) static_cast<AI*>(g2)->StartAI();
-			silnik.setCzesc(trafionaCzesc(r1->getStrona()));
+			silnik.setCzesc(trafionaCzesc(r1));
 			silnik.odbiciePaletka(r1->getStrona());
 
 		}
 		else if(ball->DetectCollision(r2))
 		{
 			//if(g1->checkSI()) static_cast<AI*>(g1)->StartAI();
-			silnik.setCzesc(trafionaCzesc(r2->getStrona()));
+			silnik.setCzesc(trafionaCzesc(r2));
 			silnik.odbiciePaletka(r2->getStrona());
 		}
 		else
