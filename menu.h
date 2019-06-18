@@ -12,19 +12,19 @@
 #ifndef PONG_MENU_H
 #define PONG_MENU_H
 
-/** 
-* Klasa MainMenu jest implementacją głównego menu, które jest wyświetlane na początku.
-* Klasa dziedziczy po interfejsie `IMenu` więc znane jest przeznaczenie jej metod.
-* U dokumentowane są metody, które nie zostały nadpisane z interfejsu.
-* Opcje menu są przechowywane w kontenerze z biblioteki standardowej tj. std::list
-*/
-/// Details description
+
+/// Klasa MainMenu jest implementacją głównego menu, które jest wyświetlane na początku.
+/**
+/// Klasa dziedziczy po interfejsie `IMenu` więc znane jest przeznaczenie jej metod.
+/// U dokumentowane są metody, które nie zostały nadpisane z klasy bazowej.
+/// Opcje menu są przechowywane w kontenerze z biblioteki standardowej tj. std::list
 /// Menu zawiera opcje takie jak:
 /// Start gry z sztuczną inteligencją,
 /// Start gry z drugim człowiekiem,
 /// Zmiane ustawień klawiszy,
 /// Pokazanie wyników w top10,
 /// Wyjście z programu.
+**/
 class MainMenu : public IMenu, public sf::Drawable
 {
 public:
@@ -36,9 +36,14 @@ protected:
     sf::Font font;
 };
 
+/// Klasa przedstawiająca menu pauzy w grze.
 /**
- * Klasa przedstawiająca menu pauzy w grze.
- */
+/// Menu Pauzy posiada opcje:
+/// - Odpauzuj gre.
+/// - ZmienSterowanie.
+/// - Powrót do MenuGłównego
+/// - Wyjście z gry.
+**/
 class PauseMenu : public IMenu, public sf::Drawable
 {
 public:
@@ -49,6 +54,10 @@ protected:
 private:
 	sf::Font font;
 };
+
+////////////////////////////////////////////////////////////////
+//////////POLECENIA/////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 /// Polecenie rozpoczęcia gry z jednym graczem;
 class StartOnePlayer : public ICommand
@@ -71,7 +80,7 @@ class ZmienSterowanie : public ICommand
 {
 public:
 	ZmienSterowanie(){}
-	void execute(){};
+	void execute();
 };
 
 /// Wyświetlanie tablicy wynikow najlepszych graczy.
@@ -100,8 +109,8 @@ public:
 
 /// Wyjście z gry
 /**
-* Polecenie zwolni wszystkie zasoby pobrane przez program.
-*/
+/// Polecenie zwolni wszystkie zasoby pobrane przez program.
+ */
 class Wyjscie : public ICommand
 {
 private:
@@ -109,6 +118,13 @@ private:
 public:
 	Wyjscie(IMenu* im) 
 		: imenu(im){};
+	void execute();
+};
+
+class Help : public ICommand
+{
+public:
+	Help() = default;
 	void execute();
 };
 

@@ -2,7 +2,7 @@
 
 
 #include "AI.h"
-#include "Silnik.cpp"
+
 AiTreeNode::AiTreeNode()
 {
 	up = nullptr;
@@ -111,29 +111,37 @@ AiTreeNode::~AiTreeNode()//destruktor drzewa
 		DeleteNode(down);
 	delete down;
 }
+AiTreeNode* AiTreeNode::get_child(char part)
+{
+	switch (part)
+	{
+	case part_up: return up;
+	case part_middle: return middle;
+	case part_down: return down;
+	}
+
+}
 
 
-
-bool AiTreeNode::get_can()//destruktor drzewa
+bool AiTreeNode::get_can()
 {
 	return this->can;
 }
 
-void StartAI()
+void AI::StartAI()
 {
-	AiTreeNode* root = create_root();
+	/*AiTreeNode* root = create_root();
 	root->CalculateBallTargetPosition();
 	root->CanIBounceBall();
 
 	if (root->get_can())
 	{
 		root->CreateNextLevel();
-//		root->up.CalculateBallParams()
-
+		root->get_child(up)->
 
 
 	}
-
+	*/
 }
 
 

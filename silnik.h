@@ -1,17 +1,17 @@
 #pragma once
-#include <cmath>
 #include "Ball.h"
+
 #define part_up 1
 #define part_middle  0
 #define part_down -1
+
 class Silnik
 {
 public:
-	Silnik(Ball* b);
-	Silnik(float x, float y, int kat) : a(x), b(y), alfa(kat) {}
-	float getA() { return a; }
-	float getB() { return b; }
-	int getAlfa() { return alfa; }
+	Silnik(float x, float y, int kat);
+	float getA() const;
+	float getB() const;
+	int getAlfa() const;
 	void prosta();
 	void gorapaletkatrue();
 	void srodkowapaletka();
@@ -19,7 +19,12 @@ public:
 	void odbiciePaletka(bool prawa); // silnikpaletka nazwa zmieniona
 	void odbicieBanda(); // silnikbanda nazwa zmieniona. (bez flagi czy dolna czy gorna)
 	void dowolnapaletka(char CzescPaletki);
+	void setPalecz(int);
 
+
+public:
+	/// dostarczenie obiektu pilki do silnika
+	void setBall(Ball* b) { ball = b; }
 private:
 	Ball* ball;
 
@@ -30,5 +35,5 @@ private:
 	int bs{50}; // basic speed
 	int br{15}; // basic rotation
 	// jakies pomocnicze.
-	int palecz{1}; // czeœæ paletki 1-up, 2-mid, 3-bottom (1, 0, -1)
+	int palecz{2}; // czeœæ paletki 1-up, 2-mid, 3-bottom (1, 0, -1)
 };

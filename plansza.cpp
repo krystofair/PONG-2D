@@ -1,5 +1,5 @@
 #include "plansza.h"
-
+#include "AI.h"
 
 IGracz* Plansza::createPlayer(Rakieta* r, int id)
 {
@@ -10,8 +10,11 @@ IGracz* Plansza::createPlayer(Rakieta* r, int id)
 	}
 	else
 	{
-		if(id == 2) gracz2 = new Gracz(r, id);
-		else if(id == 3) gracz2 = new IGracz(r);
+		if(id == 2)
+		{
+			gracz2 = new Gracz(r, id);
+		}
+		else if(id == 3) gracz2 = new AI(r);
 		return gracz2;
 	}
 }

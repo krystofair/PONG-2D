@@ -3,28 +3,25 @@
 #include "gracz.h"
 #include "Ball.h"
 
-struct KeysGlobalSet
-{
-	Klawisz up = Klawisz::Unknown;
-	Klawisz down = Klawisz::Unknown;
-	Klawisz left = Klawisz::Unknown;
-	Klawisz right = Klawisz::Unknown;
-};
-
 /// Klasa Plansza jest manad¿erem graczy oraz pi³ki.
+/**
 /// Obiekt tej klasy jest wyexternowany w globals.h
 /// Utrzymuje ona obiekty graczy w odpowiednim stanie.
+**/
 class Plansza
 {
 public:
 	/// Konstruktor przyjmuj¹cy wymiary planszy.
+	/**
 	/// @param width - szerokosc planszy
 	/// @param height - wysokosc planszy.
+	**/
 	Plansza(float _width, float _height) : width(_width), height(_height){}
 
 	/// Pozwala innym obiektom otrzymaæ potrzebnego im gracza, po numerze id.
-	/// id oznacza numer gracza w klasie.
+	/** id oznacza numer gracza w klasie.
 	/// zwraca nullptr je¿eli id jest niew³aœciwe.
+	**/
 	IGracz* getGracz(int id) const
 	{
 		switch(id)
@@ -46,8 +43,10 @@ public:
 	IGracz* createPlayer(Rakieta* r, int id);
 
 	/// Usuwanie instancji graczy. Rozró¿nia tylko dwie liczby id: 1 oraz 2
-	/** id = 1 usuwa gracza z numerem 1 w klasie,
-	/// id = 2 analogicznie z numerem 2. */
+	/**
+	/// id = 1 usuwa gracza z numerem 1 w klasie,
+	/// id = 2 analogicznie z numerem 2. 
+	**/
 	void deletePlayer(int id);
 
 	/// Zwraca obiekt pilki dla klas.
@@ -71,9 +70,9 @@ public:
 	float getHeight() const { return height; }
 
 private:
-	IGracz* gracz1;
-	IGracz* gracz2;
-	Ball* pilka;
+	IGracz* gracz1{nullptr};
+	IGracz* gracz2{nullptr};
+	Ball* pilka{nullptr};
 private:
 	float width;
 	float height;
