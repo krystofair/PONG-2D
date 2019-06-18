@@ -35,11 +35,6 @@ sf::Vector2f Ball::GetSize()
 	return sf::Vector2f(circleShape.getLocalBounds().width, circleShape.getLocalBounds().height);
 }
 
-sf::Vector2f Ball::GetVelocity()
-{
-	return velocity;
-}
-
 sf::Vector2f Ball::GetPosition()
 {
 	return circleShape.getPosition();
