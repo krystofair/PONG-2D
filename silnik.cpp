@@ -182,7 +182,7 @@ void Silnik::odbiciePaletka(bool prawa)
 	bool paletka = prawa;
 	if(paletka == true)// sprawdza która paletka (true dla prawej)
 	{
-		switch(palecz)
+		switch(czesc_rakiety)
 		{
 			case 1:
 			{
@@ -205,7 +205,7 @@ void Silnik::odbiciePaletka(bool prawa)
 	}
 	else
 	{
-		switch(palecz)
+		switch(czesc_rakieta)
 		{
 			case 1:
 			{
@@ -246,4 +246,4 @@ float Silnik::getA() const { return a; }
 float Silnik::getB() const { return b; }
 int Silnik::getAlfa() const { return alfa; }
 
-void Silnik::setPalecz(int czesc) { palecz = czesc; }
+void Silnik::setCzesc(int czesc) { czesc_rakiety = czesc; }

@@ -19,7 +19,7 @@ public:
 	void odbiciePaletka(bool prawa); // silnikpaletka nazwa zmieniona
 	void odbicieBanda(); // silnikbanda nazwa zmieniona. (bez flagi czy dolna czy gorna)
 	void dowolnapaletka(char CzescPaletki);
-	void setPalecz(int);
+	void setCzesc(int);
 
 
 public:
@@ -35,5 +35,5 @@ private:
 	int bs{50}; // basic speed
 	int br{15}; // basic rotation
 	// jakies pomocnicze.
-	int palecz{2}; // czeœæ paletki 1-up, 2-mid, 3-bottom (1, 0, -1)
+	int czesc_rakiety{2}; // czeœæ paletki 1-up, 2-mid, 3-bottom (1, 0, -1)
 };
