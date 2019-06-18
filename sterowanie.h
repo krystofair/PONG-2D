@@ -36,7 +36,6 @@ public:
 	/// Menu przekazywane jest w celu wysyłania komunikatów typu którą opcje
 	/// zaznaczyć, którą odznaczyć oraz którą uruchmić. Wszystkie te metody są
 	/// zadeklarowane w typie IMenu.
-	/// Stan gry w tej klasie jest pobierany z głównej klasy programu GameApp.
 	Sterowanie(Gracz* g1 = nullptr, Gracz* g2 = nullptr, IMenu* menu = nullptr)
 		: gracz1(g1), gracz2(g2), imenu(menu) {}
 
