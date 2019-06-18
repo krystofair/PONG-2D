@@ -16,18 +16,14 @@ class Ball
 public:
 	Ball();
 	~Ball();
-	//void GenerateVelocity();
-	sf::Vector2f GetVelocity();
 	void Move(float x, float y);
 	void Draw(sf::RenderWindow* win);
 	void SetPosition(float x, float y);
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetSize();
-	void Rest();
-	void Bounce(int a, int b);
 	/// Wykrywanie kolizji z banda.
 	bool DetectCollision();
-	/// WYkrywanie kolizji z rakiet¹.
+	/// WYkrywanie kolizji z rakietÂ¹.
 	bool DetectCollision(Rakieta* r);
 	float GetSpeed();
 	float GetRotation();
@@ -36,8 +32,6 @@ public:
 private:
 
 	sf::CircleShape circleShape;
-	sf::Vector2f velocity;
-	int maxAxisSpeed;
 };
 
 #endif
