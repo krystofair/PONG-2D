@@ -128,6 +128,16 @@ bool AiTreeNode::get_can()
 	return this->can;
 }
 
+unsigned AiTreeNode::getMydistance()
+{
+	return this->MyDistance;
+}
+
+unsigned AiTreeNode::getBallTarget()
+{
+	return this->BallTargetPosition;
+}
+
 void AI::StartAI()
 {
 	/*AiTreeNode* root = create_root();
@@ -137,10 +147,26 @@ void AI::StartAI()
 	if (root->get_can())
 	{
 		root->CreateNextLevel();
-		root->get_child(up)->
+		root->get_child(part_up)->CalculateBallParams();
+		root->get_child(part_up)->CalculateBallTargetPosition();
+		
+		root->get_child(part_middle)->CalculateBallParams();
+		root->get_child(part_middle)->CalculateBallTargetPosition();
+	
 
+		root->get_child(part_down)->CalculateBallTargetPosition();
+		root->get_child(part_down)->get_can();
+
+		if (root->get_child(part_up)->getMydistance() > root->get_child(part_middle)->getMydistance())
+		{
+			if (root->get_child(part_up)->getMydistance() > root->get_child(part_down)->getMydistance())
+				//setPaletka(root->getBallTarget+paletka.getDlugosc()/3)
+			else
+				//setPaletka(root->getBallTarget-paletka.getDlugosc()/3)
+		}
 
 	}
+
 	*/
 }
 

@@ -34,8 +34,9 @@ public:
 	void CanIBounceBall();
 	void DeleteNode(AiTreeNode*);
 	AiTreeNode *get_child(char part);
-
+	unsigned getMydistance();
 	void CreateNextLevel();
+	unsigned getBallTarget();
 
 
 };
