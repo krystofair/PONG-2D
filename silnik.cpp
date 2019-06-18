@@ -160,10 +160,6 @@ void Silnik::odbicieBanda()
 		rota = 0;
 	}
 	rota = rota * -1; // odwraca rotacje
-
-
-
-	rota = 0;//musi być aby zawsze byłą prosta
 	if(rota == 0)
 	{
 		prosta(); 
