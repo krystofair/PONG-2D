@@ -305,3 +305,8 @@ void ZmienSterowanie::execute()
 		}
 	}
 }
+
+void Help::execute()
+{
+
+}

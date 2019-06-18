@@ -16,6 +16,7 @@
 
 using namespace std;
 
+
 int screen_width = 800;
 int screen_height = 600;
 
@@ -40,7 +41,26 @@ void game_loop()
 	IGracz *g1{nullptr}, *g2{nullptr};
 	Ball *ball{nullptr};
 	Silnik silnik(0.5, plansza.getHeight()/2, 0);
-	//Trasa trace = wylicz(0,screen_height/2);
+
+	auto trafionaCzesc = [&](bool which)->int{
+		float yr = 0.0;
+		float dl = 0.0;
+		if(which == true)
+		{
+			yr = r1->getPozY();
+			dl = r1->getDlugosc();
+		}
+		else
+		{
+			yr = r2->getPozY();
+			dl = r2->getDlugosc();
+		}
+		float yb = ball->GetPosition().y;
+		if(yb <= dl/3) return part_up;
+		else if(yb > dl/3 && yb < 2*dl/3) return part_middle;
+		else if(yb > 2*dl/3) return part_down;
+	};
+
 	auto update = [&]{
 		auto czas_stop = clk.now();
 		auto elapsed = chrono::duration<double>(czas_stop-czas_start).count();
@@ -84,10 +104,14 @@ void game_loop()
 		if(ball->DetectCollision(r1))
 		{
 			if(g2->checkSI()) static_cast<AI*>(g2)->StartAI();
+			silnik.setPalecz(trafionaCzesc(r1->getStrona()));
 			silnik.odbiciePaletka(r1->getStrona());
+
 		}
 		else if(ball->DetectCollision(r2))
 		{
+			//if(g1->checkSI()) static_cast<AI*>(g1)->StartAI();
+			silnik.setPalecz(trafionaCzesc(r2->getStrona()));
 			silnik.odbiciePaletka(r2->getStrona());
 		}
 		else
@@ -109,7 +133,7 @@ void game_loop()
 
 int main()
 {
-	window.setFramerateLimit(35);
+	window.setFramerateLimit(40);
 	//thread si_thread(StartAi)
 	IMenu* current_menu{nullptr};
 	
@@ -119,6 +143,7 @@ int main()
 	stery.setMenu(new MainMenu());
 	while(window.isOpen())
 	{
+		window.clear(sf::Color::Black);
 			while(window.waitEvent(event))
 			{
 				if(event.type == sf::Event::Closed)
@@ -147,7 +172,6 @@ int main()
 					plansza.deletePlayer(1);
 					plansza.deletePlayer(2);
 				}
-				//X = screen_width/2;
 				window.clear(sf::Color::Black);
 				window.draw(*dynamic_cast<sf::Drawable*>(current_menu));
 				window.display();
