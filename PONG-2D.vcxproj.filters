@@ -39,6 +39,9 @@
     <ClCompile Include="AI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="silnik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gracz.h">
@@ -81,9 +84,6 @@
     </None>
     <None Include="silnik_before_refaktor.h">
       <Filter>Header Files</Filter>
-    </None>
-    <None Include="silnik.cpp">
-      <Filter>Source Files</Filter>
     </None>
     <None Include="silnik.h">
       <Filter>Header Files</Filter>

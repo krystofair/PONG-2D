@@ -10,21 +10,17 @@
 /**
  * Klasa Rakieta reprezentująca obiekt rakiety na ekranie.
  */
-class Rakieta : public sf::Drawable
+class Rakieta : public sf::RectangleShape
 {
 public:
     Rakieta(float x,
 			float y,
 			float szer,
 			float dl)
-		: pos_x(x), pos_y(y), szerokosc(szer), dlugosc(dl), lim_y(y), szybkosc(0.3){}
-
-    /**
-     * Ustawia pozycje rakiety. Gdzie zostanie wyświetlona na ekranie.
-     * @param x: pozycja na osi odciętych.
-     * @param y: pozycja na osi rzędnych.
-     */
-    inline void setPozycja(float x, float y);
+		: sf::RectangleShape(sf::Vector2f(szer,dl)), lim_y(y), szybkosc(100)	{
+		setPosition(x, y);
+		setFillColor(sf::Color::White);
+	}
 
     /**
      * Metoda ustawiająca pozycje na osi X.
@@ -87,23 +83,40 @@ public:
 	 * przesunie się rakieta na osi OY.
 	 */
 	void moveTo(float lim);
+
 	/**
-	 * przesuwanie rakiety do ustalonego miejsca
+	/// przesuwanie rakiety do ustalonego miejsca
 	 */
 	void move();
 
-	/// override method from drawable to draw rakieta on the screen
-	void draw(sf::RenderTarget& rt, sf::RenderStates states = sf::RenderStates::Default) const;
+	/**
+	/// przesuwanie rakiety do ustalonego miejsca
+	/// w okreslonym czasie - który jest przekazywany w parametrze.
+	 */
+	void move(double sekundy);
 
+	/// Określa po której stronie znajduje się rakieta.
+	/**
+	/// true - jest po prawej stronie
+	/// false - jest po lewej stronie
+	**/
+	bool getStrona() const;
+
+	/// Ustawia flage strony, żeby rozróżnić od startu
+	/**
+	/// Jest to pomocna flaga dla silnika, jak i dla modyfikatorów,
+	/// które mogły by zamieniać stronami obie rakiety, lub je do siebie
+	/// zbliżyć, a co za tym idzie nie można było by rozróżnić która rakieta
+	/// to która wg silnika, jak i SI
+	/// (prawa strona = true, lewa false).
+	**/
+	void setStrona(bool strona);
 public:
 	float lim_y;
 
 private:
-    float pos_x;
-    float pos_y;
-	float dlugosc;
-	float szerokosc;
 	float szybkosc;
+	bool prawa{true};
 };
 
 #endif //PONG_RAKIETA_H

@@ -3,8 +3,6 @@
 #include "silnik.h"
 
 
-Silnik::Silnik(Ball* b) : ball(b) {}
-
 void Silnik::gorapaletkatrue()
 {
 	int predkosc = ball->GetSpeed();
@@ -178,9 +176,12 @@ void Silnik::odbiciePaletka(bool prawa)
 	int speed = ball->GetSpeed();
 	int pomocna;
 	bool paletka = prawa;
+
+	//dowolnapaletka(czesc_rakiety);
+
 	if(paletka == true)// sprawdza która paletka (true dla prawej)
 	{
-		switch(palecz)
+		switch(czesc_rakiety)
 		{
 			case 1:
 			{
@@ -203,7 +204,7 @@ void Silnik::odbiciePaletka(bool prawa)
 	}
 	else
 	{
-		switch(palecz)
+		switch(czesc_rakiety)
 		{
 			case 1:
 			{
@@ -237,3 +238,11 @@ void Silnik::odbiciePaletka(bool prawa)
 	ball->SetSpeed(speed);
 	ball->SetRotation(rota);
 }
+
+Silnik::Silnik(float _a, float _b, int kat) : a(_a), b(_b), alfa(kat){}
+
+float Silnik::getA() const { return a; }
+float Silnik::getB() const { return b; }
+int Silnik::getAlfa() const { return alfa; }
+
+void Silnik::setCzesc(int czesc) { czesc_rakiety = czesc; }

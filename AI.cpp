@@ -2,7 +2,7 @@
 
 
 #include "AI.h"
-#include "Silnik.cpp"
+
 AiTreeNode::AiTreeNode()
 {
 	up = nullptr;
@@ -85,31 +85,15 @@ AiTreeNode* create_root()
 	return root;
 }
 
-void AiTreeNode::DeleteNode(AiTreeNode* i)
-{
-	if (up != nullptr)
-		DeleteNode(up);
-	delete up;
-	if (middle != nullptr)
-		DeleteNode(middle);
-	delete middle;
-	if (down != nullptr)
-		DeleteNode(down);
-	delete down;
-	
-}
 
 AiTreeNode::~AiTreeNode()//destruktor drzewa
 {
 	if (up != nullptr)
-		DeleteNode(up);
-	delete up;
+		delete up;
 	if (middle != nullptr)
-		DeleteNode(middle);
-	delete middle;
+		delete middle;
 	if (down != nullptr)
-		DeleteNode(down);
-	delete down;
+		delete down;
 }
 AiTreeNode* AiTreeNode::get_child(char part)
 {
@@ -123,12 +107,22 @@ AiTreeNode* AiTreeNode::get_child(char part)
 }
 
 
-bool AiTreeNode::get_can()//destruktor drzewa
+bool AiTreeNode::get_can()
 {
 	return this->can;
 }
 
-void StartAI()
+unsigned AiTreeNode::getMydistance()
+{
+	return this->MyDistance;
+}
+
+unsigned AiTreeNode::getBallTarget()
+{
+	return this->BallTargetPosition;
+}
+
+void AI::StartAI()
 {
 	/*AiTreeNode* root = create_root();
 	root->CalculateBallTargetPosition();
@@ -137,10 +131,26 @@ void StartAI()
 	if (root->get_can())
 	{
 		root->CreateNextLevel();
-		root->get_child(up)->
+		root->get_child(part_up)->CalculateBallParams();
+		root->get_child(part_up)->CalculateBallTargetPosition();
+		
+		root->get_child(part_middle)->CalculateBallParams();
+		root->get_child(part_middle)->CalculateBallTargetPosition();
+	
 
+		root->get_child(part_down)->CalculateBallTargetPosition();
+		root->get_child(part_down)->get_can();
+
+		if (root->get_child(part_up)->getMydistance() > root->get_child(part_middle)->getMydistance())
+		{
+			if (root->get_child(part_up)->getMydistance() > root->get_child(part_down)->getMydistance())
+				//setPaletka(root->getBallTarget+paletka.getDlugosc()/3)
+			else
+				//setPaletka(root->getBallTarget-paletka.getDlugosc()/3)
+		}
 
 	}
+
 	*/
 }
 

@@ -11,6 +11,14 @@
 
 using Klawisz = sf::Keyboard::Key;
 
+struct KeysSet
+{
+	Klawisz up = Klawisz::Up;
+	Klawisz down = Klawisz::Down;
+	Klawisz left = Klawisz::Unknown;
+	Klawisz right = Klawisz::Unknown;
+};
+
 class Gracz : public IGracz
 {
 public:
@@ -34,6 +42,25 @@ public:
             Klawisz down,
             Klawisz left = Klawisz::Unknown,
             Klawisz right = Klawisz::Unknown);
+
+	/// Ustawienia klawiszy przez strukture KeysSet.
+	/**
+	 * Każdy klawisz opisany za pomocą struktury.
+	 * przeciążenie funkcji powyższej na strukture.
+	 */
+	void setKlawisze(KeysSet);
+
+	/// Zapisuje aktualną konfiguracje klawiszy do pliku.
+	/**
+	 * Jeżeli zakończy się z kodem sto poszukaj pliku pong.log
+	 */
+	void saveKeyboardSet();
+
+	/// wczytuje konfiguracje dla siebie oraz zwraca ją.
+	/**
+	 * parametr id obiekcie określa z którego pliku pobierze konfiguracje.
+	 */
+	KeysSet loadKeyboardSet();
 
     /**
 	 * Zwraca klawisz przypisany dla danego gracza z tablicy klawisze

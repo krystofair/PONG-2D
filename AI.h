@@ -1,8 +1,9 @@
 #pragma once
-
 #define AiBounce true
 #define UserBounce false
 #include "silnik.h"
+#include "IGracz.h"
+
 class AiTreeNode
 {
 private:
@@ -33,8 +34,17 @@ public:
 	void CanIBounceBall();
 	void DeleteNode(AiTreeNode*);
 	AiTreeNode *get_child(char part);
-
+	unsigned getMydistance();
 	void CreateNextLevel();
+	unsigned getBallTarget();
 
 
+};
+
+
+class AI:public IGracz
+{
+public:
+	void StartAI();
+	AI(Rakieta *rakieta) :IGracz(rakieta) {}
 };
