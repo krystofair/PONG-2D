@@ -3,6 +3,8 @@
 #include <thread>
 #include <mutex>
 
+#include <fstream>
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -29,18 +31,17 @@ sf::RenderWindow window(
 
 sf::Event event{};
 
-void game_loop()
+void game_loop(Silnik& silnik)
 {
 	window.setFramerateLimit(30);
-	float X = plansza.getWidth()/2;
-	float Y = plansza.getHeight()/2;
+	float X = silnik.getA();
+	float Y = plansza.getHeight()/2; // constant value for now.
 	chrono::steady_clock clk;
 	auto czas_start = clk.now();
 	// wskazniki do wyswietlania
 	Rakieta *r1{nullptr}, *r2{nullptr}; // r1-rakieta tylko gracza, r2- albo albo.
 	IGracz *g1{nullptr}, *g2{nullptr};
 	Ball *ball{nullptr};
-	Silnik silnik(0.5, plansza.getHeight()/2, 0);
 
 	auto trafionaCzesc = [&](Rakieta* r)->int{
 		float yr = 0.0;
@@ -53,15 +54,14 @@ void game_loop()
 		else if(yb > 2*dl/3) return 3; // part_down
 	};
 
-	auto update = [&]{
+	auto update = [&] {
 		auto czas_stop = clk.now();
 		auto elapsed = chrono::duration<double>(czas_stop-czas_start).count();
-		ball->SetPosition(X, Y);
+		
 		r1->move(elapsed);
 		r2->move(elapsed);
-		//ball->GetPosition().x = X;
-		// ball move
-		//X += ball->GetSpeed()*elapsed;
+		X += ball->GetSpeed()*elapsed*5;
+		ball->SetPosition(X, Y);
 		czas_start = clk.now();
 	};
 	g1 = plansza.getGracz(1);
@@ -71,6 +71,9 @@ void game_loop()
 	ball = plansza.getPilka();
 	if(r1 == nullptr || r2 == nullptr || ball == nullptr)
 		throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
+	else
+	{
+	}
 	while(stan_gry == STAN::GRA)
 	{
 		
@@ -98,30 +101,26 @@ void game_loop()
 			if(g2->checkSI()) static_cast<AI*>(g2)->StartAI();
 			silnik.setCzesc(trafionaCzesc(r1));
 			silnik.odbiciePaletka(r1->getStrona());
-
+			if(r1->getStrona()) X -= 50;
+			else X+=50;
 		}
 		else if(ball->DetectCollision(r2))
 		{
 			//if(g1->checkSI()) static_cast<AI*>(g1)->StartAI();
 			silnik.setCzesc(trafionaCzesc(r2));
 			silnik.odbiciePaletka(r2->getStrona());
+			if(r1->getStrona()) X -= 50;
+			else X+=50;
 		}
 		else
 		{
 			silnik.odbicieBanda();
 		}
-
-
-		//X += ball->GetSpeed(); // kierunek dla prostej.
-		//Y += silnik.getA()*X + silnik.getB(); // prosta
 		update();
-
-		//if(X > screen_width- 2*size || X < size) kierunek *= -1;
-		/*
-		trace = wylicz(a,b);
-		*/
 	}
 }
+
+Silnik* engine{nullptr};
 
 int main()
 {
@@ -129,7 +128,7 @@ int main()
 	//thread si_thread(StartAi)
 	IMenu* current_menu{nullptr};
 	
-	//ofstream logfile("pong.log");
+	ofstream logfile("engine.log");
 	// pocz¹tkowe warunki.
 	stan_gry = STAN::MENU;
 	stery.setMenu(new MainMenu());
@@ -141,7 +140,6 @@ int main()
 				if(event.type == sf::Event::Closed)
 				{
 					window.close();
-
 				}
 				else if(event.type == sf::Event::KeyPressed)
 				{
@@ -149,11 +147,19 @@ int main()
 				}
 
 				//logfile << "[!] przed if(stan_gry == STAN::GRA)" << endl;
+				if(engine)
+				{
+					logfile << "stan silnika\n";
+					logfile << engine->getA() << "\n";
+					logfile << engine->getB() << "\n";
+					logfile << engine->getAlfa() << "\n\n";
+				}
 
 				if(stan_gry == STAN::GRA)
 				{
 					//if(plansza.getGracz(2)->checkSI()) //nope it's run without threading.
-					game_loop();
+					if(engine == nullptr) engine = new Silnik(200, plansza.getHeight()/2, 0);
+					game_loop(*engine);
 					continue;
 				}
 
@@ -163,12 +169,17 @@ int main()
 					plansza.deletePilka();
 					plansza.deletePlayer(1);
 					plansza.deletePlayer(2);
+					if(engine)
+					{
+						delete engine;
+						engine = nullptr;
+					}
 				}
 				window.clear(sf::Color::Black);
 				window.draw(*dynamic_cast<sf::Drawable*>(current_menu));
 				window.display();
 			}
 	}
-	//logfile.close();
+	logfile.close();
 	return 0;
 }

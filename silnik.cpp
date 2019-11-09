@@ -73,12 +73,14 @@ void Silnik::dowolnapaletka(char CzescPaletki)
 	int predkosc = ball->GetSpeed();
 	int rotacja = ball->GetRotation();
 	predkosc = predkosc + 2 * bs;
-	if (CzescPaletki == part_down || CzescPaletki == part_up)
+	if (CzescPaletki == static_cast<char>(CzPaletki::part_down)
+		|| CzescPaletki == static_cast<char>(CzPaletki::part_up))
 	{
 		if (rotacja == 0) rotacja = rotacja - CzescPaletki* br;//piłka bez rotacji
 		if (rotacja != 0)// piłka z rotacja
 		{
-			if ((CzescPaletki == part_down && rotacja < 0) || (CzescPaletki == part_up && rotacja > 0))// -r
+			if ((CzescPaletki == static_cast<char>(CzPaletki::part_down) && rotacja < 0) 
+				|| (CzescPaletki == static_cast<char>(CzPaletki::part_up) && rotacja > 0))// -r
 			{
 				rotacja = rotacja + CzescPaletki * br;
 			}
@@ -94,14 +96,14 @@ void Silnik::dowolnapaletka(char CzescPaletki)
 	if (rotacja < -100) rotacja = -100;////
 	ball->SetSpeed(predkosc);
 	ball->SetRotation(rotacja);
-
 }
 
 
 void ZmianaParametrowPilkiPoOdbiciuOdPaletki(int &predkosc, int &rotacja, int bs, int br, char CzescPaletki)
 {
 	predkosc = predkosc + 2 * bs;
-	if (CzescPaletki == part_down || CzescPaletki == part_up)
+	if (CzescPaletki == static_cast<char>(CzPaletki::part_down)
+		|| CzescPaletki == static_cast<char>(CzPaletki::part_up))
 	{
 		if (rotacja == 0) rotacja = rotacja - (CzescPaletki*br);//pi�ka bez rotacji
 		if (rotacja != 0)// pi�ka z rotacja

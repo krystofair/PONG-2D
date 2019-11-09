@@ -158,7 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="globals.h" />
-    <None Include="gameapp.h" />
     <None Include="README.MD" />
     <ClCompile Include="silnik.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

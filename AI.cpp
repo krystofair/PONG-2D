@@ -99,9 +99,9 @@ AiTreeNode* AiTreeNode::get_child(char part)
 {
 	switch (part)
 	{
-	case part_up: return up;
-	case part_middle: return middle;
-	case part_down: return down;
+	case 1: return up;
+	case 0: return middle;
+	case -1: return down;
 	}
 
 }

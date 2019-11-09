@@ -1,9 +1,13 @@
 #pragma once
 #include "Ball.h"
 
-#define part_up 1
-#define part_middle  0
-#define part_down -1
+enum class CzPaletki
+{
+	part_up = 1,
+	part_middle = 0,
+	part_down = -1
+};
+
 
 class Silnik
 {
@@ -26,7 +30,7 @@ public:
 	/// dostarczenie obiektu pilki do silnika
 	void setBall(Ball* b) { ball = b; }
 private:
-	Ball* ball;
+	Ball* ball; //weak pointer;
 
 private:
 	int alfa;

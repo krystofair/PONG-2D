@@ -79,9 +79,6 @@
     <None Include="globals.h">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="gameapp.h">
-      <Filter>Header Files</Filter>
-    </None>
     <None Include="silnik_before_refaktor.h">
       <Filter>Header Files</Filter>
     </None>
