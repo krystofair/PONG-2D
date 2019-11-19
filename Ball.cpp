@@ -8,6 +8,7 @@ Ball::Ball()
 {
 	circleShape.setRadius(10);
 	circleShape.setFillColor(sf::Color::White);
+	SetPosition(plansza.getWidth()/2, plansza.getHeight()/2);
 }
 
 Ball::~Ball()
@@ -51,14 +52,14 @@ float Ball::GetRotation() const
 }
 void Ball::SetSpeed(float x)
 {
-	if(x > 1000) x = 1000;
-	else if(x<-1000) x = -1000;
+	if(x > 1400) x = 1400;
+	else if(x < -1400) x = -1400;
 	speed = x;
 }
 void Ball::SetRotation(float x)
 {
-	if (x > 100) x = 100;
-	if (x < -100) x = -100;
+	if (x > 600) x = 600;
+	if (x < -600) x = -600;
 	rotation = x;
 }
 

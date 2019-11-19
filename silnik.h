@@ -36,8 +36,8 @@ private:
 	int alfa;
 	float a, b;
 	//zmienne srodowiskowe
-	int bs{50}; // basic speed
-	int br{15}; // basic rotation
+	int bs{200}; // basic speed
+	int br{50}; // basic rotation
 	// jakies pomocnicze.
 	int czesc_rakiety{2}; // czeœæ paletki 1-up, 2-mid, 3-bottom (1, 0, -1)
 };

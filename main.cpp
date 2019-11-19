@@ -34,7 +34,7 @@ sf::Event event{};
 
 void game_loop(Silnik& silnik)
 {
-	window.setFramerateLimit(30);
+	window.setFramerateLimit(40);
 	//float X = silnik.getA();
 	//float Y = plansza.getHeight()/2; // constant value for now.
 	chrono::steady_clock clk;
@@ -44,7 +44,8 @@ void game_loop(Silnik& silnik)
 	IGracz *g1{nullptr}, *g2{nullptr};
 	Ball *ball{nullptr};
 
-	auto trafionaCzesc = [&](Rakieta* r)->int{
+	auto trafionaCzesc = [&](Rakieta* r)->int
+	{
 		float yr = 0.0;
 		float dl = 0.0;
 		float yb = ball->GetPosition().y;
@@ -60,10 +61,9 @@ void game_loop(Silnik& silnik)
 	auto update = [&] {
 		auto czas_stop = clk.now();
 		auto elapsed = chrono::duration<double>(czas_stop-czas_start).count();
-		
 		r1->move(elapsed);
 		r2->move(elapsed);
-		ball->Move(0, ball->GetSpeed()*elapsed);
+		ball->Move(ball->GetSpeed()*elapsed, ball->GetRotation()*elapsed);
 		log_collision << "czas*szybkosc= " << ball->GetSpeed()*elapsed << "\n";
 		czas_start = clk.now();
 	};
@@ -76,9 +76,6 @@ void game_loop(Silnik& silnik)
 	if(r1 == nullptr || r2 == nullptr || ball == nullptr)
 		throw("w grze musza byc te 3 obiekty inaczej to nie ma sensu.");
 
-	
-	ball->SetSpeed(700);
-	ball->SetPosition(300, 400);
 
 	while(stan_gry == STAN::GRA)
 	{
@@ -105,46 +102,43 @@ void game_loop(Silnik& silnik)
 		ball->Draw(&window);
 		window.display();
 		// sekcja silnika
-		// silnik.setBall(ball);
-		auto deb_pos = ball->GetPosition();
-		log_collision << "ball pos x = " << deb_pos.x << "\n";
-		log_collision << "lime y = " << r1->lim_y << "\n";
+		silnik.setBall(ball);
 		if(ball->DetectCollision(r1))
 		{
 			log_collision << "hit the r1\n";
 			if(g2->checkSI()) static_cast<AI*>(g2)->StartAI();
-			//silnik.setCzesc(trafionaCzesc(r1));
-			//silnik.odbiciePaletka(r1->getStrona());
-
-			if(r1->getStrona())
-				ball->SetSpeed(-1000.0);
-			else
-				ball->SetSpeed(1000.0);
+			silnik.setCzesc(trafionaCzesc(r1));
+			silnik.odbiciePaletka(r1->getStrona());
+			// if(r1->getStrona()) zobacz detect(r2)
+				ball->SetSpeed(-ball->GetSpeed());
 		}
-		if(ball->DetectCollision(r2))
+		else if(ball->DetectCollision(r2))
 		{
 			log_collision << "hit the r2\n";
 			//if(g1->checkSI()) static_cast<AI*>(g1)->StartAI();
-			//silnik.setCzesc(trafionaCzesc(r2));
-			//silnik.odbiciePaletka(r2->getStrona());
-			if(r2->getStrona())
-				ball->SetSpeed(-1000.0);
-			else
-				ball->SetSpeed(1000.0);
+			silnik.setCzesc(trafionaCzesc(r2));
+			silnik.odbiciePaletka(r2->getStrona());
+			
+			//if(r2->getStrona())
+				ball->SetSpeed(-ball->GetSpeed());
+			//else
+				//ball->SetSpeed();
+				
 		}
-		if(ball->DetectCollision())
+		else if(ball->DetectCollision())
 		{
-			//silnik.odbicieBanda();
+			silnik.odbicieBanda();
+			/*
 			if(!gorna_banda){
-				ball->SetSpeed(-300);
+				ball->SetRotation(-ball->GetRotation());
 				log_collision<<"kolizja banda 1\n";
 			}
 			else{
-				ball->SetSpeed(300);
+				ball->SetRotation(ball->GetRotation());
 				log_collision<<"kolizja banda 2\n";
 			}
 			if(ball->GetPosition().y >= plansza.getHeight()/2) gorna_banda=false;
-			else gorna_banda=true;
+			else gorna_banda=true;*/
 		}
 		if(ball->GetPosition().x < 0 || ball->GetPosition().x > plansza.getWidth())
 		{
@@ -157,14 +151,14 @@ void game_loop(Silnik& silnik)
 	log_collision.close();
 }
 
-Silnik* engine{nullptr};
 
 int main()
 {
-	window.setFramerateLimit(40);
+	window.setFramerateLimit(30);
 	window.setMouseCursorVisible(false);
 	//thread si_thread(StartAi)
 	IMenu* current_menu{nullptr};
+	Silnik* engine{nullptr};
 	
 	// pocz¹tkowe warunki.
 	stan_gry = STAN::MENU;
@@ -188,12 +182,10 @@ int main()
 					stery.menus(event);
 				}
 
-				//logfile << "[!] przed if(stan_gry == STAN::GRA)" << endl;			
-
 				if(stan_gry == STAN::GRA)
 				{
-					//if(plansza.getGracz(2)->checkSI()) //nope it's run without threading.
-					//if(engine == nullptr) engine = new Silnik(200, plansza.getHeight()/2, 0);
+					//if(plansza.getGracz(2)->checkSI()) /*start thread AI */; //nope it's run without threading.
+					if(engine == nullptr) engine = new Silnik(0, 0, 0);
 					game_loop(*engine);
 				}
 

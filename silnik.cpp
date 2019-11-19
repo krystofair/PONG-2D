@@ -22,9 +22,6 @@ void Silnik::gorapaletkatrue()
 			rotacja = rotacja - br;//zmniejsza
 		}
 	}
-	if(predkosc > 1000) predkosc = 1000;//nie przekraczanie wartosci maksymalnej
-	if(rotacja > 100) rotacja = 100;/////
-	if(rotacja < -100) rotacja = -100;///
 	ball->SetSpeed(predkosc);
 	ball->SetRotation(rotacja);
 }
@@ -34,9 +31,6 @@ void Silnik::srodkowapaletka()
 	int predkosc = ball->GetSpeed();
 	int rotacja = ball->GetRotation();
 	predkosc = predkosc + (2 * bs);
-	if(predkosc > 1000) predkosc = 1000;//nie przekraczanie wartosci maksymalnej
-	if(rotacja > 100) rotacja = 100;//////
-	if(rotacja < -100) rotacja = -100;////
 	ball->SetSpeed(predkosc);
 	ball->SetRotation(rotacja);
 }
@@ -59,9 +53,6 @@ void Silnik::dolnapaletkatrue()
 			rotacja = rotacja + br;//zmniejsza
 		}
 	}
-	if(predkosc > 1000) predkosc = 1000;//nie przekraczanie wartosci maksymalnej
-	if(rotacja > 100) rotacja = 100;//////
-	if(rotacja < -100) rotacja = -100;////
 	ball->SetSpeed(predkosc);
 	ball->SetRotation(rotacja);
 }
@@ -91,9 +82,6 @@ void Silnik::dowolnapaletka(char CzescPaletki)
 			}
 		}
 	}
-	if (predkosc > 1000) predkosc = 1000;//nie przekraczanie wartosci maksymalnej
-	if (rotacja > 100) rotacja = 100;//////
-	if (rotacja < -100) rotacja = -100;////
 	ball->SetSpeed(predkosc);
 	ball->SetRotation(rotacja);
 }
@@ -177,11 +165,10 @@ void Silnik::odbiciePaletka(bool prawa)
 	int rota = ball->GetRotation();
 	int speed = ball->GetSpeed();
 	int pomocna;
-	bool paletka = prawa;
 
 	//dowolnapaletka(czesc_rakiety);
 
-	if(paletka == true)// sprawdza która paletka (true dla prawej)
+	if(prawa)// sprawdza która paletka (true dla prawej)
 	{
 		switch(czesc_rakiety)
 		{
@@ -228,7 +215,7 @@ void Silnik::odbiciePaletka(bool prawa)
 		}
 	}
 
-	rota = 0;//musi być aby zawsze byłą prosta
+	//rota = 0;//musi być aby zawsze byłą prosta
 	if(rota == 0)
 	{
 		prosta();

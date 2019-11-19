@@ -12,7 +12,7 @@
 
 class Ball
 {
-	float speed{2}, rotation{0};
+	float speed{500}, rotation{200};
 public:
 	Ball();
 	~Ball();
@@ -33,7 +33,7 @@ private:
 
 	sf::CircleShape circleShape;
 	float prog_wejscia = 15;
-	float prog_wyjscia = 15;
+	float prog_wyjscia = 30;
 };
 
 #endif
