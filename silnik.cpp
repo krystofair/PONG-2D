@@ -157,7 +157,7 @@ void Silnik::odbicieBanda()
 		//
 	}
 	ball->SetSpeed(speed);
-	ball->SetRotation(rota);
+	ball->SetRotation(-ball->GetRotation());
 }
 
 void Silnik::odbiciePaletka(bool prawa)
@@ -224,8 +224,8 @@ void Silnik::odbiciePaletka(bool prawa)
 	{
 
 	}
-	ball->SetSpeed(speed);
-	ball->SetRotation(rota);
+	ball->SetSpeed(-ball->GetSpeed());
+	//ball->SetRotation(rota);
 }
 
 Silnik::Silnik(float _a, float _b, int kat) : a(_a), b(_b), alfa(kat){}

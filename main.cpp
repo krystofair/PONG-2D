@@ -110,7 +110,7 @@ void game_loop(Silnik& silnik)
 			silnik.setCzesc(trafionaCzesc(r1));
 			silnik.odbiciePaletka(r1->getStrona());
 			// if(r1->getStrona()) zobacz detect(r2)
-				ball->SetSpeed(-ball->GetSpeed());
+				//ball->SetSpeed(-ball->GetSpeed());
 		}
 		else if(ball->DetectCollision(r2))
 		{
@@ -120,7 +120,7 @@ void game_loop(Silnik& silnik)
 			silnik.odbiciePaletka(r2->getStrona());
 			
 			//if(r2->getStrona())
-				ball->SetSpeed(-ball->GetSpeed());
+				//ball->SetSpeed(-ball->GetSpeed());
 			//else
 				//ball->SetSpeed();
 				
