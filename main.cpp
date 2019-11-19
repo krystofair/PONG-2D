@@ -57,14 +57,12 @@ void game_loop(Silnik& silnik)
 	};
 	bool gorna_banda = false;
 
-	ofstream log_collision("coll.log");
 	auto update = [&] {
 		auto czas_stop = clk.now();
 		auto elapsed = chrono::duration<double>(czas_stop-czas_start).count();
 		r1->move(elapsed);
 		r2->move(elapsed);
 		ball->Move(ball->GetSpeed()*elapsed, ball->GetRotation()*elapsed);
-		log_collision << "czas*szybkosc= " << ball->GetSpeed()*elapsed << "\n";
 		czas_start = clk.now();
 	};
 
@@ -84,8 +82,6 @@ void game_loop(Silnik& silnik)
 		{
 			if(event.type == sf::Event::Closed)
 			{
-				log_collision << "wychodze ELO\n";
-				log_collision.close();
 				auto w = Wyjscie(nullptr);
 				w.execute();
 				//window.close();
@@ -105,7 +101,6 @@ void game_loop(Silnik& silnik)
 		silnik.setBall(ball);
 		if(ball->DetectCollision(r1))
 		{
-			log_collision << "hit the r1\n";
 			if(g2->checkSI()) static_cast<AI*>(g2)->StartAI();
 			silnik.setCzesc(trafionaCzesc(r1));
 			silnik.odbiciePaletka(r1->getStrona());
@@ -114,7 +109,6 @@ void game_loop(Silnik& silnik)
 		}
 		else if(ball->DetectCollision(r2))
 		{
-			log_collision << "hit the r2\n";
 			//if(g1->checkSI()) static_cast<AI*>(g1)->StartAI();
 			silnik.setCzesc(trafionaCzesc(r2));
 			silnik.odbiciePaletka(r2->getStrona());
@@ -148,7 +142,6 @@ void game_loop(Silnik& silnik)
 		}
 		update();
 	}
-	log_collision.close();
 }
 
 

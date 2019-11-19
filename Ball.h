@@ -12,7 +12,7 @@
 
 class Ball
 {
-	float speed{500}, rotation{150};
+	float speed{400}, rotation{150};
 public:
 	Ball();
 	~Ball();

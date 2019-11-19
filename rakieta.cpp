@@ -60,7 +60,7 @@ void Rakieta::move()
 void Rakieta::move(double seconds)
 {
 	auto pos_y = getPozY();
-	if(abs(pos_y-lim_y) < 3) return;
+	if(abs(pos_y-lim_y) < 5) return;
 	if(pos_y < lim_y) pos_y += szybkosc*seconds;
 	else if(pos_y > lim_y) pos_y -= szybkosc*seconds;
 	setPozY(pos_y);

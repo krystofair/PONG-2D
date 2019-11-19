@@ -14,7 +14,7 @@ class Rakieta : public sf::RectangleShape
 {
 public:
     Rakieta(float x, float y, float szer, float dl)
-		: sf::RectangleShape(sf::Vector2f(szer,dl)), lim_y(y), szybkosc(300)
+		: sf::RectangleShape(sf::Vector2f(szer,dl)), lim_y(y), szybkosc(400)
 	{
 		setPosition(x, y);
 		setFillColor(sf::Color::White);
