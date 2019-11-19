@@ -13,11 +13,9 @@
 class Rakieta : public sf::RectangleShape
 {
 public:
-    Rakieta(float x,
-			float y,
-			float szer,
-			float dl)
-		: sf::RectangleShape(sf::Vector2f(szer,dl)), lim_y(y), szybkosc(100)	{
+    Rakieta(float x, float y, float szer, float dl)
+		: sf::RectangleShape(sf::Vector2f(szer,dl)), lim_y(y), szybkosc(300)
+	{
 		setPosition(x, y);
 		setFillColor(sf::Color::White);
 	}
@@ -100,7 +98,7 @@ public:
 	/// true - jest po prawej stronie
 	/// false - jest po lewej stronie
 	**/
-	bool getStrona() const;
+	inline bool getStrona() const { return prawa; }
 
 	/// Ustawia flage strony, żeby rozróżnić od startu
 	/**

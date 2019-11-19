@@ -352,3 +352,6 @@ MigrationBackup/
 .vs/PONG-2D/v16/Browse.VC.db
 
 *.dll
+zamiana_polska.py
+gracz1.cfg
+PONG-2D.sln

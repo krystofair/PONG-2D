@@ -30,28 +30,29 @@ void Ball::SetPosition(float x, float y)
 	circleShape.setPosition(x, y);
 }
 
-sf::Vector2f Ball::GetSize()
+sf::Vector2f Ball::GetSize() const
 {
 	return sf::Vector2f(circleShape.getLocalBounds().width, circleShape.getLocalBounds().height);
 }
 
-sf::Vector2f Ball::GetPosition()
+sf::Vector2f Ball::GetPosition() const
 {
 	return circleShape.getPosition();
 }
 
-float Ball::GetSpeed()
+float Ball::GetSpeed() const
 {
 	return speed;
 }
 
-float Ball::GetRotation()
+float Ball::GetRotation() const
 {
 	return rotation;
 }
 void Ball::SetSpeed(float x)
 {
-	if (x > 1000) x = 1000;
+	if(x > 1000) x = 1000;
+	else if(x<-1000) x = -1000;
 	speed = x;
 }
 void Ball::SetRotation(float x)
@@ -62,27 +63,62 @@ void Ball::SetRotation(float x)
 }
 
 
-bool Ball::DetectCollision(Rakieta* r)
+bool Ball::DetectCollision(Rakieta* r) const
 {
-	float pktRy = (r->getPozY() + r->getDlugosc())/2;
-	float pktBy = (GetPosition().y + GetSize().y)/2;
-	float pktRx = (r->getPozX() + r->getSzerokosc())/2;
-	float pktBx = (GetPosition().x + GetSize().x)/2;
+	bool warunek_wejscia{false}, warunek_wyjscia{false};
+	int war_odb{0};
+	float dl_r = r->getDlugosc();
+	float sz_r = r->getSzerokosc();
+	float promien = circleShape.getRadius();
+	double rel_pkt_b[] ={
+		(GetPosition().x + 2*promien)/2,
+		GetPosition().y + promien
+	};
+	double rel_pkt_r[]={
+		(r->getPozX() + sz_r)/2,
+		r->getPozY() + dl_r/2
+	};
+	sz_r = sz_r/2;
+	dl_r = dl_r/2;
+	auto down_edge_r = rel_pkt_r[1] + dl_r + promien;
+	auto up_edge_r = rel_pkt_r[1] - dl_r - promien;
 
-	float dX = pktBx - pktRx;
-	dX = (dX<0) ? -dX : dX;
-	float dY = pktBy - pktRy;
-	dY = (dY<0) ? -dY : dY;
-	if(dY >= (r->getDlugosc()/2 + GetSize().y/2) || dX >(r->getSzerokosc()/2 + GetSize().x/2))
-		return false;
-	else
-		return true;
+	war_odb = (down_edge_r - rel_pkt_b[1]) * (rel_pkt_b[1] - up_edge_r);
+	if(war_odb>0) // it is war_odb.
+	{
+		if(r->getStrona()) {
+			warunek_wejscia = ((rel_pkt_b[0] >= (rel_pkt_r[0] - sz_r - prog_wejscia)));
+							   //&& (rel_pkt_b[0] <= (rel_pkt_r[0] - sz_r + prog_wyjscia)));
+			warunek_wyjscia = rel_pkt_b[0] <= (rel_pkt_r[0] - sz_r - prog_wyjscia);
+		}
+		else {
+			warunek_wejscia = ((rel_pkt_b[0] <= (rel_pkt_r[0] + sz_r + prog_wejscia)));
+							   //&& (rel_pkt_b[0] >= (rel_pkt_r[0] + sz_r - prog_wyjscia)));
+			warunek_wyjscia = rel_pkt_b[0] >= (rel_pkt_r[0] + sz_r + prog_wyjscia);
+		}
+		return warunek_wejscia && !warunek_wyjscia;
+	}
+	else return false;
+
+	
 }
 
-bool Ball::DetectCollision()
+bool Ball::DetectCollision() const
 {
-	if(GetPosition().y + GetSize().y/2 <= 0) return true;
-	else return false;
-	if(GetPosition().y + GetSize().y/2 >= plansza.getHeight()) return true;
-	else return false;
+	bool warunek_wejscia{false}, warunek_wyjscia{false};
+	float up_edge = GetPosition().y;
+	float down_edge = GetPosition().y + GetSize().y;
+	auto bottom = plansza.getHeight();
+	if(down_edge < bottom/2)
+	{
+		warunek_wejscia = (up_edge <= prog_wejscia);
+		warunek_wyjscia = (up_edge > prog_wyjscia);
+	}
+	else
+	{
+		warunek_wejscia = (down_edge >= bottom - prog_wejscia);
+		warunek_wyjscia = (down_edge < bottom - prog_wyjscia);
+	}
+
+	return warunek_wejscia && !warunek_wyjscia;
 }

@@ -128,7 +128,8 @@ void Powrot::execute()
 		g1->setRakieta(nullptr);
 	}
 	if(g2) if(g2->getRakieta()) {
-		delete g2->getRakieta(); g2->setRakieta(nullptr);
+		delete g2->getRakieta();
+		g2->setRakieta(nullptr);
 	}
 	plansza.deletePlayer(1);
 	plansza.deletePlayer(2);
@@ -163,8 +164,8 @@ void ZmienSterowanie::execute()
 	bool koniec = false;
 	sf::Font font;
 	sf::Event eve{};
-	int sch = plansza.getHeight();
-	int scw = plansza.getWidth();
+	float sch = plansza.getHeight();
+	float scw = plansza.getWidth();
 	if(!font.loadFromFile("C:\\WINDOWS\\Fonts\\calibri.ttf"))
 		throw("brakuje czcionki w zasobach systemu.");
 	sf::Text texts[] = {
