@@ -86,10 +86,6 @@ void game_loop(Silnik& silnik)
 				w.execute();
 				//window.close();
 			}
-			else if(event.type == sf::Event::KeyPressed)
-			{
-				stery.games(event);
-			}
 		}
 
 		window.clear(sf::Color::Black);
@@ -141,6 +137,7 @@ void game_loop(Silnik& silnik)
 			break;
 		}
 		update();
+		stery.games();
 	}
 }
 

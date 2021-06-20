@@ -45,7 +45,7 @@ public:
 	 * o przyciśniętym klawiszu na klawiaturze.
      * @param e: ww obiekt zdarzenia.
      */
-    void games(sf::Event& e);
+    void games();
 
 	/**
 	 * Obsługa klawiatury zgodna z interfejsem IMenu.

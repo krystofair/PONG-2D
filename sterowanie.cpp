@@ -47,18 +47,18 @@ void Sterowanie::menus(sf::Event& e)
 	}
 }
 
-void Sterowanie::games(sf::Event& e)
+void Sterowanie::games()
 {
 	if(gracz1)
 	{
-		if(e.key.code == gracz1->getKlawisz(0))
+		if(sf::Keyboard::isKeyPressed(gracz1->getKlawisz(0)))
 		{
 			Rakieta* R = gracz1->getRakieta();
 			auto pozY = R->getPozY();
 			auto dl = R->getDlugosc();
 			R->moveTo(pozY-dl/2);
 		}
-		else if(e.key.code == gracz1->getKlawisz(1))
+		else if(sf::Keyboard::isKeyPressed(gracz1->getKlawisz(1)))
 		{
 			Rakieta* R = gracz1->getRakieta();
 			auto pozY = R->getPozY();
@@ -68,7 +68,7 @@ void Sterowanie::games(sf::Event& e)
 	}
 	if(gracz2)
 	{
-		if(e.key.code == gracz2->getKlawisz(0))
+		if(sf::Keyboard::isKeyPressed(gracz2->getKlawisz(0)))
 		{
 
 			Rakieta* R = gracz2->getRakieta();
@@ -76,7 +76,7 @@ void Sterowanie::games(sf::Event& e)
 			auto dl = R->getDlugosc();
 			R->moveTo(pozY-dl/2);
 		}
-		else if(e.key.code == gracz2->getKlawisz(1)) 
+		else if(sf::Keyboard::isKeyPressed(gracz2->getKlawisz(1)))
 		{
 			Rakieta* R = gracz2->getRakieta();
 			auto pozY = R->getPozY();
@@ -84,7 +84,7 @@ void Sterowanie::games(sf::Event& e)
 			R->moveTo(pozY+dl/2);
 		} 
 	}
-	if(e.key.code == Klawisz::Escape)
+	if(sf::Keyboard::isKeyPressed(Klawisz::Escape))
 	{
 		this->setMenu(new PauseMenu());
 		stan_gry = STAN::PAUZA;
